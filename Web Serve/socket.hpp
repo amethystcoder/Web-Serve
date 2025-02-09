@@ -52,7 +52,7 @@ namespace AmthSocket {
 		explicit SocketImpl(std::nothrow_t) {
 			const int startupResult = WSAStartup(WINSOCK_VERSION, &WSAdata);
 			if (startupResult != 0) {
-				//do something here
+				//TODO: Handle the error here
 				return;
 			}
 
@@ -77,7 +77,7 @@ namespace AmthSocket {
 	{
 		const int startupResult = WSAStartup(WINSOCK_VERSION, &WSAdata);
 		if (startupResult != 0) {
-			//do something here
+			//Throw an exception
 			throw std::system_error(startupResult, std::system_category());
 		}
 		

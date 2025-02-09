@@ -44,11 +44,19 @@ private:
     SOCKET cleanSocket = { INVALID_SOCKET };
 };
 
+std::string sendGetRequestWithSocket(CleanSocket* tcpSocketIPV4, char origin[]);
+
 int main() {
 	AmthSocket::SocketImpl sock{};
 
 	CleanSocket tcpSocketIPV4( AF_INET, SOCK_STREAM, IPPROTO_TCP );
+	char origin[] = "www.google.com";
 
+	std::cout << sendGetRequestWithSocket(&tcpSocketIPV4,origin) << std::endl;
+
+}
+
+std::string sendGetRequestWithSocket(CleanSocket *tcpSocketIPV4,char origin[]) {
 	addrinfo hints{};
 
 	hints.ai_family = AF_INET;
@@ -59,9 +67,9 @@ int main() {
 
 	const char* port = "80";
 
-	if (getaddrinfo("www.google.com", "80", &hints, &results) != 0) {
-		//do something here
-		return 1;
+	if (getaddrinfo(origin, "80", &hints, &results) != 0) {
+		//TODO: handle error
+		//return 1;
 	}
 
 	sockaddr_in Address{};
@@ -70,16 +78,18 @@ int main() {
 
 	freeaddrinfo(results);
 
-	connect(tcpSocketIPV4.Get(), reinterpret_cast<const sockaddr*>(&Address), sizeof(Address));
+	connect(tcpSocketIPV4->Get(), reinterpret_cast<const sockaddr*>(&Address), sizeof(Address));
 
-	const char request[] = "GET / HTTP/1.1\r\nHost: www.google.com\r\nConnection: close\r\nUser-Agent:TestAgent\r\n\r\n";
+	char request[1024] = "GET / HTTP/1.1\r\n";
+	strcat_s(request,origin);
+	strcat_s(request, "Connection: close\r\nUser-Agent:TestAgent\r\n\r\n");
 
-	send(tcpSocketIPV4.Get(), request, sizeof(request), 0);
+	send(tcpSocketIPV4->Get(), request, sizeof(request), 0);
 
 	char buffer[1024]{};
-	recv(tcpSocketIPV4.Get(), buffer, sizeof(buffer), 0);
+	recv(tcpSocketIPV4->Get(), buffer, sizeof(buffer), 0);
 
-	std::cout << buffer << std::endl;
+	return buffer;
 }
 
 /*
