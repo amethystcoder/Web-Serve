@@ -21,12 +21,27 @@
     <ClCompile Include="socket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="serversock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clientsock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="socket.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cleansocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clientsock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serversock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

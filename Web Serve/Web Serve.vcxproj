@@ -129,11 +129,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clientsock.cpp" />
+    <ClCompile Include="serversock.cpp" />
     <ClCompile Include="socket.cpp" />
     <ClCompile Include="Web Serve.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cleansocket.h" />
+    <ClInclude Include="clientsock.h" />
     <ClInclude Include="components.hpp" />
+    <ClInclude Include="serversock.h" />
     <ClInclude Include="socket.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,12 +16,46 @@
 
 #endif // !
 
+#ifndef SOCKETCONNECTIONSUCCESS
+
+#define SOCKETCONNECTIONSUCCESS 0
+
+#endif // !SOCKETCONNECTIONSUCCESS
+
 #include <iostream>
 #include <stdexcept>
 #include <WinSock2.h>
 #include <system_error>
 
-void handleStartupError(int errorcode) {}
+void handleStartupError(int errorcode) {
+	std::cerr << "Error: " << errorcode << std::endl;
+	//handle each category of error
+	switch (errorcode)
+	{
+	case WSASYSNOTREADY:
+		std::cerr << "The underlying network subsystem is not ready for network communication." << std::endl;
+		break;
+	case WSAVERNOTSUPPORTED:
+		std::cerr << "The version of Windows Sockets support requested is not provided by this particular Windows Sockets implementation." << std::endl;
+		break;
+	case WSAEINPROGRESS:
+		std::cerr << "A blocking Windows Sockets 1.1 operation is in progress." << std::endl;
+		break;
+	case WSAEPROCLIM:
+		std::cerr << "A limit on the number of tasks supported by the Windows Sockets implementation has been reached." << std::endl;
+		break;
+	case WSAEFAULT:
+		std::cerr << "The lpWSAData parameter is not a valid pointer." << std::endl;
+		break;
+	case WSANOTINITIALISED:
+		std::cerr << "A successful WSAStartup call must occur before using this function." << std::endl;
+		break;
+	default:
+		break;
+	}
+	//still deciding whether it is a good idea to throw an exception here or not
+	//throw std::system_error(errorcode, std::system_category());
+}
 
 
 namespace AmthSocket {
@@ -51,8 +85,9 @@ namespace AmthSocket {
 
 		explicit SocketImpl(std::nothrow_t) {
 			const int startupResult = WSAStartup(WINSOCK_VERSION, &WSAdata);
-			if (startupResult != 0) {
-				//TODO: Handle the error here
+			if (startupResult != SOCKETCONNECTIONSUCCESS) {
+				//TODO: Handle the error here gracefully
+				handleStartupError(startupResult);
 				return;
 			}
 
