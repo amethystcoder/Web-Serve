@@ -18,6 +18,8 @@ namespace AmthSocket
 			ServerSocket(ServerSocket&&) noexcept = default;
 			ServerSocket& operator = (ServerSocket&&) noexcept = default;
 
+
+
 	private:
 	};
 }

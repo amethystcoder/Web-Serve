@@ -87,7 +87,7 @@ namespace AmthSocket {
 			const int startupResult = WSAStartup(WINSOCK_VERSION, &WSAdata);
 			if (startupResult != SOCKETCONNECTIONSUCCESS) {
 				//TODO: Handle the error here gracefully
-				handleStartupError(startupResult);
+				handleStartupError(WSAGetLastError());
 				return;
 			}
 
