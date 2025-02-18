@@ -77,6 +77,7 @@ namespace AmthSocket
 
 		void sendData(SOCKET clientSocket, const char data[]) {
 			send(clientSocket, data, strlen(data), 0);
+			shutdown(clientSocket, SD_SEND);  
 		}
 
 
