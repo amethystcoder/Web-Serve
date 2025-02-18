@@ -1,19 +1,28 @@
 #include "socket.hpp"
 #include <system_error>
-#include <WS2tcpip.h>
 #include <iostream>
+#include <WS2tcpip.h>
+#include <Winsock2.h>
 #include "cleansocket.h"
 #include "clientsock.h"
+#include "serversock.h"
 
 
 int main() {
 	AmthSocket::SocketImpl sock{};
-	AmthSocket::ClientSocket clientSock{};
+	//AmthSocket::ClientSocket clientSock{};
+
+	AmthSocket::ServerSocket serverSock{};
 
 	CleanSocket tcpSocketIPV4( AF_INET, SOCK_STREAM, IPPROTO_TCP );
 	char origin[] = "www.google.com";
 
-	std::cout << clientSock.sendGetRequestWithSocket(&tcpSocketIPV4,origin) << std::endl;
+	//std::cout << clientSock.sendGetRequestWithSocket(&tcpSocketIPV4,origin) << std::endl;
+
+	char ip_addr[] = "127.1.1.1";
+
+	std::cout << "client is now listening on port 5400" << std::endl;
+	serverSock.listenforConnections(&tcpSocketIPV4, ip_addr, 5400);
 
 }
 

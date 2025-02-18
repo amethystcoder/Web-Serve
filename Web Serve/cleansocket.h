@@ -2,11 +2,11 @@
 
 #include <string>
 #include <system_error>
+#include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <iostream>
 
 
-	
 class CleanSocket {
     public:
         CleanSocket(int address_family, int sockettype, int protocol) {
