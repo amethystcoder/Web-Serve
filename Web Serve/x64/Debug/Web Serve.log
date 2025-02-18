@@ -1,2 +1,6 @@
-﻿  Web Serve.cpp
+﻿  clientsock.cpp
+  serversock.cpp
+  socket.cpp
+  Web Serve.cpp
+  Generating Code...
   Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe

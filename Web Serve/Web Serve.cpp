@@ -19,7 +19,7 @@ int main() {
 
 	//std::cout << clientSock.sendGetRequestWithSocket(&tcpSocketIPV4,origin) << std::endl;
 
-	char ip_addr[] = "127.1.1.1";
+	char ip_addr[] = "127.0.0.1";
 
 	std::cout << "client is now listening on port 5400" << std::endl;
 	serverSock.listenforConnections(&tcpSocketIPV4, ip_addr, 5400);

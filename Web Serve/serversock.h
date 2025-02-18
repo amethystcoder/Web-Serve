@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
 #include <system_error>
-//#include <ws2def.h>
 #include <WinSock2.h>
 #include "cleansocket.h"
+#include <iostream>
 
 namespace AmthSocket
 {
@@ -35,7 +35,7 @@ namespace AmthSocket
 
 			if (bind_result == SOCKET_ERROR) {
 				//try to prevent the use of throwing exceptions here
-				//throw std::system_error(WSAGetLastError(), std::system_category());
+				throw std::system_error(WSAGetLastError(), std::system_category());
 			}
 
 			//bind should be successful at this stage
@@ -44,35 +44,44 @@ namespace AmthSocket
 
 			if (listen_result == SOCKET_ERROR) {
 				//try to prevent the use of throwing exceptions here
-				//throw std::system_error(WSAGetLastError(), std::system_category());
+				throw std::system_error(WSAGetLastError(), std::system_category());
 			}
+		}
 
-			SOCKET new_client_socket = accept(tcpSocketIPV4->Get(), nullptr,nullptr);
-			//we need to check that the new_client_socket is valid
-			if (new_client_socket == INVALID_SOCKET) {
+		SOCKET acceptConnection(CleanSocket* tcpSocketIPV4) {
+			sockaddr_in client{};
+			int clientSize = sizeof(client);
+
+			SOCKET clientSocket = accept(tcpSocketIPV4->Get(), reinterpret_cast<sockaddr*>(&client), &clientSize);
+
+			if (clientSocket == INVALID_SOCKET) {
 				//try to prevent the use of throwing exceptions here
-				//throw std::system_error(WSAGetLastError(), std::system_category());
+				throw std::system_error(WSAGetLastError(), std::system_category());
 			}
 
-			char buffer[4096];
-			recv(new_client_socket, buffer, sizeof(buffer), 0);
+			return clientSocket;
+		}
 
+		std::string receiveData(SOCKET clientSocket) {
+			char buf[4096];
+			ZeroMemory(buf, 4096);
 
-			
-			//this is a simple response
-			char sendbuffer[4096] = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Hello, World!</h1></body></html>";
-			send(new_client_socket, sendbuffer, sizeof(sendbuffer), 0);
+			int bytesReceived = recv(clientSocket, buf, 4096, 0);
 
-			//connect(tcpSocketIPV4->Get(), reinterpret_cast<const sockaddr*>(&hint), sizeof(hint));
+			if (bytesReceived == SOCKET_ERROR) {
+				throw std::system_error(WSAGetLastError(), std::system_category());
+			}
 
-			//freeaddrinfo();
+			return std::string(buf, 0, bytesReceived);
+		}
 
-			
+		void sendData(SOCKET clientSocket, const char data[]) {
+			send(clientSocket, data, strlen(data), 0);
 		}
 
 
 	private:
-		/*int inet_pton(int af, const char* src, void* dst)
+		int inet_pton(int af, const char* src, void* dst)
 		{
 			struct sockaddr_storage ss;
 			int size = sizeof(ss);
@@ -117,6 +126,6 @@ namespace AmthSocket
 			
 			return (WSAAddressToString((struct sockaddr*)&ss, sizeof(ss), NULL, reinterpret_cast<WCHAR*>(dst), &s) == 0) ?
 				dst : NULL;
-		}*/
+		}
 	};
 }

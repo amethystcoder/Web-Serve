@@ -138,6 +138,7 @@
     <ClInclude Include="cleansocket.h" />
     <ClInclude Include="clientsock.h" />
     <ClInclude Include="components.hpp" />
+    <ClInclude Include="httprequest.h" />
     <ClInclude Include="serversock.h" />
     <ClInclude Include="socket.hpp" />
   </ItemGroup>

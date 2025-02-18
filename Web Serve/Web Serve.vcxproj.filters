@@ -44,5 +44,8 @@
     <ClInclude Include="serversock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="httprequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
