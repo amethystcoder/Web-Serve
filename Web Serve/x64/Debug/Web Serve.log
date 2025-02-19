@@ -1,6 +1,12 @@
 ﻿  clientsock.cpp
   serversock.cpp
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'serversock.cpp')
+  
   socket.cpp
   Web Serve.cpp
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Web%20Serve.cpp')
+  
   Generating Code...
   Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe

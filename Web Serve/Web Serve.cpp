@@ -23,9 +23,10 @@ int main() {
 
 	std::cout << "client is now listening on port 5400" << std::endl;
 	serverSock.listenforConnections(&tcpSocketIPV4, ip_addr, 5400);
-
+	SOCKET clientSocket = serverSock.acceptConnection(&tcpSocketIPV4);
+	std::cout << serverSock.receiveData(clientSocket) << std::endl;
+	serverSock.sendData(clientSocket, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>");
 }
-
 
 
 /*

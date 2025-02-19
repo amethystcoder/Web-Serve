@@ -75,9 +75,14 @@ namespace AmthSocket
 			return std::string(buf, 0, bytesReceived);
 		}
 
-		void sendData(SOCKET clientSocket, const char data[]) {
-			send(clientSocket, data, strlen(data), 0);
+		inline void sendData(SOCKET &clientSocket,const char data[]) {
+			int sendData = send(clientSocket, data, strlen(data) + 1, 0); 
+			if (sendData == SOCKET_ERROR) {
+				throw std::system_error(WSAGetLastError(), std::system_category());
+			}
+			Sleep(1000);
 			shutdown(clientSocket, SD_SEND);  
+
 		}
 
 
@@ -90,7 +95,7 @@ namespace AmthSocket
 
 			ZeroMemory(&ss, sizeof(ss));
 			
-			strncpy(src_copy, src, INET6_ADDRSTRLEN + 1);
+			strncpy_s(src_copy, src, INET6_ADDRSTRLEN + 1);
 			src_copy[INET6_ADDRSTRLEN] = 0;
 
 			if (WSAStringToAddress(reinterpret_cast<WCHAR*>(src_copy), af, NULL, (struct sockaddr*)&ss, &size) == 0) {
