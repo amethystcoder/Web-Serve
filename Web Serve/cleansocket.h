@@ -47,3 +47,13 @@ class CleanSocket {
     private:
         SOCKET cleanSocket = { INVALID_SOCKET };
 };
+
+//should be able to handle other forms of connection
+/*
+    //SOCKET tcpSocketIPV6 = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP);
+
+    //udp sockets as well for ipv4 and ipv6
+    SOCKET udpSocketIPV4 = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    SOCKET udpSocketIPV6 = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+
+*/

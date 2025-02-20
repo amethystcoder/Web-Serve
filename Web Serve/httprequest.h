@@ -4,11 +4,12 @@
 
 #include <system_error>
 
-class MyClass
+//contains utility functions for parsing the raw http request from sockets
+class HTTPTextParser
 {
 public:
-	MyClass();
-	~MyClass();
+	HTTPTextParser();
+	~HTTPTextParser();
 
 	HTTPRequestMethods GetRequestType(char *headers[]) const noexcept {
 		return GET;
@@ -18,11 +19,11 @@ private:
 
 };
 
-MyClass::MyClass()
+HTTPTextParser::HTTPTextParser()
 {
 }
 
-MyClass::~MyClass()
+HTTPTextParser::~HTTPTextParser()
 {
 }
 
@@ -39,7 +40,8 @@ enum HTTPRequestMethods
 	CONNECT
 };
 
-struct HTTPHeader
+typedef struct HTTPHeader
 {
-
-};
+	std::string key;
+	std::string value;
+} HTTPHeader;

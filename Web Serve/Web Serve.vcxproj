@@ -135,6 +135,7 @@
     <ClCompile Include="Web Serve.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ast.h" />
     <ClInclude Include="cleansocket.h" />
     <ClInclude Include="clientsock.h" />
     <ClInclude Include="components.hpp" />
