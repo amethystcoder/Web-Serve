@@ -2,7 +2,6 @@
 #include <vector>
 
 
-typedef std::vector<ASTreeNode*> NodeChildren;
 
 class ASTreeNode
 {
@@ -13,6 +12,8 @@ class ASTreeNode
 public:
 	ASTreeNode();
 	~ASTreeNode();
+
+	typedef std::vector<ASTreeNode*> NodeChildren;
 
 	//add a child to the node
 	void AddChild(ASTreeNode* child)
@@ -37,7 +38,7 @@ public:
 	}
 
 	//get the children of the node
-	NodeChildren GetChildren()
+	NodeChildren GetChildren ()
 	{
 		return children;
 	}

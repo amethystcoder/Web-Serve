@@ -50,5 +50,8 @@
     <ClInclude Include="ast.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ServerNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
