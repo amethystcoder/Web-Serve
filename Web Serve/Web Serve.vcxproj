@@ -135,11 +135,14 @@
     <ClCompile Include="Web Serve.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api.h" />
     <ClInclude Include="ast.h" />
     <ClInclude Include="cleansocket.h" />
     <ClInclude Include="clientsock.h" />
     <ClInclude Include="components.hpp" />
+    <ClInclude Include="fileParser.h" />
     <ClInclude Include="httprequest.h" />
+    <ClInclude Include="route.h" />
     <ClInclude Include="ServerNode.h" />
     <ClInclude Include="serversock.h" />
     <ClInclude Include="socket.hpp" />

@@ -53,5 +53,14 @@
     <ClInclude Include="ServerNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="route.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fileParser.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

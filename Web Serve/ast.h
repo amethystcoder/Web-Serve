@@ -1,7 +1,10 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <memory>
 #include "serverNode.h"
+#include "api.h"
+#include "route.h"
 
 
 struct HTMLTagData {
@@ -20,7 +23,7 @@ public:
 	ASTreeNode(std::string name, std::string atributes, std::string content);
 	ASTreeNode() = default;
 	
-	~ASTreeNode();
+	virtual ~ASTreeNode() = default;
 
 	typedef std::vector<ASTreeNode*> NodeChildren;
 
@@ -69,7 +72,7 @@ public:
 		while (std::regex_search(temp, match, html_regex))
 		{
 			if (match[1].matched) {
-				// Opening and closing tag like <html> </html>
+				//Opening and closing tag like <html> </html>
 				std::string tag = match[1];
 				std::string attributes = match[2];
 				std::string content = match[3];
@@ -80,7 +83,7 @@ public:
 				master_tags.push_back(tag_data);
 			}
 			else {
-				// Self closing tag like <br/>
+				//Self closing tag like <br/>
 				std::string tag = match[4];
 				std::string attributes = match[5];
 				HTMLTagData tag_data;
@@ -95,10 +98,42 @@ public:
 		return master_tags;
 	}
 
+	static std::unique_ptr<ASTreeNode> determineNode(const std::string& tag) {
+		if (tag == "server") return std::make_unique<ServerNode>();
+		if (tag == "route") return std::make_unique<RouteNode>();
+		if (tag == "api") return std::make_unique<APINode>();
+
+		return nullptr; // Handle unknown tags
+	}
+
+	static void setNodeAttributes(std::string attributes, ASTreeNode node) {
+		//parse the attributes and set the attributes of the node
+		//attributes string looks like class='weird class' or id='weird id'
+		//create a map of the attributes
+		
+	}
+
+	
+	void addTagName(std::string tagname, ASTreeNode node) {
+		//add the tag name to the node
+		name = tagname;
+	}
+
+	void addNodeChildrenFromContent(std::string content, ASTreeNode node) {
+		std::vector<HTMLTagData> parsed_content = ASTreeNode::parse_html_content(content);
+		for (auto& tag_data : parsed_content) {
+			//create a function that determines the tag classes
+			
+			this->AddChild(new ASTreeNode(tag_data.tag, tag_data.attributes, tag_data.content));//TODO: write function to determing the class of the tag
+			//all classes should be derived from ASTreeNode
+		}
+	}
 
 private:
 	//use vector to store children
 	NodeChildren children;
+
+	std::string name;
 };
 
 ASTreeNode::ASTreeNode(std::string name, std::string atributes,std::string content)
