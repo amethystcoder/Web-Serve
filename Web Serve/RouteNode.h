@@ -10,6 +10,7 @@ public:
 
 private:
 
+
 };
 
 RouteNode::RouteNode(std::string name, std::string attributes, std::string content)
@@ -17,6 +18,8 @@ RouteNode::RouteNode(std::string name, std::string attributes, std::string conte
 	addTagName(name, *this);
 	setNodeAttributes(attributes, *this);
 	addNodeChildrenFromContent(content, *this);
+
+
 }
 
 RouteNode::~RouteNode()

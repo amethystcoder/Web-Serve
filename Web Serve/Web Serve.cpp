@@ -8,12 +8,15 @@
 #include <regex>
 #include <vector>
 #include "ast.h"
+#include "fileParser.h"
+#include "RouteNode.h"
+#include "APINode.h"
 
 int main() {
 	std::string html_text = "<server port='5000'><api><routes></routes></api><DB class='weird class'/></server><content></content> <DB class='weird class'/>";
 
 	
-	std::vector<HTMLTagData> firstNodeList = ASTreeNode::parse_html_content(html_text);
+	std::vector<HTMLTagData> firstNodeList = FileParser::parse_html_content(html_text);
 	//create a tree of the html text
     //ensure that the first tag is the root tag and the root tag is <server> 
 	//if there are two sibling tags then the first tag is the root tag 
@@ -42,3 +45,13 @@ int main() {
 
 
 }
+
+/*
+		static std::unique_ptr<ASTreeNode> determineNode(const std::string& tag) {
+		if (tag == "server") return std::make_unique<ServerNode>();
+		if (tag == "route") return std::make_unique<RouteNode>();
+		if (tag == "api") return std::make_unique<APINode>();
+
+		return nullptr; // Handle unknown tags
+		}
+	*/

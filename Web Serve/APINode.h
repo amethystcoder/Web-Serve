@@ -11,6 +11,7 @@ public:
 
 private:
 
+
 };
 
 APINode::APINode(std::string name, std::string attributes, std::string content)
@@ -18,6 +19,7 @@ APINode::APINode(std::string name, std::string attributes, std::string content)
 	addTagName(name, *this);
 	setNodeAttributes(attributes, *this);
 	addNodeChildrenFromContent(content, *this);
+
 }
 
 APINode::~APINode()

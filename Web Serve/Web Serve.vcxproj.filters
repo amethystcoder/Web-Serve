@@ -47,20 +47,20 @@
     <ClInclude Include="httprequest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ast.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="ServerNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="api.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="route.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="ast.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fileParser.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RouteNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="APINode.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
