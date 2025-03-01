@@ -11,6 +11,9 @@ public:
 	FileParser();
 	~FileParser();
 
+	FileParser& operator = (const FileParser&) = delete;
+	FileParser(const FileParser&) = delete;
+
 	bool checkFileCorrectness (const char *filename){
 		//change later
 		return true;
@@ -61,18 +64,21 @@ public:
 
 
 private:
-
+	std::fstream fileRead;
 };
 
 FileParser::FileParser()
 {
-	std::fstream fileRead("");
-	while (true)
+	fileRead.open("", std::ios::in);
+	std::string lines;
+	if (fileRead.fail()) return;
+	while (getline(fileRead, lines))
 	{
-
+		//code
 	}
 }
 
 FileParser::~FileParser()
 {
+	fileRead.close();
 }
