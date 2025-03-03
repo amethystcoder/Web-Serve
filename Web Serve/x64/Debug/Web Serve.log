@@ -1,1 +1,22 @@
-﻿
+﻿  clientsock.cpp
+  serversock.cpp
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'serversock.cpp')
+  
+  socket.cpp
+  Web Serve.cpp
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Web%20Serve.cpp')
+  
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(86,28): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(86,28): warning C4305:         with
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(86,28): warning C4305:         [
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(86,28): warning C4305:             _Elem=char
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(86,28): warning C4305:         ]
+  (compiling source file 'Web%20Serve.cpp')
+  
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(86,28): warning C4309: 'argument': truncation of constant value
+  (compiling source file 'Web%20Serve.cpp')
+  
+  Generating Code...
+  Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe

@@ -5,14 +5,6 @@
 #include "fileParser.h"
 
 
-struct HTMLTagData {
-	std::string tag;
-	std::string attributes;
-	std::string content;
-};
-
-typedef std::vector<HTMLTagData> TagDataList;
-
 class ASTreeNode
 {
 
@@ -44,6 +36,7 @@ public:
 			if (children[i] == child)
 			{
 				children.erase(children.begin() + i);
+				//add code to actually delete child node here
 				break;
 			}
 		}
@@ -55,7 +48,8 @@ public:
 		return children;
 	}
 
-	static void setNodeAttributes(std::string attributes, ASTreeNode node) {
+	//this method can be overloaded if each child has specific unique attributes
+	static void setNodeAttributes(std::string attributes) {
 		//parse the attributes and set the attributes of the node
 		//attributes string looks like class='weird class' or id='weird id'
 		//create a map of the attributes
@@ -68,12 +62,12 @@ public:
 		name = tagname;
 	}
 
-	void addNodeChildrenFromContent(std::string content, ASTreeNode node) {
+	void addNodeChildrenFromContent(std::string content, ASTreeNode& node) {
 		TagDataList parsed_content = FileParser::parse_html_content(content);
 		for (auto& tag_data : parsed_content) {
 			//create a function that determines the tag classes
 			
-			this->AddChild(new ASTreeNode(tag_data.tag, tag_data.attributes, tag_data.content));//TODO: write function to determing the class of the tag
+			this->AddChild(&node);//TODO: write function to determing the class of the tag
 			//all classes should be derived from ASTreeNode
 		}
 	}

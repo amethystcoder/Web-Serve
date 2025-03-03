@@ -1,14 +1,23 @@
 #pragma once
 #include <fstream>
 #include <vector>
-#include "ast.h"
 #include <regex>
+#include <sstream>
+
+struct HTMLTagData {
+	std::string tag;
+	std::string attributes;
+	std::string content;
+};
+
+typedef std::vector<HTMLTagData> TagDataList;
 
 
+//utility function
 class FileParser
 {
 public:
-	FileParser();
+	FileParser(const char* filename);
 	~FileParser();
 
 	FileParser& operator = (const FileParser&) = delete;
@@ -65,17 +74,22 @@ public:
 
 private:
 	std::fstream fileRead;
+	std::string fileContent;
 };
 
-FileParser::FileParser()
+FileParser::FileParser(const char* filename)
 {
-	fileRead.open("", std::ios::in);
-	std::string lines;
+	fileRead.open("", std::ios::binary | std::ios::ate);
 	if (fileRead.fail()) return;
-	while (getline(fileRead, lines))
-	{
-		//code
-	}
+
+	std::streamsize size = fileRead.tellg();
+	if (size == -1) return;
+	fileRead.seekg(0, std::ios::beg);
+
+	std::string content(size, '/0');
+	fileRead.read(&content[0], size);
+	//this should be considered unneccessary
+	fileContent = content;
 }
 
 FileParser::~FileParser()

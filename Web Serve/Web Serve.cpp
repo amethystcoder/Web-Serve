@@ -22,7 +22,7 @@ int main() {
 	//if there are two sibling tags then the first tag is the root tag 
 	//as long as there is a server sibling tag, the other tags would be ignored
 
-	ServerNode* serverNode;
+	ServerNode* serverNode{};
 	
 	for (auto &tag_data : firstNodeList) {
 		//create a node for the root tag
@@ -33,14 +33,13 @@ int main() {
 
 			//create a node for the server tag
 			serverNode = new ServerNode(tag_data.tag, tag_data.attributes,tag_data.content);//, tag_data.content
+			//if the server tag is not found then the html text is invalid
+			if (serverNode == nullptr) {
+				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
+				return 1;
+			}
 			break;
 		}
-	}
-
-	//if the server tag is not found then the html text is invalid
-	if (serverNode == nullptr) {
-		std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
-		return 1;
 	}
 
 
