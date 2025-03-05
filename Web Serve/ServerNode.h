@@ -3,6 +3,7 @@
 #include <vector>
 #include "serversock.h"
 #include "ast.h"
+#include "ast_manager.h"
 
 class ServerNode : public ASTreeNode
 {
@@ -13,14 +14,14 @@ public:
 	void startUpServer() {}
 private:
 
-	long int port;
+	unsigned int port;
 };
 
 ServerNode::ServerNode(std::string name, std::string attributes,std::string content)
 {
 	addTagName(name, *this);
-	setNodeAttributes(attributes, *this);
-	addNodeChildrenFromContent(content, *this);
+	setNodeAttributes(attributes,this);
+	ASTManager::addNodeChildrenFromContent(content, this);
 }
 
 ServerNode::~ServerNode()

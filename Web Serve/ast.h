@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 #include "fileParser.h"
+//#include "ast_factory.h"
 
 
 class ASTreeNode
@@ -17,10 +18,10 @@ public:
 	
 	~ASTreeNode() = default;
 
-	typedef std::vector<ASTreeNode*> NodeChildren;
+	typedef std::vector<std::unique_ptr<ASTreeNode>> NodeChildren;
 
 	//add a child to the node
-	void AddChild(ASTreeNode* child)
+	void AddChild(std::unique_ptr<ASTreeNode> child)
 	{
 		children.push_back(child);
 	}
@@ -28,7 +29,7 @@ public:
 
 	//remove a child from the node
 	//removal should actually never happen except in rare cases
-	void RemoveChild(ASTreeNode* child)
+	void RemoveChild(std::unique_ptr<ASTreeNode> child)
 	{
 		//find the child and remove it
 		for (int i = 0; i < children.size(); i++)
@@ -49,7 +50,7 @@ public:
 	}
 
 	//this method can be overloaded if each child has specific unique attributes
-	static void setNodeAttributes(std::string attributes) {
+	static void setNodeAttributes(std::string attributes, ASTreeNode* node) {
 		//parse the attributes and set the attributes of the node
 		//attributes string looks like class='weird class' or id='weird id'
 		//create a map of the attributes
@@ -60,16 +61,6 @@ public:
 	void addTagName(std::string tagname, ASTreeNode node) {
 		//add the tag name to the node
 		name = tagname;
-	}
-
-	void addNodeChildrenFromContent(std::string content, ASTreeNode& node) {
-		TagDataList parsed_content = FileParser::parse_html_content(content);
-		for (auto& tag_data : parsed_content) {
-			//create a function that determines the tag classes
-			
-			this->AddChild(&node);//TODO: write function to determing the class of the tag
-			//all classes should be derived from ASTreeNode
-		}
 	}
 
 private:

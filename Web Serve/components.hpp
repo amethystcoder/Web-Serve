@@ -9,6 +9,8 @@
 #define components
 
 #include <stdio.h>
+#include "ast.h"
+#include "ast_factory.h"
 
 #endif // !components
 

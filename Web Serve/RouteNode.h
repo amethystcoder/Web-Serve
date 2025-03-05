@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ast.h"
+#include "ast_manager.h"
 
 class RouteNode : public ASTreeNode
 {
@@ -16,8 +17,8 @@ private:
 RouteNode::RouteNode(std::string name, std::string attributes, std::string content)
 {
 	addTagName(name, *this);
-	setNodeAttributes(attributes, *this);
-	addNodeChildrenFromContent(content, *this);
+	setNodeAttributes(attributes);
+	ASTManager::addNodeChildrenFromContent(content, this);
 
 
 }

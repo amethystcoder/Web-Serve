@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ast.cpp" />
     <ClCompile Include="clientsock.cpp" />
     <ClCompile Include="serversock.cpp" />
     <ClCompile Include="socket.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="APINode.h" />
     <ClInclude Include="ast.h" />
     <ClInclude Include="ast_factory.h" />
+    <ClInclude Include="ast_manager.h" />
     <ClInclude Include="cleansocket.h" />
     <ClInclude Include="clientsock.h" />
     <ClInclude Include="components.hpp" />

@@ -11,8 +11,15 @@
 #include "fileParser.h"
 #include "RouteNode.h"
 #include "APINode.h"
+#include "ast_factory.h"
+
+
+static void registerClasses();
 
 int main() {
+	//register classes
+	registerClasses();
+
 	std::string html_text = "<server port='5000'><api><routes></routes></api><DB class='weird class'/></server><content></content> <DB class='weird class'/>";
 
 	
@@ -45,12 +52,9 @@ int main() {
 
 }
 
-/*
-		static std::unique_ptr<ASTreeNode> determineNode(const std::string& tag) {
-		if (tag == "server") return std::make_unique<ServerNode>();
-		if (tag == "route") return std::make_unique<RouteNode>();
-		if (tag == "api") return std::make_unique<APINode>();
-
-		return nullptr; // Handle unknown tags
-		}
-	*/
+// Helper function to register classes
+static void registerClasses() {
+	ASTNodeFactory::getInstance().registerClass("server", []() { return std::make_unique<ServerNode>(); });
+	ASTNodeFactory::getInstance().registerClass("route", []() { return std::make_unique<RouteNode>(); });
+	ASTNodeFactory::getInstance().registerClass("api", []() { return std::make_unique<APINode>(); });
+}
