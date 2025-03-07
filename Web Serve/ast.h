@@ -2,8 +2,7 @@
 #include <vector>
 #include <map>
 #include <memory>
-#include "fileParser.h"
-//#include "ast_factory.h"
+#include <string>
 
 
 class ASTreeNode
@@ -13,23 +12,24 @@ class ASTreeNode
 	//it would contain children and they would also be of type ASTreeNode
 	//other classes in the server html tree would be derived from this class
 public:
-	ASTreeNode(std::string name, std::string atributes, std::string content);
 	ASTreeNode() = default;
 	
 	~ASTreeNode() = default;
 
-	typedef std::vector<std::unique_ptr<ASTreeNode>> NodeChildren;
+	typedef std::vector<std::shared_ptr<ASTreeNode>> NodeChildren;
 
 	//add a child to the node
-	void AddChild(std::unique_ptr<ASTreeNode> child)
+	void AddChild(std::shared_ptr<ASTreeNode> child)
 	{
 		children.push_back(child);
 	}
 
+	virtual void registernode(std::string name, std::string attributes, std::string content){}
+
 
 	//remove a child from the node
 	//removal should actually never happen except in rare cases
-	void RemoveChild(std::unique_ptr<ASTreeNode> child)
+	void RemoveChild(std::shared_ptr<ASTreeNode> child)
 	{
 		//find the child and remove it
 		for (int i = 0; i < children.size(); i++)
@@ -70,9 +70,6 @@ private:
 	std::string name;
 };
 
-ASTreeNode::ASTreeNode(std::string name, std::string atributes,std::string content)
-{
-}
 
 
 

@@ -3,15 +3,12 @@
 #include <memory>
 #include <functional>
 #include "ast.h"
-#include "ServerNode.h"
-#include "RouteNode.h"
-#include "APINode.h"
 
 
 // Factory class
 class ASTNodeFactory {
 public:
-    using CreatorFunc = std::function<std::unique_ptr<ASTreeNode>()>;
+    using CreatorFunc = std::function<std::shared_ptr<ASTreeNode>()>;
 
 
     static ASTNodeFactory& getInstance() {
@@ -24,7 +21,7 @@ public:
     }
 
 
-    std::unique_ptr<ASTreeNode> create(const std::string& name) {
+    std::shared_ptr<ASTreeNode> create(const std::string& name) {
         auto it = registry.find(name);
         if (it != registry.end()) {
             return it->second();

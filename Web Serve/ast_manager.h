@@ -15,8 +15,12 @@ public:
 			//create a function that determines the tag classes
 
 			//IMPORTANT!!!!!!!!
-			node->AddChild(ASTNodeFactory::getInstance().create(tag_data.tag));
-			//all classes should be derived from ASTreeNode
+			std::shared_ptr<ASTreeNode> astInstance = ASTNodeFactory::getInstance().create(tag_data.tag);
+			if(astInstance != nullptr){
+				astInstance->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
+				node->AddChild(astInstance);
+				//all classes should be derived from ASTreeNode
+			}	
 		}
 	}
 

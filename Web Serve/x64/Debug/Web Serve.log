@@ -1,11 +1,4 @@
-﻿  ast.cpp
-  clientsock.cpp
-  serversock.cpp
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'serversock.cpp')
-  
-  socket.cpp
-  Web Serve.cpp
+﻿  Web Serve.cpp
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Web%20Serve.cpp')
   
@@ -19,23 +12,4 @@ C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): war
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4309: 'argument': truncation of constant value
   (compiling source file 'Web%20Serve.cpp')
   
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\RouteNode.h(20,2): error C2660: 'ASTreeNode::setNodeAttributes': function does not take 1 arguments
-  (compiling source file 'Web%20Serve.cpp')
-      C:\Users\Administrator\source\repos\Web Serve\Web Serve\ast.h(53,14):
-      see declaration of 'ASTreeNode::setNodeAttributes'
-      C:\Users\Administrator\source\repos\Web Serve\Web Serve\RouteNode.h(20,2):
-      while trying to match the argument list '(std::string)'
-  
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\RouteNode.h(21,2): error C2653: 'ASTManager': is not a class or namespace name
-  (compiling source file 'Web%20Serve.cpp')
-  
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\RouteNode.h(21,14): error C3861: 'addNodeChildrenFromContent': identifier not found
-  (compiling source file 'Web%20Serve.cpp')
-  
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\APINode.h(22,2): error C2653: 'ASTManager': is not a class or namespace name
-  (compiling source file 'Web%20Serve.cpp')
-  
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\APINode.h(22,14): error C3861: 'addNodeChildrenFromContent': identifier not found
-  (compiling source file 'Web%20Serve.cpp')
-  
-  Generating Code...
+  Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe

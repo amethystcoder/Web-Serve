@@ -7,19 +7,24 @@
 class APINode : public ASTreeNode
 {
 public:
-	APINode(std::string name, std::string attributes, std::string content);
+	APINode();
 	~APINode();
+
+	void registernode(std::string name, std::string attributes, std::string content)
+	{
+		addTagName(name, *this);
+		setNodeAttributes(attributes, this);
+		ASTManager::addNodeChildrenFromContent(content, this);
+
+	}
 
 private:
 
 
 };
 
-APINode::APINode(std::string name, std::string attributes, std::string content)
+APINode::APINode()
 {
-	addTagName(name, *this);
-	setNodeAttributes(attributes,this);
-	ASTManager::addNodeChildrenFromContent(content, this);
 
 }
 

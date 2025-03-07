@@ -27,9 +27,6 @@
     <ClCompile Include="clientsock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ast.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components.hpp">
