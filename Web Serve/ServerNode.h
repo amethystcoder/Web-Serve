@@ -12,7 +12,7 @@ public:
 	ServerNode();
 	~ServerNode();
 
-	void registernode(std::string name, std::string attributes, std::string content)
+	void registernode(const std::string& name, const std::string& attributes, const std::string& content)
 	{
 		std::cout << "tag name: " << name << std::endl;
 		std::cout << "content: " << content << std::endl;

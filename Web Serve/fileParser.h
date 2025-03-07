@@ -28,7 +28,26 @@ public:
 		return true;
 	}
 
-	static TagDataList parse_html_content(std::string html_text)
+	std::map<std::string, std::string> parseAttributes(const std::string& input) {
+		std::map<std::string, std::string> result;
+		std::regex pattern(R"((\w+)='([^']*)'|(\w+))");
+		std::smatch match;
+		std::string str = input;
+
+		while (std::regex_search(str, match, pattern)) {
+			if (match[1].matched) { // Matched key='value' pattern
+				result[match[1]] = match[2];
+			}
+			else if (match[3].matched) { // Matched standalone key
+				result[match[3]] = ""; // Assign empty value
+			}
+			str = match.suffix();
+		}
+
+		return result;
+	}
+
+	static TagDataList parse_html_content(const std::string& html_text)
 	{
 		//master tags are the tags that are not nested or are the root tags in a string
 		//for example in the html text <server><api></api></server> server is a master tag

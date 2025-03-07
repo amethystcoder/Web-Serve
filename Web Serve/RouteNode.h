@@ -10,7 +10,7 @@ public:
 	~RouteNode();
 
 
-	void registernode(std::string name, std::string attributes, std::string content)
+	void registernode(const std::string& name, const std::string& attributes, const std::string& content)
 	{
 		addTagName(name, *this);
 		setNodeAttributes(attributes, this);

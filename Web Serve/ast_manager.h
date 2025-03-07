@@ -9,7 +9,7 @@ public:
 	ASTManager();
 	~ASTManager();
 
-	static void addNodeChildrenFromContent(std::string content, ASTreeNode* node) {
+	static void addNodeChildrenFromContent(const std::string& content, ASTreeNode* node) {
 		TagDataList parsed_content = FileParser::parse_html_content(content);
 		for (auto& tag_data : parsed_content) {
 			//create a function that determines the tag classes

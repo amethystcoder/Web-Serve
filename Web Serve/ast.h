@@ -24,7 +24,7 @@ public:
 		children.push_back(child);
 	}
 
-	virtual void registernode(std::string name, std::string attributes, std::string content){}
+	virtual void registernode(const std::string& name, const std::string& attributes, const std::string& content){}
 
 
 	//remove a child from the node
@@ -50,7 +50,7 @@ public:
 	}
 
 	//this method can be overloaded if each child has specific unique attributes
-	static void setNodeAttributes(std::string attributes, ASTreeNode* node) {
+	static void setNodeAttributes(const std::string& attributes, ASTreeNode* node) {
 		//parse the attributes and set the attributes of the node
 		//attributes string looks like class='weird class' or id='weird id'
 		//create a map of the attributes
@@ -58,7 +58,7 @@ public:
 	}
 
 	
-	void addTagName(std::string tagname, ASTreeNode node) {
+	void addTagName(const std::string& tagname, ASTreeNode node) {
 		//add the tag name to the node
 		name = tagname;
 	}
@@ -68,6 +68,7 @@ private:
 	NodeChildren children;
 
 	std::string name;
+	std::map<std::string, std::string> nodeAttributes;
 };
 
 

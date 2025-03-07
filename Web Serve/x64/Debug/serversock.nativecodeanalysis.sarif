@@ -1,0 +1,51 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.41.34120.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/administrator/source/repos/web serve/web serve/serversock.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "e3166e37d0a49014e098b6ba7c5f91d96c6458609e088e0c7d9931845859d631"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/administrator/source/repos/web serve/web serve/serversock.h"
+          },
+          "hashes": {
+            "sha-256": "e639ce6da15d5f1d8b996c2f10e629a0b1e1578ccb72f41adaf8975081e6a0ac"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/administrator/source/repos/web serve/web serve/cleansocket.h"
+          },
+          "hashes": {
+            "sha-256": "a083ae6ab1fa817bd94c2ab969287561849c16cdc41965aa4d298e2220eef0ab"
+          }
+        }
+      ]
+    }
+  ]
+}
