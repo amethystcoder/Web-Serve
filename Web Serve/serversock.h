@@ -81,7 +81,7 @@ namespace AmthSocket
 				throw std::system_error(WSAGetLastError(), std::system_category());
 			}
 			Sleep(1000);
-			shutdown(clientSocket, SD_SEND);  
+			shutdown(clientSocket, SD_SEND);  //shutdown the sending side of the socket
 
 		}
 

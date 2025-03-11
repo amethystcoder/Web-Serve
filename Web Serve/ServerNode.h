@@ -5,6 +5,7 @@
 #include "ast.h"
 #include "ast_manager.h"
 #include <iostream>
+#include "httprequest.h"
 
 //#include "cleansocket.h"
 //#include "socket.hpp"
@@ -17,10 +18,6 @@ public:
 
 	void registernode(const std::string& name, const std::string& attributes, const std::string& content)
 	{
-		std::cout << "tag name: " << name << std::endl;
-		std::cout << "content: " << content << std::endl;
-		std::cout << "attributes: " << attributes << std::endl;
-
 		addTagName(name, *this);
 		setNodeAttributes(ASTManager::parseattributes(attributes), this);
 		ASTManager::addNodeChildrenFromContent(content, this);
@@ -46,7 +43,16 @@ public:
 		AmthSocket::ServerSocket server{};
 		server.listenforConnections(this->cleanSocket, this->address, this->port);
 		SOCKET clientSocket = server.acceptConnection(this->cleanSocket);
-		server.sendData(clientSocket, "Hello from server");
+		//TODO: note that this only works if it is a get request
+		//need to implement a way to handle other request types
+		std::string request_data = server.receiveData(clientSocket);
+		HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
+		//print key and value for each item in the map
+		for (auto& header : headers) {
+			std::cout << header.first << " is equal to " << header.second << std::endl;
+		}
+		server.sendData(clientSocket, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>");
+
 	}
 
 	friend ASTManager;
