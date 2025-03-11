@@ -13,7 +13,7 @@ public:
 	void registernode(const std::string& name, const std::string& attributes, const std::string& content)
 	{
 		addTagName(name, *this);
-		setNodeAttributes(attributes, this);
+		setNodeAttributes(ASTManager::parseattributes(attributes), this);
 		ASTManager::addNodeChildrenFromContent(content, this);
 
 	}

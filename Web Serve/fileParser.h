@@ -28,7 +28,7 @@ public:
 		return true;
 	}
 
-	std::map<std::string, std::string> parseAttributes(const std::string& input) {
+	static std::map<std::string, std::string> parseAttributes(const std::string& input) {
 		std::map<std::string, std::string> result;
 		std::regex pattern(R"((\w+)='([^']*)'|(\w+))");
 		std::smatch match;

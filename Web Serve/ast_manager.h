@@ -2,6 +2,7 @@
 #include "fileParser.h"
 #include "ast.h"
 #include "ast_factory.h"
+#include <unordered_map>
 
 class ASTManager
 {
@@ -22,6 +23,10 @@ public:
 				//all classes should be derived from ASTreeNode
 			}	
 		}
+	}
+
+	static std::map<std::string, std::string> parseattributes(const std::string& attributes) {
+		return FileParser::parseAttributes(attributes);
 	}
 
 private:

@@ -132,6 +132,7 @@
     <ClCompile Include="clientsock.cpp" />
     <ClCompile Include="serversock.cpp" />
     <ClCompile Include="socket.cpp" />
+    <ClCompile Include="Socket_manager.cpp" />
     <ClCompile Include="Web Serve.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="ServerNode.h" />
     <ClInclude Include="serversock.h" />
     <ClInclude Include="socket.hpp" />
+    <ClInclude Include="Socket_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

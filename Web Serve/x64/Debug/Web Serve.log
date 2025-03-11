@@ -1,24 +1,15 @@
-﻿  clientsock.cpp
-  serversock.cpp
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'serversock.cpp')
-  
-  socket.cpp
-  Web Serve.cpp
+﻿  Web Serve.cpp
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.h(79,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Web%20Serve.cpp')
   
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4305:         with
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4305:         [
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4305:             _Elem=char
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4305:         ]
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(108,28): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(108,28): warning C4305:         with
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(108,28): warning C4305:         [
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(108,28): warning C4305:             _Elem=char
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(108,28): warning C4305:         ]
   (compiling source file 'Web%20Serve.cpp')
   
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(89,28): warning C4309: 'argument': truncation of constant value
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.h(108,28): warning C4309: 'argument': truncation of constant value
   (compiling source file 'Web%20Serve.cpp')
   
-  Running Code Analysis for C/C++...
-  Generating Code...
   Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\ServerNode.h(33): warning C26495: Variable 'ServerNode::port' is uninitialized. Always initialize a member variable (type.6).

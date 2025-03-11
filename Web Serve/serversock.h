@@ -21,7 +21,7 @@ namespace AmthSocket
 
 
 		//ip_addr is the ip address of the server and looks like "127.0.0.1"
-		void listenforConnections(CleanSocket* tcpSocketIPV4, char ip_addr[], u_int port) {
+		void listenforConnections(CleanSocket* tcpSocketIPV4, const char ip_addr[], u_int port) {
 			
 			sockaddr_in hint{};
 			hint.sin_family = AF_INET;

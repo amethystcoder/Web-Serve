@@ -50,11 +50,11 @@ public:
 	}
 
 	//this method can be overloaded if each child has specific unique attributes
-	static void setNodeAttributes(const std::string& attributes, ASTreeNode* node) {
+	static void setNodeAttributes(std::map<std::string, std::string> attributes, ASTreeNode* node) {
 		//parse the attributes and set the attributes of the node
 		//attributes string looks like class='weird class' or id='weird id'
 		//create a map of the attributes
-		
+		node->nodeAttributes = attributes;
 	}
 
 	
@@ -63,12 +63,13 @@ public:
 		name = tagname;
 	}
 
+	std::map<std::string, std::string> nodeAttributes;
+
 private:
 	//use vector to store children
 	NodeChildren children;
 
 	std::string name;
-	std::map<std::string, std::string> nodeAttributes;
 };
 
 

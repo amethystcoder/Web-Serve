@@ -2,8 +2,6 @@
 #include <system_error>
 #include <iostream>
 #include "cleansocket.h"
-#include "clientsock.h"
-#include "serversock.h"
 #include "ServerNode.h"
 #include <vector>
 #include "fileParser.h"
@@ -42,12 +40,13 @@ int main() {
 
 			//create a node for the server tag
 			serverNode = new ServerNode();//, tag_data.content
-			serverNode->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
 			//if the server tag is not found then the html text is invalid
 			if (serverNode == nullptr) {
 				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
 				return 1;
 			}
+			serverNode->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
+			serverNode->startUpServer();
 			break;
 		}
 	}

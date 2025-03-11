@@ -1,2 +1,0 @@
-C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe.lastcodeanalysissucceeded
-C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\NativeCodeAnalysis.read.1.tlog

@@ -2,14 +2,13 @@
 
 #include <string>
 #include <system_error>
-#include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <iostream>
 
 
 class CleanSocket {
     public:
-        CleanSocket(int address_family, int sockettype, int protocol) {
+        CleanSocket(int address_family = AF_INET, int sockettype = SOCK_STREAM, int protocol = IPPROTO_TCP) {
             cleanSocket = socket(address_family, sockettype, protocol);
             std::cout << cleanSocket << std::endl;
             if (cleanSocket == INVALID_SOCKET) {
