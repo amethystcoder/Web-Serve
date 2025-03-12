@@ -63,6 +63,10 @@ public:
 		name = tagname;
 	}
 
+	std::string getTagName() const noexcept {
+		return name;
+	}
+
 	std::map<std::string, std::string> nodeAttributes;
 
 private:

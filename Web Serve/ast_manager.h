@@ -25,6 +25,25 @@ public:
 		}
 	}
 
+	static ASTreeNode* findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode) {
+		//search for the route node with the endpoint
+		//return the node
+		//if the node is not found, return nullptrs
+		ASTreeNode* routeNode = nullptr;
+		if (startnode->getTagName() == "route") {
+			if (startnode->nodeAttributes["endpoint"] == endpoint) {
+				return startnode;
+			}
+		}
+
+		for (auto& child : startnode->GetChildren()) {
+			routeNode = findRouteNodeWithEndpoint(endpoint, child.get());
+			if (routeNode != nullptr) {
+				return routeNode;
+			}
+		}
+	}
+
 	static std::map<std::string, std::string> parseattributes(const std::string& attributes) {
 		return FileParser::parseAttributes(attributes);
 	}

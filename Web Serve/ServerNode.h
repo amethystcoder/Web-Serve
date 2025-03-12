@@ -47,7 +47,14 @@ public:
 		//need to implement a way to handle other request types
 		std::string request_data = server.receiveData(clientSocket);
 		HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
-		server.sendData(clientSocket, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>");
+		ASTreeNode* routeWithEndpoint = ASTManager::findRouteNodeWithEndpoint(headers["endpoint"], this);
+		if (routeWithEndpoint != nullptr) {
+			//send the response
+			server.sendData(clientSocket, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>");
+			//server.sendData(clientSocket, routeWithEndpoint.nodeAttributes);
+		}
+		else server.sendData(clientSocket, "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\n<html><body><h1>404 Not Found</h1></body></html>");//send a 404 response
+			
 
 	}
 
