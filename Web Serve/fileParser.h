@@ -2,7 +2,9 @@
 #include <fstream>
 #include <vector>
 #include <regex>
+#include <string>
 #include <sstream>
+#include <algorithm>
 
 struct HTMLTagData {
 	std::string tag;
@@ -23,8 +25,11 @@ public:
 	FileParser& operator = (const FileParser&) = delete;
 	FileParser(const FileParser&) = delete;
 
-	bool checkFileCorrectness (const char *filename){
-		//change later
+	static bool check_is_html(const std::string& filename){
+		//check if the file is a valid html file
+		//valid files have the .html extension
+		std::string file = filename;
+		if (file.find(".html") == std::string::npos) return false;
 		return true;
 	}
 
@@ -47,14 +52,17 @@ public:
 		return result;
 	}
 
-	static TagDataList parse_html_content(const std::string& html_text)
-	{
+	static TagDataList parse_html_content(std::string& html_text)
+	{	
+		html_text.erase(std::remove(html_text.begin(), html_text.end(), '\r'), html_text.end());
+		html_text.erase(std::remove(html_text.begin(), html_text.end(), '\n'), html_text.end());
+
 		//master tags are the tags that are not nested or are the root tags in a string
 		//for example in the html text <server><api></api></server> server is a master tag
 		//child tags are not accessed
 		TagDataList master_tags;
 		//regex to parse html text
-		std::regex html_regex(R"(<([^<>/\s]+)([^<>]*)>(.*?)<\/\1>|<([^<>/\s]+)([^<>]*)\/>)");
+		std::regex html_regex(R"(<([^<>/\s]+)((?:\s+[^<>/\s=]+=(?:"[^"]*"|'[^']*'|[^'"\s<>]*))*)>(.*?)<\/\1>|<([^<>/\s]+)((?:\s+[^<>/\s=]+=(?:"[^"]*"|'[^']*'|[^'"\s<>]*))*)\/>)");
 		std::smatch match;
 
 		std::string temp = html_text;
@@ -90,6 +98,25 @@ public:
 		return master_tags;
 	}
 
+	//html file like index.html
+	static TagDataList parse_html_file(const std::string& html_file)
+	{
+		if (!check_is_html (html_file)) return TagDataList();
+		std::ifstream file(html_file);
+		std::stringstream buffer;
+		buffer << file.rdbuf();
+		std::string html_text = buffer.str();
+		return parse_html_content(html_text);
+	}
+
+	static TagDataList determineParseType(std::string& input) {
+		//check if the input is a file or a string
+		//if the input is a file then return the parsed file content
+		//if the input is a string then return the parsed string content
+		//if the input is neither a file nor a string then return an empty string
+		return input.ends_with(".html") ? parse_html_file(input) : parse_html_content(input);
+	}
+	
 
 private:
 	std::fstream fileRead;
@@ -105,7 +132,7 @@ FileParser::FileParser(const char* filename)
 	if (size == -1) return;
 	fileRead.seekg(0, std::ios::beg);
 
-	std::string content(size, '/0');
+	std::string content(size, 0);
 	fileRead.read(&content[0], size);
 	//this should be considered unneccessary
 	fileContent = content;

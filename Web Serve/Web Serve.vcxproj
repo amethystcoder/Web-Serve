@@ -151,6 +151,9 @@
     <ClInclude Include="socket.hpp" />
     <ClInclude Include="Socket_manager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="serverFile.html" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

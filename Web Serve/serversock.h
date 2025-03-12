@@ -76,7 +76,7 @@ namespace AmthSocket
 		}
 
 		inline void sendData(SOCKET &clientSocket,const char data[]) {
-			int sendData = send(clientSocket, data, strlen(data) + 1, 0); 
+			int sendData = send(clientSocket, data, static_cast<int>(strlen(data)) + 1, 0); 
 			if (sendData == SOCKET_ERROR) {
 				throw std::system_error(WSAGetLastError(), std::system_category());
 			}

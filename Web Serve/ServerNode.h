@@ -16,7 +16,7 @@ public:
 	ServerNode();
 	~ServerNode();
 
-	void registernode(const std::string& name, const std::string& attributes, const std::string& content)
+	void registernode(const std::string& name, const std::string& attributes, std::string& content)
 	{
 		addTagName(name, *this);
 		setNodeAttributes(ASTManager::parseattributes(attributes), this);
@@ -47,10 +47,6 @@ public:
 		//need to implement a way to handle other request types
 		std::string request_data = server.receiveData(clientSocket);
 		HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
-		//print key and value for each item in the map
-		for (auto& header : headers) {
-			std::cout << header.first << " is equal to " << header.second << std::endl;
-		}
 		server.sendData(clientSocket, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>");
 
 	}

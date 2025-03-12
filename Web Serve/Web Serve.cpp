@@ -20,14 +20,10 @@ static void registerClasses() {
 int main() {
 	registerClasses();
 
-	std::string html_text = "<server port='5000'><api><route></route></api></server>";
-
+	std::string html_text = "serverFile.html";
 	
-	std::vector<HTMLTagData> firstNodeList = FileParser::parse_html_content(html_text);
+	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(html_text);
 	//create a tree of the html text
-    //ensure that the first tag is the root tag and the root tag is <server> 
-	//if there are two sibling tags then the first tag is the root tag 
-	//as long as there is a server sibling tag, the other tags would be ignored
 
 	ServerNode* serverNode{};
 	
@@ -40,7 +36,6 @@ int main() {
 
 			//create a node for the server tag
 			serverNode = new ServerNode();//, tag_data.content
-			//if the server tag is not found then the html text is invalid
 			if (serverNode == nullptr) {
 				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
 				return 1;
@@ -50,7 +45,5 @@ int main() {
 			break;
 		}
 	}
-
-
 }
 
