@@ -2,6 +2,7 @@
 
 #include "ast.h"
 #include "ast_manager.h"
+#include <iostream>
 
 class RouteNode : public ASTreeNode
 {
@@ -12,11 +13,16 @@ public:
 
 	void registernode(const std::string& name, const std::string& attributes, std::string& content)
 	{
-		addTagName(name, *this);
+		addTagName(name, this);
 		setNodeAttributes(ASTManager::parseattributes(attributes), this);
 		ASTManager::addNodeChildrenFromContent(content, this);
 		setParams();
 	}
+
+	//set the string that would be sent as a server response
+	//std::string setResponseString() {
+		//return this->
+	//}
 
 	void setParams() noexcept {
 		this->endpoint = endpoint = this->nodeAttributes["endpoint"];

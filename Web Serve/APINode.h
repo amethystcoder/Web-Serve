@@ -3,6 +3,7 @@
 
 #include "ast.h"
 #include "ast_manager.h"
+#include <iostream>
 
 class APINode : public ASTreeNode
 {
@@ -12,14 +13,14 @@ public:
 
 	void registernode(const std::string& name, const std::string& attributes, std::string& content)
 	{
-		addTagName(name, *this);
+		addTagName(name, this);
 		setNodeAttributes(ASTManager::parseattributes(attributes), this);
 		ASTManager::addNodeChildrenFromContent(content, this);
 
 	}
 
 private:
-
+	friend ASTManager;
 
 };
 

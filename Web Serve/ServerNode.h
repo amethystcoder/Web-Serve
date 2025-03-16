@@ -18,7 +18,7 @@ public:
 
 	void registernode(const std::string& name, const std::string& attributes, std::string& content)
 	{
-		addTagName(name, *this);
+		addTagName(name, this);
 		setNodeAttributes(ASTManager::parseattributes(attributes), this);
 		ASTManager::addNodeChildrenFromContent(content, this);
 
@@ -44,12 +44,13 @@ public:
 		server.listenforConnections(this->cleanSocket, this->address, this->port);
 		SOCKET clientSocket = server.acceptConnection(this->cleanSocket);
 		//TODO: note that this only works if it is a get request
-		//need to implement a way to handle other request types
+		//We need to implement a way to handle other request types
 		std::string request_data = server.receiveData(clientSocket);
 		HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
-		ASTreeNode* routeWithEndpoint = ASTManager::findRouteNodeWithEndpoint(headers["endpoint"], this);
+		std::cout << "endpoint: " << headers["path"] << std::endl;
+		ASTreeNode* routeWithEndpoint = ASTManager::findRouteNodeWithEndpoint(headers["path"], this);
 		if (routeWithEndpoint != nullptr) {
-			//send the response
+			//Send the response
 			server.sendData(clientSocket, "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>");
 			//server.sendData(clientSocket, routeWithEndpoint.nodeAttributes);
 		}

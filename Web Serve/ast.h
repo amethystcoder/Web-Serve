@@ -24,7 +24,7 @@ public:
 		children.push_back(child);
 	}
 
-	virtual void registernode(const std::string& name, const std::string& attributes, const std::string& content){}
+	void registernode(const std::string& name, const std::string& attributes, const std::string& content){}
 
 
 	//remove a child from the node
@@ -58,9 +58,9 @@ public:
 	}
 
 	
-	void addTagName(const std::string& tagname, ASTreeNode node) {
+	static void addTagName(const std::string& tagname, ASTreeNode* node) {
 		//add the tag name to the node
-		name = tagname;
+		node->name = tagname;
 	}
 
 	std::string getTagName() const noexcept {
