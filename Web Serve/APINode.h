@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef APINODE
+#define APINODE
 
 #include "ast.h"
 #include "ast_manager.h"
@@ -11,24 +13,11 @@ public:
 	APINode();
 	~APINode();
 
-	void registernode(const std::string& name, const std::string& attributes, std::string& content)
-	{
-		addTagName(name, this);
-		setNodeAttributes(ASTManager::parseattributes(attributes), this);
-		ASTManager::addNodeChildrenFromContent(content, this);
-
-	}
+	void registernode(const std::string& name, const std::string& attributes, std::string& content);
 
 private:
 	friend ASTManager;
 
 };
 
-APINode::APINode()
-{
-
-}
-
-APINode::~APINode()
-{
-}
+#endif // !APINODE

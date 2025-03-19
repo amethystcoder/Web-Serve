@@ -1,47 +1,27 @@
-#pragma once
+#ifndef CLEANSOCKET_H
+#define CLEANSOCKET_H
 
 #include <string>
 #include <system_error>
 #include <WS2tcpip.h>
 #include <iostream>
+#include <WinSock2.h>
 
 
 class CleanSocket {
-    public:
-        CleanSocket(int address_family = AF_INET, int sockettype = SOCK_STREAM, int protocol = IPPROTO_TCP) {
-            cleanSocket = socket(address_family, sockettype, protocol);
-            std::cout << cleanSocket << std::endl;
-            if (cleanSocket == INVALID_SOCKET) {
-                throw std::system_error(WSAGetLastError(), std::system_category());
-            }
-        }
+public:
+    CleanSocket(int address_family = AF_INET, int sockettype = SOCK_STREAM, int protocol = IPPROTO_TCP);
 
-        SOCKET Get() const noexcept {
-            return cleanSocket;
-        }
+    SOCKET Get() const noexcept;
 
-        CleanSocket(const CleanSocket&) = delete;
-        CleanSocket& operator = (const CleanSocket&) = delete;
+    CleanSocket(const CleanSocket&) = delete;
+    CleanSocket& operator = (const CleanSocket&) = delete;
 
-        CleanSocket(CleanSocket&& rhs) noexcept :
-            cleanSocket{ std::exchange(rhs.cleanSocket, INVALID_SOCKET) }
-        {}
+    CleanSocket(CleanSocket&& rhs) noexcept;
 
-        CleanSocket& operator = (CleanSocket&& rhs) noexcept {
-            if (cleanSocket != INVALID_SOCKET) {
-                std::ignore = closesocket(cleanSocket);
-            }
+    CleanSocket& operator = (CleanSocket&& rhs) noexcept;
 
-            cleanSocket = std::exchange(rhs.cleanSocket, INVALID_SOCKET);
-
-            return *this;
-        }
-
-        ~CleanSocket() noexcept {
-            if (cleanSocket != INVALID_SOCKET) {
-                std::ignore = closesocket(cleanSocket);
-            }
-        }
+    ~CleanSocket() noexcept;
 
     private:
         SOCKET cleanSocket = { INVALID_SOCKET };
@@ -56,3 +36,5 @@ class CleanSocket {
     SOCKET udpSocketIPV6 = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
 
 */
+
+#endif //CLEANSOCKET_H

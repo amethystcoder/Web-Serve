@@ -1,5 +1,3 @@
-#include "socket.hpp"
-#include <system_error>
 #include <iostream>
 #include "cleansocket.h"
 #include "ServerNode.h"
@@ -17,7 +15,7 @@ static void registerClasses() {
 	ASTNodeFactory::getInstance().registerClass("api", []() { return std::make_shared<APINode>(); });
 }
 
-int main() {
+int main(int argc, char** argv) {
 	registerClasses();
 
 	std::string html_text = "serverFile.html";

@@ -1,8 +1,8 @@
 <server port='5000'>
     <api>
-        <route endpoint='/name'></route>
-        <route endpoint='/stats'></route>
-        <route endpoint='/wonder'></route>
-        <route endpoint='/equip'></route>
+        <route endpoint='/name' method='GET' rescontenttype='html' response='Hello, World!'></route>
+        <route endpoint='/stats' method='GET' rescontenttype='html' response='Hello, You are in the equip page!'></route>
+        <route endpoint='/wonder' method='GET' rescontenttype='html' response='Hello, You are in the wonder page!'></route>
+        <route endpoint='/equip' method='GET' rescontenttype='html' response='Hello, You are in the equip page!'></route>
     </api>
 </server>

@@ -129,10 +129,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="APINode.cpp" />
+    <ClCompile Include="ast_manager.cpp" />
+    <ClCompile Include="cleansocket.cpp" />
     <ClCompile Include="clientsock.cpp" />
+    <ClCompile Include="fileParser.cpp" />
+    <ClCompile Include="httprequest.cpp" />
+    <ClCompile Include="RouteNode.cpp" />
+    <ClCompile Include="ServerNode.cpp" />
     <ClCompile Include="serversock.cpp" />
     <ClCompile Include="socket.cpp" />
     <ClCompile Include="Socket_manager.cpp" />
+    <ClCompile Include="ast.cpp" />
     <ClCompile Include="Web Serve.cpp" />
   </ItemGroup>
   <ItemGroup>
