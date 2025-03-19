@@ -5,7 +5,7 @@
 #include <system_error>
 #include <WS2tcpip.h>
 #include <iostream>
-#include <WinSock2.h>
+#include "socket.hpp"
 
 
 class CleanSocket {

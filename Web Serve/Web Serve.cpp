@@ -16,6 +16,7 @@ static void registerClasses() {
 }
 
 int main(int argc, char** argv) {
+	AmthSocket::SocketImpl sockimpl{};
 	registerClasses();
 
 	std::string html_text = "serverFile.html";
