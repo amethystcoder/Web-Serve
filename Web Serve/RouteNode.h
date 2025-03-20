@@ -19,11 +19,11 @@ public:
 
 	std::string getFullResponse() noexcept;
 
-	std::string determineResponseStatus() const noexcept;
+	std::string determineResponseStatus() noexcept;
 
 	std::string determineResponse();
 
-	std::string determineContentType() const noexcept;
+	std::string determineContentType() noexcept;
 
 	std::string getEndpoint();
 

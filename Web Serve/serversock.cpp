@@ -65,7 +65,7 @@ std::string AmthSocket::ServerSocket::receiveData(SOCKET clientSocket) {
 }
 
 void AmthSocket::ServerSocket::sendData(SOCKET& clientSocket, const char data[]) {
-	int sendData = send(clientSocket, data, static_cast<int>(strlen(data)) + 1, 0);
+	int sendData = send(clientSocket, data, static_cast<int>(strlen(data)) + 1, 0);//add 1 to the length to include the null terminator
 	if (sendData == SOCKET_ERROR) {
 		throw std::system_error(WSAGetLastError(), std::system_category());
 	}
