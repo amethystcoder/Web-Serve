@@ -1,4 +1,5 @@
 #include "ast_manager.h"
+#include <iostream>
 
 ASTManager::ASTManager()
 {
@@ -18,6 +19,10 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 		if (astInstance != nullptr) {
 			ASTreeNode::addTagName(tag_data.tag, astInstance.get());
 			ASTreeNode::setNodeAttributes(ASTManager::parseattributes(tag_data.attributes), astInstance.get());
+			//use the file parser to change the content based on an attribute called `sref`
+			//the sref is given more priority than the content directly placed in the tag
+			std::string sref = astInstance->nodeAttributes["sref"];
+			if (!sref.empty()) tag_data.content = FileParser::readHtmlFile(sref);
 			ASTManager::addNodeChildrenFromContent(tag_data.content, astInstance.get());
 			node->AddChild(astInstance);
 			//all classes should be derived from ASTreeNode
@@ -39,6 +44,18 @@ ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, A
 	}
 
 	return nullptr; //Not found in this branch
+}
+
+void ASTManager::setEndpointContent(const std::string& content, ASTreeNode* node){
+	//
+	std::cout << "content:" << content << std::endl;
+	std::string filecontent = content;
+	if (FileParser::check_is_html(content)) filecontent = FileParser::readHtmlFile(content);
+	
+		
+	if (node->getTagName() == "route") {
+		node->nodeAttributes["response"] = filecontent;
+	}
 }
 
 std::map<std::string, std::string> ASTManager::parseattributes(const std::string& attributes) {

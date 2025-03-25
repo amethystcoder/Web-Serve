@@ -37,6 +37,8 @@ public:
 	//html file like index.html
 	static TagDataList parse_html_file(const std::string& html_file);
 	static TagDataList determineParseType(std::string& input);
+
+	static std::string readHtmlFile(const std::string& html_file);
 	
 
 private:

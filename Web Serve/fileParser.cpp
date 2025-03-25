@@ -94,14 +94,19 @@ TagDataList FileParser::parse_html_content(std::string& html_text)
 	return master_tags;
 }
 
-//html file like index.html
-TagDataList FileParser::parse_html_file(const std::string& html_file)
-{
-	if (!check_is_html(html_file)) return TagDataList();
+std::string FileParser::readHtmlFile(const std::string& html_file){
+	if (!check_is_html(html_file)) return "";
 	std::ifstream file(html_file);
 	std::stringstream buffer;
 	buffer << file.rdbuf();
-	std::string html_text = buffer.str();
+	return buffer.str();
+}
+
+//html file like index.html
+TagDataList FileParser::parse_html_file(const std::string& html_file)
+{
+	std::string html_text = readHtmlFile(html_file);
+	if (html_text == "") return TagDataList();
 	return parse_html_content(html_text);
 }
 

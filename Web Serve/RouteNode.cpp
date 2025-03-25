@@ -40,6 +40,7 @@ std::string RouteNode::determineResponseStatus() noexcept {
 }
 
 std::string RouteNode::determineResponse() {
+	//check that response is not an html file
 	return this->nodeAttributes["response"];
 }
 

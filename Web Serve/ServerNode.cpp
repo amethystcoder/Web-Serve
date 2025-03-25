@@ -47,6 +47,7 @@ void ServerNode::startUpServer() {
 		RouteNode* routeWithEndpoint = reinterpret_cast<RouteNode*>(ASTManager::findRouteNodeWithEndpoint(headers["path"], this));
 		//check if the route with the endpoint exists and that the node is a route node
 		if (routeWithEndpoint != nullptr && routeWithEndpoint->getTagName() == "route") {
+			ASTManager::setEndpointContent(routeWithEndpoint->nodeAttributes["response"], routeWithEndpoint);
 			//Send the response
 			server.sendData(clientSocket, routeWithEndpoint->getFullResponse().c_str());
 		}
