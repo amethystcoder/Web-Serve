@@ -1,4 +1,5 @@
 <server port='5000'>
+    <rate-limit maxRequests="100" per="60s" />
     <api>
         <route endpoint='/name' method='GET' rescontenttype='html' response='Hello, World!'></route>
         <route endpoint='/stats' method='GET' rescontenttype='html' response='Hello, You are in the equip page!'></route>

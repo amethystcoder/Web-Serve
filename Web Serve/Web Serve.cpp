@@ -1,10 +1,12 @@
 #include <iostream>
 #include "cleansocket.h"
 #include "ServerNode.h"
+#include "databaseNode.h"
 #include <vector>
 #include "fileParser.h"
 #include "RouteNode.h"
 #include "APINode.h"
+#include "RatelimitNode.h"
 #include "ast_factory.h"
 
 
@@ -13,6 +15,8 @@ static void registerClasses() {
 	ASTNodeFactory::getInstance().registerClass("server", []() { return std::make_shared<ServerNode>(); });
 	ASTNodeFactory::getInstance().registerClass("route", []() { return std::make_shared<RouteNode>(); });
 	ASTNodeFactory::getInstance().registerClass("api", []() { return std::make_shared<APINode>(); });
+	ASTNodeFactory::getInstance().registerClass("database", []() { return std::make_shared<DatabaseNode>(); });
+	ASTNodeFactory::getInstance().registerClass("rate-limit", []() { return std::make_shared<RateLimitNode>(); });
 }
 
 int main(int argc, char** argv) {

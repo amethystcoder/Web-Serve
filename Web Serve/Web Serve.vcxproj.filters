@@ -54,6 +54,15 @@
     <ClCompile Include="ServerNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="databaseCon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="databaseNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RatelimitNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components.hpp">
@@ -96,6 +105,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Socket_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="databaseNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="databaseCon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RatelimitNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -133,8 +133,11 @@
     <ClCompile Include="ast_manager.cpp" />
     <ClCompile Include="cleansocket.cpp" />
     <ClCompile Include="clientsock.cpp" />
+    <ClCompile Include="databaseCon.cpp" />
+    <ClCompile Include="databaseNode.cpp" />
     <ClCompile Include="fileParser.cpp" />
     <ClCompile Include="httprequest.cpp" />
+    <ClCompile Include="RatelimitNode.cpp" />
     <ClCompile Include="RouteNode.cpp" />
     <ClCompile Include="ServerNode.cpp" />
     <ClCompile Include="serversock.cpp" />
@@ -151,8 +154,11 @@
     <ClInclude Include="cleansocket.h" />
     <ClInclude Include="clientsock.h" />
     <ClInclude Include="components.hpp" />
+    <ClInclude Include="databaseCon.h" />
+    <ClInclude Include="databaseNode.h" />
     <ClInclude Include="fileParser.h" />
     <ClInclude Include="httprequest.h" />
+    <ClInclude Include="RatelimitNode.h" />
     <ClInclude Include="RouteNode.h" />
     <ClInclude Include="ServerNode.h" />
     <ClInclude Include="serversock.h" />
