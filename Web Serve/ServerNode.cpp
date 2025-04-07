@@ -1,4 +1,5 @@
 #include "ServerNode.h"
+#include "RatelimitNode.h"
 
 ServerNode::ServerNode()
 {
@@ -47,6 +48,26 @@ void ServerNode::startUpServer() {
 		RouteNode* routeWithEndpoint = reinterpret_cast<RouteNode*>(ASTManager::findRouteNodeWithEndpoint(headers["path"], this));
 		//check if the route with the endpoint exists and that the node is a route node
 		if (routeWithEndpoint != nullptr && routeWithEndpoint->getTagName() == "route") {
+			//check if the route has a rate limit
+			if (routeWithEndpoint->nodeAttributes.find("rate-limit") != routeWithEndpoint->nodeAttributes.end()) {
+
+				//Lots of things to do here
+				//get the address of the client and get the ratelimit node based on the name
+				RateLimitNode* rateLimitNode = reinterpret_cast<RateLimitNode*>(ASTManager::findNodeWithName(routeWithEndpoint->nodeAttributes["rateLimit"], this));
+				struct sockaddr_in clientAddress;
+				getpeername(clientSocket, (struct sockaddr*)&clientAddress, reinterpret_cast<int*>(sizeof(clientAddress)));
+				char ip_str[INET_ADDRSTRLEN];
+				inet_ntop(AF_INET, &(clientAddress.sin_addr), ip_str, INET_ADDRSTRLEN);
+				rateLimitNode->addNewIpaddress(ip_str);
+
+				std::cout << "" << ip_str << "amount of requests now" << rateLimitNode->getIpAttempts(ip_str) << std::endl;
+
+				if (rateLimitNode->isRateLimited(ip_str)) {
+					//response to the client if the ip address is in the rate limit
+					server.sendData(clientSocket, "HTTP/1.1 429 Too Many Requests\nContent-Type: text/html\n\n<html><body><h1>429 Too Many Requests</h1></body></html>");
+					continue;
+				}
+			}
 			ASTManager::setEndpointContent(routeWithEndpoint->nodeAttributes["response"], routeWithEndpoint);
 			//Send the response
 			server.sendData(clientSocket, routeWithEndpoint->getFullResponse().c_str());

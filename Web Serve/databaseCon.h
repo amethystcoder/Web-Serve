@@ -1,7 +1,7 @@
 #ifndef DATABASECON_H
 #define	DATABASECON_H
 
-#include <sql.h>
+//#include <sql.h>
 
 enum MyEnum
 {

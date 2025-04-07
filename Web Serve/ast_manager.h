@@ -20,6 +20,8 @@ public:
 
 	static std::map<std::string, std::string> parseattributes(const std::string& attributes);
 
+	static ASTreeNode* findNodeWithName(const std::string& name, ASTreeNode* startnode);
+
 private:
 
 };

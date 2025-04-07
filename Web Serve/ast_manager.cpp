@@ -40,7 +40,21 @@ ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, A
 	//Recursively search children
 	for (auto& child : startnode->GetChildren()) {
 		ASTreeNode* result = findRouteNodeWithEndpoint(endpoint, child.get());
-		if (result) return result; //Stop as soon as we find a match
+		if (result) return result; 
+	}
+
+	return nullptr; //Not found in this branch
+}
+
+ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* startnode) {
+	if (!startnode) return nullptr;
+
+	if (startnode->getTagName() == name) return startnode;
+
+	//Recursively search children
+	for (auto& child : startnode->GetChildren()) {
+		ASTreeNode* result = findNodeWithName(name, child.get());
+		if (result) return result;
 	}
 
 	return nullptr; //Not found in this branch
@@ -61,3 +75,5 @@ void ASTManager::setEndpointContent(const std::string& content, ASTreeNode* node
 std::map<std::string, std::string> ASTManager::parseattributes(const std::string& attributes) {
 	return FileParser::parseAttributes(attributes);
 }
+
+

@@ -2,8 +2,11 @@ C:\Users\Administrator\source\repos\Web Serve\Web Serve\APINode.cpp;C:\Users\Adm
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\ast_manager.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\ast_manager.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\cleansocket.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\cleansocket.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\clientsock.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\clientsock.obj
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\databaseCon.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\databaseCon.obj
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\databaseNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\databaseNode.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\fileParser.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\httprequest.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\httprequest.obj
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\RatelimitNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\RatelimitNode.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\RouteNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\RouteNode.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\ServerNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\ServerNode.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\serversock.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\serversock.obj
