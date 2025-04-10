@@ -1,7 +1,7 @@
 #ifndef RATELIMITNODE_H
 #define RATELIMITNODE_H
 
-#include <unordered_map>
+#include <map>
 #include <ctime>
 #include <chrono>
 #include <thread>
@@ -32,7 +32,7 @@ private:
 	std::string time;
 	short unsigned int rate;
 
-	std::unordered_map<std::string, short unsigned int> ip_attempts_map;
+	std::map<std::string, short unsigned int> ip_attempts_map;
 };
 
 #endif // !RATELIMITNODE_H

@@ -49,13 +49,19 @@ void ServerNode::startUpServer() {
 		//check if the route with the endpoint exists and that the node is a route node
 		if (routeWithEndpoint != nullptr && routeWithEndpoint->getTagName() == "route") {
 			//check if the route has a rate limit
-			if (routeWithEndpoint->nodeAttributes.find("rate-limit") != routeWithEndpoint->nodeAttributes.end()) {
-
-				//Lots of things to do here
+			if (routeWithEndpoint->nodeAttributes.find("rateLimit") != routeWithEndpoint->nodeAttributes.end()) {
 				//get the address of the client and get the ratelimit node based on the name
 				RateLimitNode* rateLimitNode = reinterpret_cast<RateLimitNode*>(ASTManager::findNodeWithName(routeWithEndpoint->nodeAttributes["rateLimit"], this));
+				//this is just a test and i will remove it later
+				//std::string tester = "";
+				//rateLimitNode->registernode("","",tester);
+				if (rateLimitNode == nullptr) {
+					server.sendData(clientSocket, "HTTP/1.1 500 Internal Server Error\nContent-Type: text/html\n\n<html><body><h1>500 Internal Server Error</h1></body></html>");
+					continue;
+				}
 				struct sockaddr_in clientAddress;
-				getpeername(clientSocket, (struct sockaddr*)&clientAddress, reinterpret_cast<int*>(sizeof(clientAddress)));
+				int clientAddressLen = sizeof(clientAddress);
+				getpeername(clientSocket, (struct sockaddr*)&clientAddress, &clientAddressLen);
 				char ip_str[INET_ADDRSTRLEN];
 				inet_ntop(AF_INET, &(clientAddress.sin_addr), ip_str, INET_ADDRSTRLEN);
 				rateLimitNode->addNewIpaddress(ip_str);

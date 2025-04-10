@@ -49,7 +49,11 @@ ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, A
 ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* startnode) {
 	if (!startnode) return nullptr;
 
-	if (startnode->getTagName() == name) return startnode;
+	//work on this tomorrow 
+
+	if (startnode->nodeAttributes.find("name") != startnode->nodeAttributes.end()) {
+		if (startnode->nodeAttributes["name"] == name) return startnode;
+	}
 
 	//Recursively search children
 	for (auto& child : startnode->GetChildren()) {
@@ -60,9 +64,21 @@ ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* st
 	return nullptr; //Not found in this branch
 }
 
+ASTreeNode* ASTManager::findNodeWithTagName(const std::string& Tagname, ASTreeNode* startnode) {
+	if (!startnode) return nullptr;
+
+	if (startnode->getTagName() == Tagname) return startnode;
+
+	//Recursively search children
+	for (auto& child : startnode->GetChildren()) {
+		ASTreeNode* result = findNodeWithTagName(Tagname, child.get());
+		if (result) return result;
+	}
+
+	return nullptr; //Not found in this branch
+}
+
 void ASTManager::setEndpointContent(const std::string& content, ASTreeNode* node){
-	//
-	std::cout << "content:" << content << std::endl;
 	std::string filecontent = content;
 	if (FileParser::check_is_html(content)) filecontent = FileParser::readHtmlFile(content);
 	

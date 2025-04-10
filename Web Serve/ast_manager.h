@@ -14,6 +14,8 @@ public:
 
 	static void addNodeChildrenFromContent(std::string& content, ASTreeNode* node);
 
+	ASTreeNode* findNodeWithTagName(const std::string& name, ASTreeNode* startnode);
+
 	static ASTreeNode* findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode);
 
 	static void setEndpointContent(const std::string& content,ASTreeNode* node);

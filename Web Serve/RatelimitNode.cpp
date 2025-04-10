@@ -29,11 +29,12 @@ bool RateLimitNode::beginLimit() {
 // adds one to the ip_address if it is already in memory, or creates a new std::pair with the ip_address and sets it to zero
 void RateLimitNode::addNewIpaddress(const std::string& ip_address)
 {
+	
 	//if the ip already is in the map, add one to the 
 	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end())
-		this->ip_attempts_map[ip_address] = 0;
-	else
 		this->ip_attempts_map[ip_address]++;
+	else
+		this->ip_attempts_map[ip_address] = 1;
 }
 
 int RateLimitNode::getIpAttempts(const std::string& ip_address)
@@ -68,3 +69,25 @@ bool RateLimitNode::startCheck() {
 
 	return true;
 }
+
+/*
+void RateLimitNode::startCentralResetThread() {
+	std::thread([this]() {
+		while (true) {
+			std::this_thread::sleep_for(std::chrono::seconds(1)); // or configurable
+
+			std::lock_guard<std::mutex> lock(this->mutex);
+
+			auto now = std::chrono::steady_clock::now();
+			for (auto it = ipTimestamps.begin(); it != ipTimestamps.end(); ++it) {
+				const std::string& ip = it->first;
+				auto& [count, lastResetTime] = it->second;
+
+				if (now - lastResetTime >= std::chrono::seconds(this->perSeconds)) {
+					it->second = { 0, now }; // reset count and update timer
+				}
+			}
+		}
+		}).detach();
+}
+*/
