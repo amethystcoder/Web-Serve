@@ -9,7 +9,7 @@ ASTManager::~ASTManager()
 {
 }
 
-
+//this function needs proper error handling as well as fixing
 void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* node) {
 	TagDataList parsed_content = FileParser::parse_html_content(content);
 	for (auto& tag_data : parsed_content) {
@@ -21,9 +21,11 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 			ASTreeNode::setNodeAttributes(ASTManager::parseattributes(tag_data.attributes), astInstance.get());
 			//use the file parser to change the content based on an attribute called `sref`
 			//the sref is given more priority than the content directly placed in the tag
+			astInstance->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
+			std::cout << "tag name: " << astInstance->getTagName() << std::endl;
 			std::string sref = astInstance->nodeAttributes["sref"];
 			if (!sref.empty()) tag_data.content = FileParser::readHtmlFile(sref);
-			ASTManager::addNodeChildrenFromContent(tag_data.content, astInstance.get());
+			//ASTManager::addNodeChildrenFromContent(tag_data.content, astInstance.get());
 			node->AddChild(astInstance);
 			//all classes should be derived from ASTreeNode
 		}

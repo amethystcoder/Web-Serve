@@ -1,13 +1,13 @@
 #include "ast.h"
 
 
-void ASTreeNode::registernode(const std::string& name, const std::string& attributes, const std::string& content)
+void ASTreeNode::registernode(const std::string& name, const std::string& attributes, std::string& content)
 {
 }
 
 void ASTreeNode::AddChild(std::shared_ptr<ASTreeNode> child)
 {
-	children.push_back(child);
+	children.emplace_back(child);
 }
 
 

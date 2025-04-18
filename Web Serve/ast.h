@@ -22,7 +22,7 @@ public:
 	//add a child to the node
 	void AddChild(std::shared_ptr<ASTreeNode> child);
 
-	void registernode(const std::string& name, const std::string& attributes, const std::string& content);
+	virtual void registernode(const std::string& name, const std::string& attributes, std::string& content);
 
 	void RemoveChild(std::shared_ptr<ASTreeNode> child);
 

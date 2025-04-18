@@ -1,6 +1,8 @@
 #include "RatelimitNode.h"
 #include <iostream>
 
+using namespace std::literals::chrono_literals;
+
 RateLimitNode::RateLimitNode()
 {
 	this->time = "";
@@ -13,9 +15,16 @@ RateLimitNode::~RateLimitNode()
 
 void RateLimitNode::registernode(const std::string& name, const std::string& attributes, std::string& content)
 {
-	this->rate = std::stoi(this->nodeAttributes["rate"]);
-	this->time = this->nodeAttributes["time"];
-	std::cout << "RateLimitNode: " << name << " registered with rate: " << this->rate << " and time: " << this->time << std::endl;
+	//sanity checks here please 
+	addTagName(name, this);
+	setNodeAttributes(ASTManager::parseattributes(attributes), this);
+	ASTManager::addNodeChildrenFromContent(content, this);
+	if (this->nodeAttributes.find("maxRequests") == this->nodeAttributes.end() || this->nodeAttributes["maxRequests"].find_first_not_of("0123456789") != std::string::npos) {
+		std::cerr << "Error: maxRequests attribute is missing in RateLimitNode" << std::endl;
+		return;
+	}
+	this->rate = std::stoi(this->nodeAttributes["maxRequests"]);
+	this->time = this->nodeAttributes["per"];
 
 }
 
@@ -30,11 +39,13 @@ bool RateLimitNode::beginLimit() {
 void RateLimitNode::addNewIpaddress(const std::string& ip_address)
 {
 	
-	//if the ip already is in the map, add one to the 
-	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end())
-		this->ip_attempts_map[ip_address]++;
-	else
+	//check that the ip address is not already in the map
+	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end()) {
+		this->ip_attempts_map[ip_address] += 1;
+	}
+	else {
 		this->ip_attempts_map[ip_address] = 1;
+	}
 }
 
 int RateLimitNode::getIpAttempts(const std::string& ip_address)
@@ -53,8 +64,13 @@ void RateLimitNode::removeIpaddress(std::string& ip_address)
 }
 
 bool RateLimitNode::isRateLimited(const std::string& ip_address){
+	//check that `maxRequests` is exists as an attribute ... else use 100
+	if(this->nodeAttributes.find("maxRequests") != this->nodeAttributes.end())
 	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end()) {
 		//we need to keep track of the time and check if the time is within the rate limit
+		for (auto [key, value] : this->nodeAttributes) {
+			std::cout << key << value << "\n";
+		}
 		if (this->ip_attempts_map[ip_address] >= this->rate) {
 			return true;
 		}

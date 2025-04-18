@@ -16,7 +16,7 @@ static void registerClasses() {
 	ASTNodeFactory::getInstance().registerClass("route", []() { return std::make_shared<RouteNode>(); });
 	ASTNodeFactory::getInstance().registerClass("api", []() { return std::make_shared<APINode>(); });
 	ASTNodeFactory::getInstance().registerClass("database", []() { return std::make_shared<DatabaseNode>(); });
-	ASTNodeFactory::getInstance().registerClass("rate-limit", []() { return std::make_shared<RateLimitNode>(); });
+	ASTNodeFactory::getInstance().registerClass("ratelimit", []() { return std::make_shared<RateLimitNode>(); });
 }
 
 int main(int argc, char** argv) {

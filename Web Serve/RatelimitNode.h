@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 #include "ast.h"
+#include "ast_manager.h"
 
 
 class RateLimitNode : public ASTreeNode
@@ -30,9 +31,9 @@ public:
 
 private:
 	std::string time;
-	short unsigned int rate;
+	unsigned short int rate;
 
-	std::map<std::string, short unsigned int> ip_attempts_map;
+	std::map<std::string, unsigned short int> ip_attempts_map;
 };
 
 #endif // !RATELIMITNODE_H

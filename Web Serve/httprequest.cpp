@@ -31,7 +31,7 @@ std::string HTTPTextParser::GetRequestBody(std::string& headers) noexcept {
 	size_t pos = headers.find(DBCRLF);
 	if (pos != std::string::npos) {
 		header = headers.substr(0, pos);
-		body = headers.substr(pos + 4);  // Skip \r\n\r\n
+		body = headers.substr(pos + 4);  //Skip \r\n\r\n
 	}
 	return body;
 }

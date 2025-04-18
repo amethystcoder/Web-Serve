@@ -19,7 +19,6 @@ void RouteNode::registernode(const std::string& name, const std::string& attribu
 }
 
 inline void RouteNode::setParams() noexcept {
-	std::cout << "Setting params" << std::endl;
 	this->endpoint = endpoint = this->nodeAttributes["endpoint"];
 	this->rescontenttype = this->nodeAttributes["rescontenttype"];
 	this->method = this->nodeAttributes["method"];

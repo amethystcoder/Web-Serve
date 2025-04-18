@@ -1,7 +1,7 @@
 <server port='5000'>
-    <rate-limit maxRequests="100" per="60s" name="someratelimitname"/>
+    <ratelimit maxRequests='100' per='60s' name='someratelimitname'></ratelimit>
     <api>
-        <route endpoint='/name' method='GET' rescontenttype='html' response='Hello, World!' rateLimit="someratelimitname"></route>
+        <route endpoint='/name' method='GET' rescontenttype='html' response='Hello, World!' rateLimit='someratelimitname'></route>
         <route endpoint='/stats' method='GET' rescontenttype='html' response='Hello, You are in the equip page!'></route>
         <route endpoint='/wonder' method='GET' rescontenttype='html' response='Hello, You are in the wonder page!'></route>
         <route endpoint='/equip' method='GET' rescontenttype='html' response='Hello, You are in the equip page!'></route>
