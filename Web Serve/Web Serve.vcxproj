@@ -136,6 +136,7 @@
     <ClCompile Include="databaseCon.cpp" />
     <ClCompile Include="databaseNode.cpp" />
     <ClCompile Include="fileParser.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="httprequest.cpp" />
     <ClCompile Include="RatelimitNode.cpp" />
     <ClCompile Include="RouteNode.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="databaseCon.h" />
     <ClInclude Include="databaseNode.h" />
     <ClInclude Include="fileParser.h" />
+    <ClInclude Include="FileSystem.h" />
     <ClInclude Include="httprequest.h" />
     <ClInclude Include="RatelimitNode.h" />
     <ClInclude Include="RouteNode.h" />
@@ -166,7 +168,12 @@
     <ClInclude Include="Socket_manager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Desktop\kjfdkj.html" />
+    <None Include="HTMLPage.html">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="serverFile.html" />
+    <None Include="some file.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

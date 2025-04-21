@@ -92,14 +92,14 @@ void RateLimitNode::startCentralResetThread() {
 		while (true) {
 			std::this_thread::sleep_for(std::chrono::seconds(1)); // or configurable
 
-			std::lock_guard<std::mutex> lock(this->mutex);
+			std::lock_guard<std::mutex> lock(this->attempts_mutex);
 
 			auto now = std::chrono::steady_clock::now();
-			for (auto it = ipTimestamps.begin(); it != ipTimestamps.end(); ++it) {
+			for (auto it = this->ip_attempts_map.begin(); it != this->ip_attempts_map.end(); ++it) {
 				const std::string& ip = it->first;
 				auto& [count, lastResetTime] = it->second;
 
-				if (now - lastResetTime >= std::chrono::seconds(this->perSeconds)) {
+				if (now - lastResetTime >= std::chrono::seconds(this->rate)) {
 					it->second = { 0, now }; // reset count and update timer
 				}
 			}

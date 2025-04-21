@@ -7,6 +7,7 @@
 #include <thread>
 #include "ast.h"
 #include "ast_manager.h"
+#include <mutex>
 
 
 class RateLimitNode : public ASTreeNode
@@ -29,12 +30,15 @@ public:
 
 	int getIpAttempts(const std::string& ip_address);
 
+	//void startCentralResetThread();
+
 private:
 	std::string time;
 	unsigned short int rate;
+
+	std::mutex attempts_mutex;
 
 	std::map<std::string, unsigned short int> ip_attempts_map;
 };
 
 #endif // !RATELIMITNODE_H
-

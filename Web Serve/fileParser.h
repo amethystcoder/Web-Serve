@@ -39,6 +39,10 @@ public:
 	static TagDataList determineParseType(std::string& input);
 
 	static std::string readHtmlFile(const std::string& html_file);
+
+	static void parseStringTemplateLiteral(const std::string& input);
+
+	std::vector<std::string> splitString(const std::string& str, char delimiter);
 	
 
 private:

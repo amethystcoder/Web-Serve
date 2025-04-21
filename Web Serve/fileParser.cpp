@@ -48,6 +48,37 @@ std::map<std::string, std::string> FileParser::parseAttributes(const std::string
 	return result;
 }
 
+void FileParser::parseStringTemplateLiteral(const std::string& input) {
+	//parse the string template literal
+	//this is a simple implementation that does not handle all cases
+	//it is just a placeholder for now
+	//instead of using a string, use a map
+	//this is just a note to myself
+	std::vector<std::vector<std::string>> result;
+	std::regex pattern(R"(\{([^{}]+)\})");
+	std::smatch match;
+	std::string str = input;
+
+	while (std::regex_search(str, match, pattern)) {
+		std::string content = match[1];
+		//get the string between the curly braces
+		content.replace(content.find("{"), 1, "");
+		content.replace(content.find("}"), 1, "");
+	}
+}
+
+std::vector<std::string> FileParser::splitString(const std::string& str, char delimiter) {
+	std::vector<std::string> tokens;
+	std::stringstream ss(str);
+	std::string token;
+
+	while (std::getline(ss, token, delimiter)) {
+		tokens.push_back(token);
+	}
+	return tokens;
+}
+
+
 TagDataList FileParser::parse_html_content(std::string& html_text)
 {
 	html_text.erase(std::remove(html_text.begin(), html_text.end(), '\r'), html_text.end());

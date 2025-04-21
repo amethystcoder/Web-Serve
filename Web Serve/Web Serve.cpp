@@ -7,6 +7,7 @@
 #include "RouteNode.h"
 #include "APINode.h"
 #include "RatelimitNode.h"
+#include "FileSystem.h"
 #include "ast_factory.h"
 
 
@@ -17,6 +18,7 @@ static void registerClasses() {
 	ASTNodeFactory::getInstance().registerClass("api", []() { return std::make_shared<APINode>(); });
 	ASTNodeFactory::getInstance().registerClass("database", []() { return std::make_shared<DatabaseNode>(); });
 	ASTNodeFactory::getInstance().registerClass("ratelimit", []() { return std::make_shared<RateLimitNode>(); });
+	ASTNodeFactory::getInstance().registerClass("filesystem", []() { return std::make_shared<FileSystem>(); });
 }
 
 int main(int argc, char** argv) {

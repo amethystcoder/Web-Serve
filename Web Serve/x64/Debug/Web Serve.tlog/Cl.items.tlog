@@ -5,6 +5,7 @@ C:\Users\Administrator\source\repos\Web Serve\Web Serve\clientsock.cpp;C:\Users\
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\databaseCon.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\databaseCon.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\databaseNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\databaseNode.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\fileParser.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\fileParser.obj
+C:\Users\Administrator\source\repos\Web Serve\Web Serve\FileSystem.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\FileSystem.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\httprequest.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\httprequest.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\RatelimitNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\RatelimitNode.obj
 C:\Users\Administrator\source\repos\Web Serve\Web Serve\RouteNode.cpp;C:\Users\Administrator\source\repos\Web Serve\Web Serve\x64\Debug\RouteNode.obj

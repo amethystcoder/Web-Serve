@@ -63,6 +63,9 @@
     <ClCompile Include="RatelimitNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components.hpp">
@@ -116,9 +119,21 @@
     <ClInclude Include="RatelimitNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="serverFile.html">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="HTMLPage.html">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\..\..\Desktop\kjfdkj.html">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="some file.json">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
