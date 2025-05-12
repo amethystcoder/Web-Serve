@@ -78,6 +78,45 @@ std::vector<std::string> FileParser::splitString(const std::string& str, char de
 	return tokens;
 }
 
+TagDataList FileParser::parse_html(std::string& html_text) {
+	std::stringstream ss(html_text);
+	bool in_tag = false;
+	bool in_content = false;
+	bool in_endTag = false;
+	bool in_self_closing = false;
+
+	bool collected_name = false;
+
+	std::string content = "";
+	std::string name = "";
+	std::string attributes = "";
+
+	char c;//for getting each character in the html text
+	while (ss.get(c)) {
+		in_tag = (c == OPENING_TAG && ss.peek() != '/' && !in_tag); // < in <server>
+		in_endTag = (c == OPENING_TAG && ss.peek() == '/' && !in_endTag); // </ in </server>
+		in_content = (c == CLOSING_TAG && in_tag); // > in <server>
+		if (c == CLOSING_TAG && in_endTag) in_content = true;// > in </server>
+		in_self_closing = (c == '/' && in_tag);
+		//in this case continue copying into the main and attributes string until we meet a closing tag
+		if (in_tag) {
+			//separate the tag name from the attributes... as a rule, the tag name is the first string
+			if (!collected_name && ss.peek() != ' ') name.append(c);
+			if (!collected_name && ss.peek() == ' ') { 
+				name.append(c);
+				collected_name = true;
+			}
+			if (collected_name) attributes.append(c);
+		}
+		if (in_content) {
+			attributes.append(c);
+		}
+		if (in_endTag || in_self_closing) {
+			//check for the end of the end tag itself
+		}
+	}
+}
+
 
 TagDataList FileParser::parse_html_content(std::string& html_text)
 {
@@ -131,6 +170,13 @@ std::string FileParser::readHtmlFile(const std::string& html_file){
 	std::stringstream buffer;
 	buffer << file.rdbuf();
 	return buffer.str();
+}
+
+std::stringstream FileParser::readHtmlFileAsBuffer(const std::string& html_file) {
+	std::ifstream file(html_file);
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	return buffer;
 }
 
 //html file like index.html

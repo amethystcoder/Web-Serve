@@ -1,6 +1,12 @@
 #ifndef FILEPARSER_H
 #define FILEPARSER_H
 
+//some tag closing definitions
+#define CLOSING_ARROW ">"
+#define CLOSING_TAG "</"
+#define CLOSING_TAG_SLASH "/>"
+#define OPENING_TAG '<'
+
 #include <map>
 #include <fstream>
 #include <vector>
@@ -33,12 +39,14 @@ public:
 	static std::map<std::string, std::string> parseAttributes(const std::string& input);
 
 	static TagDataList parse_html_content(std::string& html_text);
+	static TagDataList parse_html(std::string& html_text);
 
 	//html file like index.html
 	static TagDataList parse_html_file(const std::string& html_file);
 	static TagDataList determineParseType(std::string& input);
 
 	static std::string readHtmlFile(const std::string& html_file);
+	static std::stringstream readHtmlFileAsBuffer(const std::string& html_file);
 
 	static void parseStringTemplateLiteral(const std::string& input);
 
@@ -48,6 +56,7 @@ public:
 private:
 	std::fstream fileRead;
 	std::string fileContent;
+	//std::vector<std::string> allowed_extensions = { ".html", ".htm" };
 };
 
 
