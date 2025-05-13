@@ -78,90 +78,92 @@ std::vector<std::string> FileParser::splitString(const std::string& str, char de
 	return tokens;
 }
 
-TagDataList FileParser::parse_html(std::string& html_text) {
-	std::stringstream ss(html_text);
-	bool in_tag = false;
-	bool in_content = false;
-	bool in_endTag = false;
-	bool in_self_closing = false;
-
-	bool collected_name = false;
-
-	std::string content = "";
-	std::string name = "";
-	std::string attributes = "";
-
-	char c;//for getting each character in the html text
-	while (ss.get(c)) {
-		in_tag = (c == OPENING_TAG && ss.peek() != '/' && !in_tag); // < in <server>
-		in_endTag = (c == OPENING_TAG && ss.peek() == '/' && !in_endTag); // </ in </server>
-		in_content = (c == CLOSING_TAG && in_tag); // > in <server>
-		if (c == CLOSING_TAG && in_endTag) in_content = true;// > in </server>
-		in_self_closing = (c == '/' && in_tag);
-		//in this case continue copying into the main and attributes string until we meet a closing tag
-		if (in_tag) {
-			//separate the tag name from the attributes... as a rule, the tag name is the first string
-			if (!collected_name && ss.peek() != ' ') name.append(c);
-			if (!collected_name && ss.peek() == ' ') { 
-				name.append(c);
-				collected_name = true;
-			}
-			if (collected_name) attributes.append(c);
-		}
-		if (in_content) {
-			attributes.append(c);
-		}
-		if (in_endTag || in_self_closing) {
-			//check for the end of the end tag itself
-		}
-	}
-}
-
-
-TagDataList FileParser::parse_html_content(std::string& html_text)
-{
+TagDataList FileParser::parse_html_content(std::string& html_text) {
 	html_text.erase(std::remove(html_text.begin(), html_text.end(), '\r'), html_text.end());
 	html_text.erase(std::remove(html_text.begin(), html_text.end(), '\n'), html_text.end());
 
-	//master tags are the tags that are not nested or are the root tags in a string
-	//for example in the html text <server><api></api></server> server is a master tag
-	//child tags are not accessed
-	TagDataList master_tags;
-	//regex to parse html text
-	std::regex html_regex(R"(<([^<>/\s]+)((?:\s+[^<>/\s=]+=(?:"[^"]*"|'[^']*'|[^'"\s<>]*))*)>(.*?)<\/\1>|<([^<>/\s]+)((?:\s+[^<>/\s=]+=(?:"[^"]*"|'[^']*'|[^'"\s<>]*))*)\/>)");
-	std::smatch match;
+	std::stringstream ss(html_text);
+	TagDataList tag_list;
+	short depth = 0;
+	bool in_tag = false;
 
-	std::string temp = html_text;
+	char c;
+	std::string nameAndAttributes;
+	std::string content;
 
-	//parse the html text
-	//std::string::const_iterator searchStart(html_text.cbegin());
-	while (std::regex_search(temp, match, html_regex))
-	{
-		if (match[1].matched) {
-			//Opening and closing tag like <html> </html>
-			std::string tag = match[1];
-			std::string attributes = match[2];
-			std::string content = match[3];
-			HTMLTagData tag_data;
-			tag_data.tag = tag;
-			tag_data.attributes = attributes;
-			tag_data.content = content;
-			master_tags.push_back(tag_data);
+	while (ss.get(c)) {
+		if (depth == 0 && c != OPENING_TAG) continue;
+
+		if (c == OPENING_TAG && ss.peek() != '/') {
+			// Start of new tag
+			depth = 1;
+			in_tag = true;
+
+			// Read tag name and attributes until '>'
+			nameAndAttributes.clear();
+			bool isSelfClosing = false;
+			while (ss.get(c) && c != CLOSING_TAG) {
+				if (c == '/' && ss.peek() == CLOSING_TAG) {
+					isSelfClosing = true;
+					ss.get();
+					break;
+				}
+				else nameAndAttributes += c;
+			}
+
+			// Clean trailing '/' from nameAndAttributes if self-closing
+			if (isSelfClosing && !nameAndAttributes.empty() && nameAndAttributes.back() == '/') {
+				nameAndAttributes.pop_back();
+			}
+
+			// Parse tag name and attributes
+			HTMLTagData tagData;
+			auto space_pos = nameAndAttributes.find(' ');
+			if (space_pos == std::string::npos) {
+				tagData.tag = nameAndAttributes;
+				tagData.attributes = "";
+			}
+			else {
+				tagData.tag = nameAndAttributes.substr(0, space_pos);
+				tagData.attributes = nameAndAttributes.substr(space_pos + 1);
+			}
+
+			// Handle content only if not self-closing
+			if (!isSelfClosing) {
+				content.clear();
+				std::string endTagName = tagData.tag;
+
+				while (ss.get(c)) {
+					if (c == OPENING_TAG && ss.peek() == '/') {
+						ss.get(); // consume '/'
+						std::string maybeEndTag;
+						while (ss.get(c) && c != CLOSING_TAG) {
+							maybeEndTag += c;
+						}
+
+						if (maybeEndTag == endTagName) break;
+						else content += "</" + maybeEndTag + ">";
+					}
+					else {
+						content += c;
+					}
+				}
+
+				tagData.content = content;
+			}
+			else {
+				tagData.content = ""; // self-closing tags have no content
+			}
+
+			tag_list.emplace_back(tagData);
+
+			// Reset state
+			in_tag = false;
+			depth = 0;
 		}
-		else {
-			//Self closing tag like <br/>
-			std::string tag = match[4];
-			std::string attributes = match[5];
-			HTMLTagData tag_data;
-			tag_data.tag = tag;
-			tag_data.attributes = attributes;
-			tag_data.content = "";
-			master_tags.push_back(tag_data);
-		}
-		temp = match.suffix().str();
 	}
 
-	return master_tags;
+	return tag_list;
 }
 
 std::string FileParser::readHtmlFile(const std::string& html_file){
