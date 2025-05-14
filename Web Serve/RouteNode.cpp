@@ -66,9 +66,6 @@ std::string RouteNode::getResContentType() {
 
 std::string RouteNode::setEndpointContent(const std::string& content) {
 	std::string filecontent = content;
-	if (FileParser::check_is_file(content)) { 
-		std::cout << "is file" << std::endl;
-		filecontent = FileParser::readFile(content);
-	}
+	if (FileParser::check_is_file(content)) filecontent = FileParser::readFile(content);
 	return filecontent;
 }

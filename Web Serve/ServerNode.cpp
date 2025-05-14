@@ -76,7 +76,6 @@ void ServerNode::startUpServer() {
 				}
 			}
 			//Send the response
-			std::cout << routeWithEndpoint->getFullResponse().c_str() << std::endl;
 			server.sendData(clientSocket, routeWithEndpoint->getFullResponse().c_str());
 		}
 		else server.sendData(clientSocket, "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\n<html><body><h1>404 Not Found</h1></body></html>");//send a 404 response
