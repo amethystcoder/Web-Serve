@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include "mimetypes.h"
 
 struct HTMLTagData {
 	std::string tag;
@@ -34,6 +35,8 @@ public:
 
 	static bool check_is_html(const std::string& filename);
 
+	static bool check_is_file(const std::string& filename);
+
 	static std::map<std::string, std::string> parseAttributes(const std::string& input);
 
 	static TagDataList parse_html_content(std::string& html_text);
@@ -43,9 +46,14 @@ public:
 	static TagDataList determineParseType(std::string& input);
 
 	static std::string readHtmlFile(const std::string& html_file);
+
+	static std::string readFile(const std::string& file_name);
+
 	static std::stringstream readHtmlFileAsBuffer(const std::string& html_file);
 
 	static void parseStringTemplateLiteral(const std::string& input);
+
+	static std::map<std::string, std::string> parseJSON(const std::string& raw_json);
 
 	std::vector<std::string> splitString(const std::string& str, char delimiter);
 	

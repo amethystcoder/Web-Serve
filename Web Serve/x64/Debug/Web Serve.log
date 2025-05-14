@@ -1,10 +1,2 @@
-﻿  APINode.cpp
-  RatelimitNode.cpp
-  RouteNode.cpp
-  ServerNode.cpp
-  Web Serve.cpp
-  ast_manager.cpp
-  databaseNode.cpp
-  fileParser.cpp
-  Generating Code...
+﻿  RouteNode.cpp
   Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe

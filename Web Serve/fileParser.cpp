@@ -1,4 +1,5 @@
 #include "fileParser.h"
+#include <iostream>
 
 
 FileParser::FileParser(const char* filename)
@@ -12,7 +13,6 @@ FileParser::FileParser(const char* filename)
 
 	std::string content(size, 0);
 	fileRead.read(&content[0], size);
-	//this should be considered unneccessary
 	fileContent = content;
 }
 
@@ -27,6 +27,14 @@ bool FileParser::check_is_html(const std::string& filename) {
 	std::string file = filename;
 	if (file.find(".html") == std::string::npos) return false;
 	return true;
+}
+
+bool FileParser::check_is_file(const std::string& filename) {
+	size_t position_of_last_separator = filename.find_last_of(".");
+	if (position_of_last_separator == std::string::npos) return false;
+	std::string extension = filename.substr(position_of_last_separator + 1);
+	if (MimeTypes::getInstance().mime_type_exists(extension)) return true;
+	return false;
 }
 
 std::map<std::string, std::string> FileParser::parseAttributes(const std::string& input) {
@@ -166,11 +174,34 @@ TagDataList FileParser::parse_html_content(std::string& html_text) {
 	return tag_list;
 }
 
+std::map<std::string, std::string> FileParser::parseJSON(const std::string& raw_json) {
+	std::map<std::string, std::string> json_map;
+	std::regex pattern(R"(\s*\"([^\"]+)\"\s*:\s*\"([^\"]+)\"\s*)");
+	std::smatch match;
+	std::string str = raw_json;
+
+	while (std::regex_search(str, match, pattern)) {
+		json_map[match[1]] = match[2];
+		str = match.suffix();
+	}
+
+	return json_map;
+}
+
 std::string FileParser::readHtmlFile(const std::string& html_file){
 	if (!check_is_html(html_file)) return "";
 	std::ifstream file(html_file);
 	std::stringstream buffer;
 	buffer << file.rdbuf();
+	file.close();
+	return buffer.str();
+}
+
+std::string FileParser::readFile(const std::string& file_name) {
+	std::ifstream file(file_name);
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	file.close();
 	return buffer.str();
 }
 
@@ -178,6 +209,7 @@ std::stringstream FileParser::readHtmlFileAsBuffer(const std::string& html_file)
 	std::ifstream file(html_file);
 	std::stringstream buffer;
 	buffer << file.rdbuf();
+	file.close();
 	return buffer;
 }
 

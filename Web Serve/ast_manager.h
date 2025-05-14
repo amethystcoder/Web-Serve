@@ -18,8 +18,6 @@ public:
 
 	static ASTreeNode* findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode);
 
-	static void setEndpointContent(const std::string& content,ASTreeNode* node);
-
 	static std::map<std::string, std::string> parseattributes(const std::string& attributes);
 
 	static ASTreeNode* findNodeWithName(const std::string& name, ASTreeNode* startnode);

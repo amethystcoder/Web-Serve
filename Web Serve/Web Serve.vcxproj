@@ -138,6 +138,7 @@
     <ClCompile Include="fileParser.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="httprequest.cpp" />
+    <ClCompile Include="mimetypes.cpp" />
     <ClCompile Include="RatelimitNode.cpp" />
     <ClCompile Include="RouteNode.cpp" />
     <ClCompile Include="ServerNode.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="fileParser.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="httprequest.h" />
+    <ClInclude Include="mimetypes.h" />
     <ClInclude Include="RatelimitNode.h" />
     <ClInclude Include="RouteNode.h" />
     <ClInclude Include="ServerNode.h" />
@@ -172,6 +174,7 @@
     <None Include="HTMLPage.html">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="mimetypes.json" />
     <None Include="serverFile.html" />
     <None Include="some file.json" />
   </ItemGroup>

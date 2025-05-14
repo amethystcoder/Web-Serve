@@ -3,6 +3,7 @@
 
 #include "ast.h"
 #include "ast_manager.h"
+#include "mimetypes.h"
 #include <iostream>
 
 class RouteNode : public ASTreeNode
@@ -32,6 +33,7 @@ public:
 	std::string getResponse();
 
 	std::string getResContentType();
+	std::string setEndpointContent(const std::string& content);
 private:
 	std::string endpoint;
 	std::string rescontenttype;

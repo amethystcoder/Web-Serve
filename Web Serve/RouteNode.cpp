@@ -22,7 +22,7 @@ inline void RouteNode::setParams() noexcept {
 	this->endpoint = endpoint = this->nodeAttributes["endpoint"];
 	this->rescontenttype = this->nodeAttributes["rescontenttype"];
 	this->method = this->nodeAttributes["method"];
-	this->response = this->nodeAttributes["response"];
+	this->response = this->setEndpointContent(this->nodeAttributes["response"]);
 }
 
 std::string RouteNode::getFullResponse() noexcept {
@@ -40,16 +40,12 @@ std::string RouteNode::determineResponseStatus() noexcept {
 
 std::string RouteNode::determineResponse() {
 	//check that response is not an html file
-	return this->nodeAttributes["response"];
+	return this->response;
 }
 
 std::string RouteNode::determineContentType() noexcept {
 	this->rescontenttype = this->nodeAttributes["rescontenttype"];
-	if (this->rescontenttype == "json") return "Content-Type: application/json\n\n";
-	else if (this->rescontenttype == "html") return "Content-Type: text/html\n\n";
-	else if (this->rescontenttype == "xml") return "Content-Type: text/xml\n\n";
-	else if (this->rescontenttype == "plain") return "Content-Type: text/plain\n\n";
-	else return "Content-Type: text/html\n\n";
+	return "Content-Type: " + MimeTypes::getInstance().getMimeType(this->rescontenttype);
 }
 
 std::string RouteNode::getEndpoint() {
@@ -66,4 +62,13 @@ std::string RouteNode::getResponse() {
 
 std::string RouteNode::getResContentType() {
 	return this->rescontenttype;
+}
+
+std::string RouteNode::setEndpointContent(const std::string& content) {
+	std::string filecontent = content;
+	if (FileParser::check_is_file(content)) { 
+		std::cout << "is file" << std::endl;
+		filecontent = FileParser::readFile(content);
+	}
+	return filecontent;
 }
