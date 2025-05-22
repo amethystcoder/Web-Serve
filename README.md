@@ -11,7 +11,7 @@
 - 🔁 **Routing** – Easily create and manage routes.
 - 🔐 **Authentication Support** – Secure endpoints with built-in auth mechanisms.
 - 📁 **Static File Serving** – Serve HTML, CSS, JS, and media files.
-- 🧵 **Multithreading** – Handles concurrent requests efficiently (in development).
+- 🧵 **Multithreading** – Handles concurrent requests efficiently.
 - 🛠️ **Extensible** – Built to support plugins and middleware in the future.
 
 ---
@@ -36,11 +36,16 @@ make   # or cmake . && make
 Celeris uses a lightweight markup-style config file:
 
 ```html
-<server port="8080">
-  <route path="/hello">
-    <response>Hello, world!</response>
-  </route>
-</server>
+<server port='5000' message='server is running on port {self.port}'>
+    <ratelimit maxRequests='100' per='60s' name='someratelimitname' message="rate limiter is created... or something"/>
+    <filesystem name='thefilesys' path='/' />
+    <api>
+        <route endpoint='/name' method='GET' rescontenttype='html' response='HTMLPage.html' rateLimit='someratelimitname'></route>
+        <route endpoint='/stats' method='GET' rescontenttype='html' response='kjfdkj.html'></route>
+        <route endpoint='/wonder' method='GET' rescontenttype='json' response='some file.json'></route>
+        <route endpoint='/equip' method='GET' rescontenttype='html' response='Hello, You are in the equip page!'></route>
+    </api>
+</server> 
 ```
 
 More details and examples coming soon.
