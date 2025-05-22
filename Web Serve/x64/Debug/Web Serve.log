@@ -1,11 +1,20 @@
 ﻿  APINode.cpp
+  ast_manager.cpp
+  cleansocket.cpp
+  clientsock.cpp
+  databaseCon.cpp
+  databaseNode.cpp
+  fileParser.cpp
+  FileSystem.cpp
+  httprequest.cpp
+  mimetypes.cpp
   RatelimitNode.cpp
   RouteNode.cpp
   ServerNode.cpp
+  serversock.cpp
+  socket.cpp
+  Socket_manager.cpp
+  ast.cpp
   Web Serve.cpp
-  ast_manager.cpp
-  databaseNode.cpp
-  fileParser.cpp
-  mimetypes.cpp
   Generating Code...
   Web Serve.vcxproj -> C:\Users\Administrator\source\repos\Web Serve\x64\Debug\Web Serve.exe
