@@ -32,3 +32,11 @@
 *.app
 
 /.vs
+
+# CMake build files
+/build/
+/CMakeFiles/
+/Makefile
+/CMakeCache.txt
+cmake_install.cmake
+
