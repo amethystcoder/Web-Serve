@@ -19,3 +19,25 @@
 3	93	0	C:/Users/Administrator/source/repos/Web Serve/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	ee0f55391f3c8909
 127	1245	7699154577294545	CMakeFiles/Celeris.dir/src/util/mimetypes.cpp.obj	cc72babf448cdf34
 97	1427	7699154579119991	CMakeFiles/Celeris.dir/src/net/serversock.cpp.obj	ef0bc9fe9c40ff9
+4	84	0	C:/Users/Administrator/source/repos/Web Serve/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	ee0f55391f3c8909
+84	107	0	clean	8c45b54705a541e8
+3	77	0	C:/Users/Administrator/source/repos/Web Serve/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	ee0f55391f3c8909
+88	1209	7699161461431521	CMakeFiles/Celeris.dir/CMakeFiles/3.29.5-msvc4/CompilerIdCXX/CMakeCXXCompilerId.cpp.obj	12f18da6752a7290
+109	2191	7699161472403877	CMakeFiles/Celeris.dir/src/ast/ast.cpp.obj	1d7313f046e5e1f5
+158	2246	7699161473002280	CMakeFiles/Celeris.dir/src/core/FileSystem.cpp.obj	a6f601ca11e53684
+143	2266	7699161472892565	CMakeFiles/Celeris.dir/src/core/APINode.cpp.obj	1d8ea77cd9854dc6
+127	2284	7699161473381259	CMakeFiles/Celeris.dir/src/ast/ast_manager.cpp.obj	be53ead84e2276b0
+2284	3142	7699161480772863	CMakeFiles/Celeris.dir/src/db/databaseCon.cpp.obj	df50606918eb1ef5
+79	3804	7699161488344243	CMakeFiles/Celeris.dir/Web_Serve.cpp.obj	1653d94db3639697
+3142	3837	7699161488015130	CMakeFiles/Celeris.dir/src/net/Socket_manager.cpp.obj	a8d77cb3c72bd6b4
+1210	4287	7699161492892098	CMakeFiles/Celeris.dir/src/core/RatelimitNode.cpp.obj	788f771b4649c617
+2266	4388	7699161493550333	CMakeFiles/Celeris.dir/src/core/databaseNode.cpp.obj	74f3dafbb464fbc8
+2192	4792	7699161494479294	CMakeFiles/Celeris.dir/src/core/RouteNode.cpp.obj	85a903760b5bde03
+2246	6012	7699161509542399	CMakeFiles/Celeris.dir/src/core/ServerNode.cpp.obj	45ae9601909c2a3e
+3838	6105	7699161511168049	CMakeFiles/Celeris.dir/src/net/clientsock.cpp.obj	45633691e0658229
+3805	6320	7699161513662732	CMakeFiles/Celeris.dir/src/net/cleansocket.cpp.obj	d5b154c38f2fa06e
+4793	6650	7699161516654737	CMakeFiles/Celeris.dir/src/protocols/http/httprequest.cpp.obj	306242e5af7be410
+4287	6691	7699161517552336	CMakeFiles/Celeris.dir/src/net/serversock.cpp.obj	ef0bc9fe9c40ff9
+4389	6827	7699161518938626	CMakeFiles/Celeris.dir/src/net/socket.cpp.obj	7261cf30b0581e24
+6106	7410	7699161524774813	CMakeFiles/Celeris.dir/src/util/mimetypes.cpp.obj	cc72babf448cdf34
+6012	7591	7699161526587838	CMakeFiles/Celeris.dir/src/util/fileParser.cpp.obj	61c0bbbeae15e053
