@@ -2,13 +2,13 @@
 #define SERVERNODE_H
 
 #include <vector>
-#include "serversock.h"
-#include "ast.h"
-#include "ast_manager.h"
+#include "../net/serversock.h"
+#include "../ast/ast.h"
+#include "../ast/ast_manager.h"
 #include <iostream>
-#include "httprequest.h"
+#include "../protocols/http/httprequest.h"
 #include "RouteNode.h"
-#include "cleansocket.h"
+#include "../net/cleansocket.h"
 #include <winsock.h>
 
 class ServerNode : public ASTreeNode

@@ -9,10 +9,11 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     src/*.cpp
     src/*.h
     src/*.hpp
+    *.cpp
 )
 
 # Executable
 add_executable(Celeris ${SOURCES})
 
 # Include directories (if using headers outside src/)
-target_include_directories(Celeris PRIVATE src)s
+target_include_directories(Celeris PRIVATE src)

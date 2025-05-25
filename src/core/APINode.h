@@ -3,8 +3,8 @@
 #ifndef APINODE
 #define APINODE
 
-#include "ast.h"
-#include "ast_manager.h"
+#include "../ast/ast.h"
+#include "../ast/ast_manager.h"
 #include <iostream>
 
 class APINode : public ASTreeNode

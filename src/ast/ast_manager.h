@@ -1,7 +1,7 @@
 #ifndef AST_MANAGER_H
 #define AST_MANAGER_H
 
-#include "fileParser.h"
+#include "../util/fileParser.h"
 #include "ast.h"
 #include "ast_factory.h"
 #include <unordered_map>

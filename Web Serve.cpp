@@ -1,14 +1,14 @@
 #include <iostream>
-#include "cleansocket.h"
-#include "ServerNode.h"
-#include "databaseNode.h"
+#include "net/cleansocket.h"
+#include "core/ServerNode.h"
+#include "core/databaseNode.h"
 #include <vector>
-#include "fileParser.h"
-#include "RouteNode.h"
-#include "APINode.h"
-#include "RatelimitNode.h"
-#include "FileSystem.h"
-#include "ast_factory.h"
+#include "util/fileParser.h"
+#include "core/RouteNode.h"
+#include "core/APINode.h"
+#include "core/RatelimitNode.h"
+#include "core/FileSystem.h"
+#include "ast/ast_factory.h"
 
 
 // Helper function to register classes

@@ -1,7 +1,8 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include "ast.h"
+#include "../ast/ast.h"
+#include "../ast/ast_manager.h"
 
 class FileSystem: public ASTreeNode
 {

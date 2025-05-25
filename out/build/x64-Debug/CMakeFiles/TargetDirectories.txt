@@ -1,0 +1,3 @@
+C:/Users/Administrator/source/repos/Web Serve/out/build/x64-Debug/CMakeFiles/Celeris.dir
+C:/Users/Administrator/source/repos/Web Serve/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/source/repos/Web Serve/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

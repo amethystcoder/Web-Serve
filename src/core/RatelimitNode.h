@@ -5,8 +5,8 @@
 #include <ctime>
 #include <chrono>
 #include <thread>
-#include "ast.h"
-#include "ast_manager.h"
+#include "../ast/ast.h"
+#include "../ast/ast_manager.h"
 #include <mutex>
 
 

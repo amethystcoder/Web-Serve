@@ -1,8 +1,8 @@
 #ifndef DATABASENODE_H
 #define DATABASENODE_H
 
-#include "ast.h"
-#include "ast_manager.h"
+#include "../ast/ast.h"
+#include "../ast/ast_manager.h"
 
 class DatabaseNode:public ASTreeNode{
 public:

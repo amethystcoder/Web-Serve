@@ -85,7 +85,7 @@ int AmthSocket::ServerSocket::inet_pton(int af, const char* src, void* dst)
 	strncpy_s(src_copy, src, INET6_ADDRSTRLEN + 1);
 	src_copy[INET6_ADDRSTRLEN] = 0;
 
-	if (WSAStringToAddress(reinterpret_cast<WCHAR*>(src_copy), af, NULL, (struct sockaddr*)&ss, &size) == 0) {
+	if (WSAStringToAddress(src_copy, af, NULL, (struct sockaddr*)&ss, &size) == 0) {
 		switch (af) {
 		case AF_INET:
 			*(struct in_addr*)dst = ((struct sockaddr_in*)&ss)->sin_addr;
@@ -117,6 +117,6 @@ const char* AmthSocket::ServerSocket::inet_ntop(int af, const void* src, char* d
 		return NULL;
 	}
 
-	return (WSAAddressToString((struct sockaddr*)&ss, sizeof(ss), NULL, reinterpret_cast<WCHAR*>(dst), &s) == 0) ?
+	return (WSAAddressToString((struct sockaddr*)&ss, sizeof(ss), NULL, dst, &s) == 0) ?
 		dst : NULL;
 }
