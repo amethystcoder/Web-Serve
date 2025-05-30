@@ -51,11 +51,6 @@ int main(int argc, char** argv) {
 			break;
 		}
 	}
-
-	if (serverNode == nullptr) {
-		std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
-		return 1;
-	}
 	std::cout << "Server started successfully." << std::endl;
 }
 

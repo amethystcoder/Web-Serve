@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 # Collect all source files
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
-    src/*.cpp 
+    src/*.cpp  
     src/*.h
     src/*.hpp
 )
