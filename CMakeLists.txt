@@ -12,7 +12,7 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     src/*.hpp
 )
 
-# add_subdirectory(src)
+# add_subdirectory(src) 
 
 # Executable
 add_executable(Celeris ${SOURCES})
