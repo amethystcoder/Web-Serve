@@ -49,24 +49,16 @@ cmake_ninja_workdir = C$:\Users\Administrator\source\repos\Web$ Serve\out\build\
 
 build cmake_object_order_depends_target_Celeris: phony || .
 
-build CMakeFiles\Celeris.dir\Web_Serve.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\Web$ Serve.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+build CMakeFiles\Celeris.dir\src\Web_Serve.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\Web$ Serve.cpp || cmake_object_order_depends_target_Celeris
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
-  OBJECT_FILE_DIR = CMakeFiles\Celeris.dir
-  TARGET_COMPILE_PDB = CMakeFiles\Celeris.dir\
-  TARGET_PDB = bin\Celeris.pdb
-
-build CMakeFiles\Celeris.dir\CMakeFiles\3.29.5-msvc4\CompilerIdCXX\CMakeCXXCompilerId.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\out\build\x64-Debug\CMakeFiles\3.29.5-msvc4\CompilerIdCXX\CMakeCXXCompilerId.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
-  INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
-  OBJECT_DIR = CMakeFiles\Celeris.dir
-  OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\CMakeFiles\3.29.5-msvc4\CompilerIdCXX
+  OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\Celeris.dir\
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\ast\ast.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\ast\ast.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\ast
@@ -74,7 +66,7 @@ build CMakeFiles\Celeris.dir\src\ast\ast.cpp.obj: CXX_COMPILER__Celeris_unscanne
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\ast\ast_manager.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\ast\ast_manager.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\ast
@@ -82,7 +74,7 @@ build CMakeFiles\Celeris.dir\src\ast\ast_manager.cpp.obj: CXX_COMPILER__Celeris_
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\core\APINode.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\core\APINode.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\core
@@ -90,7 +82,7 @@ build CMakeFiles\Celeris.dir\src\core\APINode.cpp.obj: CXX_COMPILER__Celeris_uns
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\core\FileSystem.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\core\FileSystem.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\core
@@ -98,7 +90,7 @@ build CMakeFiles\Celeris.dir\src\core\FileSystem.cpp.obj: CXX_COMPILER__Celeris_
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\core\RatelimitNode.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\core\RatelimitNode.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\core
@@ -106,7 +98,7 @@ build CMakeFiles\Celeris.dir\src\core\RatelimitNode.cpp.obj: CXX_COMPILER__Celer
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\core\RouteNode.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\core\RouteNode.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\core
@@ -114,7 +106,7 @@ build CMakeFiles\Celeris.dir\src\core\RouteNode.cpp.obj: CXX_COMPILER__Celeris_u
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\core\ServerNode.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\core\ServerNode.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\core
@@ -122,7 +114,7 @@ build CMakeFiles\Celeris.dir\src\core\ServerNode.cpp.obj: CXX_COMPILER__Celeris_
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\core\databaseNode.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\core\databaseNode.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\core
@@ -130,7 +122,7 @@ build CMakeFiles\Celeris.dir\src\core\databaseNode.cpp.obj: CXX_COMPILER__Celeri
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\db\databaseCon.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\db\databaseCon.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\db
@@ -138,7 +130,7 @@ build CMakeFiles\Celeris.dir\src\db\databaseCon.cpp.obj: CXX_COMPILER__Celeris_u
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\net\Socket_manager.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\net\Socket_manager.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\net
@@ -146,7 +138,7 @@ build CMakeFiles\Celeris.dir\src\net\Socket_manager.cpp.obj: CXX_COMPILER__Celer
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\net\cleansocket.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\net\cleansocket.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\net
@@ -154,7 +146,7 @@ build CMakeFiles\Celeris.dir\src\net\cleansocket.cpp.obj: CXX_COMPILER__Celeris_
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\net\clientsock.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\net\clientsock.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\net
@@ -162,7 +154,7 @@ build CMakeFiles\Celeris.dir\src\net\clientsock.cpp.obj: CXX_COMPILER__Celeris_u
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\net\serversock.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\net\serversock.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\net
@@ -170,7 +162,7 @@ build CMakeFiles\Celeris.dir\src\net\serversock.cpp.obj: CXX_COMPILER__Celeris_u
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\net\socket.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\net\socket.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\net
@@ -178,7 +170,7 @@ build CMakeFiles\Celeris.dir\src\net\socket.cpp.obj: CXX_COMPILER__Celeris_unsca
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\protocols\http\httprequest.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\protocols\http\httprequest.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\protocols\http
@@ -186,7 +178,7 @@ build CMakeFiles\Celeris.dir\src\protocols\http\httprequest.cpp.obj: CXX_COMPILE
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\util\fileParser.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\util\fileParser.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\util
@@ -194,7 +186,7 @@ build CMakeFiles\Celeris.dir\src\util\fileParser.cpp.obj: CXX_COMPILER__Celeris_
   TARGET_PDB = bin\Celeris.pdb
 
 build CMakeFiles\Celeris.dir\src\util\mimetypes.cpp.obj: CXX_COMPILER__Celeris_unscanned_Debug C$:\Users\Administrator\source\repos\Web$ Serve\src\util\mimetypes.cpp || cmake_object_order_depends_target_Celeris
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
   INCLUDES = -I"C:\Users\Administrator\source\repos\Web Serve\src"
   OBJECT_DIR = CMakeFiles\Celeris.dir
   OBJECT_FILE_DIR = CMakeFiles\Celeris.dir\src\util
@@ -209,7 +201,7 @@ build CMakeFiles\Celeris.dir\src\util\mimetypes.cpp.obj: CXX_COMPILER__Celeris_u
 #############################################
 # Link the executable bin\Celeris.exe
 
-build bin\Celeris.exe: CXX_EXECUTABLE_LINKER__Celeris_Debug CMakeFiles\Celeris.dir\Web_Serve.cpp.obj CMakeFiles\Celeris.dir\CMakeFiles\3.29.5-msvc4\CompilerIdCXX\CMakeCXXCompilerId.cpp.obj CMakeFiles\Celeris.dir\src\ast\ast.cpp.obj CMakeFiles\Celeris.dir\src\ast\ast_manager.cpp.obj CMakeFiles\Celeris.dir\src\core\APINode.cpp.obj CMakeFiles\Celeris.dir\src\core\FileSystem.cpp.obj CMakeFiles\Celeris.dir\src\core\RatelimitNode.cpp.obj CMakeFiles\Celeris.dir\src\core\RouteNode.cpp.obj CMakeFiles\Celeris.dir\src\core\ServerNode.cpp.obj CMakeFiles\Celeris.dir\src\core\databaseNode.cpp.obj CMakeFiles\Celeris.dir\src\db\databaseCon.cpp.obj CMakeFiles\Celeris.dir\src\net\Socket_manager.cpp.obj CMakeFiles\Celeris.dir\src\net\cleansocket.cpp.obj CMakeFiles\Celeris.dir\src\net\clientsock.cpp.obj CMakeFiles\Celeris.dir\src\net\serversock.cpp.obj CMakeFiles\Celeris.dir\src\net\socket.cpp.obj CMakeFiles\Celeris.dir\src\protocols\http\httprequest.cpp.obj CMakeFiles\Celeris.dir\src\util\fileParser.cpp.obj CMakeFiles\Celeris.dir\src\util\mimetypes.cpp.obj
+build bin\Celeris.exe: CXX_EXECUTABLE_LINKER__Celeris_Debug CMakeFiles\Celeris.dir\src\Web_Serve.cpp.obj CMakeFiles\Celeris.dir\src\ast\ast.cpp.obj CMakeFiles\Celeris.dir\src\ast\ast_manager.cpp.obj CMakeFiles\Celeris.dir\src\core\APINode.cpp.obj CMakeFiles\Celeris.dir\src\core\FileSystem.cpp.obj CMakeFiles\Celeris.dir\src\core\RatelimitNode.cpp.obj CMakeFiles\Celeris.dir\src\core\RouteNode.cpp.obj CMakeFiles\Celeris.dir\src\core\ServerNode.cpp.obj CMakeFiles\Celeris.dir\src\core\databaseNode.cpp.obj CMakeFiles\Celeris.dir\src\db\databaseCon.cpp.obj CMakeFiles\Celeris.dir\src\net\Socket_manager.cpp.obj CMakeFiles\Celeris.dir\src\net\cleansocket.cpp.obj CMakeFiles\Celeris.dir\src\net\clientsock.cpp.obj CMakeFiles\Celeris.dir\src\net\serversock.cpp.obj CMakeFiles\Celeris.dir\src\net\socket.cpp.obj CMakeFiles\Celeris.dir\src\protocols\http\httprequest.cpp.obj CMakeFiles\Celeris.dir\src\util\fileParser.cpp.obj CMakeFiles\Celeris.dir\src\util\mimetypes.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
