@@ -217,6 +217,8 @@ std::stringstream FileParser::readHtmlFileAsBuffer(const std::string& html_file)
 TagDataList FileParser::parse_html_file(const std::string& html_file)
 {
 	std::string html_text = readHtmlFile(html_file);
+	std::cout << "Parsing HTML file: " << html_file << std::endl;
+	std::cout << "HTML content: " << html_text << std::endl;
 	if (html_text == "") return TagDataList();
 	return parse_html_content(html_text);
 }
@@ -226,5 +228,7 @@ TagDataList FileParser::determineParseType(std::string& input) {
 	//if the input is a file then return the parsed file content
 	//if the input is a string then return the parsed string content
 	//if the input is neither a file nor a string then return an empty 
-	return input.ends_with(".html") ? parse_html_file(input) : parse_html_content(input);
+	return input.size() >= 5 && input.compare(input.size() - 5, 5, ".html") == 0
+		? parse_html_file(input)
+		: parse_html_content(input);
 }

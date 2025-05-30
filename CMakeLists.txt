@@ -10,7 +10,7 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     src/*.cpp  
     src/*.h
     src/*.hpp
-)
+) 
 
 # add_subdirectory(src) 
 
