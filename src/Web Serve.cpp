@@ -9,6 +9,9 @@
 #include "core/RatelimitNode.h"
 #include "core/FileSystem.h"
 #include "ast/ast_factory.h"
+#include <filesystem>
+
+
 
 
 // Helper function to register classes
@@ -26,7 +29,12 @@ int main(int argc, char** argv) {
 	AmthSocket::SocketImpl sockimpl{};
 	registerClasses();
 
-	std::string html_text = "<server port='5000' message='server is running on port {self.port}'>< ratelimit maxRequests = '100' per = '60s' name = 'someratelimitname' message = 'rate limiter is created... or something' / ><filesystem name = 'thefilesys' path = '/' / ><api><route endpoint = '/name' method = 'GET' rescontenttype = 'html' response = 'HTMLPage.html' rateLimit = 'someratelimitname'>< / route><route endpoint = '/stats' method = 'GET' rescontenttype = 'html' response = 'kjfdkj.html'>< / route><route endpoint = '/wonder' method = 'GET' rescontenttype = 'json' response = 'some file.json'>< / route><route endpoint = '/equip' method = 'GET' rescontenttype = 'html' response = 'Hello, You are in the equip page!'>< / route>< / api>< / server> ";
+	//find the current working directory
+	std::filesystem::path currentPath = std::filesystem::current_path();
+
+	std::cout << "Current working directory: " << currentPath.string() << std::endl;
+
+	std::string html_text = "../../resources/serverFile.html";
 
 	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(html_text);
 	//create a tree of the html text
