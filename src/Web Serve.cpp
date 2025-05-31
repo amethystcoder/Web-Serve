@@ -36,7 +36,9 @@ int main(int argc, char** argv) {
 
 	std::string html_text = "../../resources/serverFile.html";
 
-	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(html_text);
+	std::filesystem::path htmlPath = currentPath / html_text;
+
+	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(htmlPath.string());
 	//create a tree of the html text
 
 	ServerNode* serverNode{};
