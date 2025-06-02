@@ -10,7 +10,7 @@ public:
 	PathResolver();
 	~PathResolver();
 
-	static std::string resolvePath(const std::string& mainPath, const std::string& PathToResolve) noexcept;
+	static std::string resolvePath(const std::string& mainPath, const std::string& PathToResolve) ;
 
 private:
 

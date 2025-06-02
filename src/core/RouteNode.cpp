@@ -66,6 +66,16 @@ std::string RouteNode::getResContentType() {
 
 std::string RouteNode::setEndpointContent(const std::string& content) {
 	std::string filecontent = content;
-	if (FileParser::check_is_file(content)) filecontent = FileParser::readFile(content);
+	bool isFile = FileParser::check_is_file(content);
+	if (isFile) {
+		std::filesystem::path responseFilePath = ASTManager::getInstance().getMainPath() / content;
+		std::filesystem::path responsePath = std::filesystem::weakly_canonical(responseFilePath);
+		this->nodeAttributes["response"] = responsePath.string();
+		filecontent = FileParser::readFile(content);
+		if (!std::filesystem::exists(responsePath)) {
+			std::cout << "File not found: " << responsePath.string() << std::endl;
+			filecontent = "<html><body><h1>404 Not Found</h1></body></html>";
+		}
+	}
 	return filecontent;
 }

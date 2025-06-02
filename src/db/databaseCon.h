@@ -19,6 +19,8 @@ public:
 	DatabaseCon(const DatabaseCon& rhs) = delete;
 	DatabaseCon operator= (const DatabaseCon& rhs) = delete;
 
+	//void connectToDatabase(const std::string& dbType, const std::string& connectionString);
+
 	//database types
 
 

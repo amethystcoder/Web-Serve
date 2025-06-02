@@ -1,5 +1,6 @@
 #include "ast_manager.h"
 #include <iostream>
+#include <core/ServerNode.h>
 
 ASTManager::ASTManager()
 {
@@ -7,6 +8,37 @@ ASTManager::ASTManager()
 
 ASTManager::~ASTManager()
 {
+}
+
+std::filesystem::path ASTManager::mainPath;
+
+//build the tree from the first node list
+// the first tag must be a server tag
+ASTreeNode* ASTManager::buildTree(std::filesystem::path htmlPath) {
+	mainPath = htmlPath.parent_path(); //set the main path to the html path
+	std::string resolvedPath = std::filesystem::weakly_canonical(htmlPath).string();
+	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(resolvedPath);
+	//create a tree of the html text
+
+	for (auto& tag_data : firstNodeList) {
+		//create a node for the root tag
+		// search for the server tag
+		if (tag_data.tag == "server") {
+			//ensure that the root tag is the server tag
+			//any tag not under the server tag would be ignored
+
+			//create a node for the server tag
+			ServerNode* serverNode = new ServerNode();//, tag_data.content
+			if (serverNode == nullptr) {
+				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
+				return nullptr;
+			}
+			serverNode->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
+			serverNode->startUpServer();
+			return serverNode;
+		}
+	}
+	return nullptr;
 }
 
 //this function needs proper error handling as well as fixing
@@ -23,7 +55,11 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 			//the sref is given more priority than the content directly placed in the tag
 			astInstance->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
 			std::string sref = astInstance->nodeAttributes["sref"];
-			if (!sref.empty()) tag_data.content = FileParser::readHtmlFile(sref);
+			if (!sref.empty()) {
+				//TODO there is a small issue here that i need to fix soonest
+				std::filesystem::path p(ASTManager::getInstance().getMainPath());
+				tag_data.content = FileParser::readHtmlFile(std::filesystem::weakly_canonical(p/sref).string());
+			} 
 			//ASTManager::addNodeChildrenFromContent(tag_data.content, astInstance.get());
 			node->AddChild(astInstance);
 			//all classes should be derived from ASTreeNode
@@ -83,4 +119,15 @@ std::map<std::string, std::string> ASTManager::parseattributes(const std::string
 	return FileParser::parseAttributes(attributes);
 }
 
+std::filesystem::path ASTManager::getMainPath() const noexcept {
+	return mainPath;
+}
 
+void ASTManager::setMainPath(std::string& path) noexcept {
+	//parse path and remove text behind slashes that might contain an extension
+	std::filesystem::path p(path);
+	if (p.has_extension()) {
+		p = p.parent_path();
+	}
+	mainPath = p.string();
+}

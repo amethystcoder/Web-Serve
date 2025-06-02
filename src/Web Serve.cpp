@@ -10,8 +10,7 @@
 #include "core/FileSystem.h"
 #include "ast/ast_factory.h"
 #include <filesystem>
-
-
+#include "ast/ast_manager.h"
 
 
 // Helper function to register classes
@@ -32,35 +31,12 @@ int main(int argc, char** argv) {
 	//find the current working directory
 	std::filesystem::path currentPath = std::filesystem::current_path();
 
-	std::cout << "Current working directory: " << currentPath.string() << std::endl;
-
-	std::string html_text = "../../resources/serverFile.html";
+	std::string html_text = "../../../src/resources/serverFile.html"; 
+	//keep this for now, in the finished application, this would be set to the absolute path of the html file to be parsed
+	//there could also be a command line argument to specify the path to the html file and something to determine the location of the file
 
 	std::filesystem::path htmlPath = currentPath / html_text;
 
-	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(htmlPath.string());
-	//create a tree of the html text
-
-	ServerNode* serverNode{};
-
-	for (auto& tag_data : firstNodeList) {
-		//create a node for the root tag
-		// search for the server tag
-		if (tag_data.tag == "server") {
-			//ensure that the root tag is the server tag
-			//any tag not under the server tag would be ignored
-
-			//create a node for the server tag
-			serverNode = new ServerNode();//, tag_data.content
-			if (serverNode == nullptr) {
-				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
-				return 1;
-			}
-			serverNode->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
-			serverNode->startUpServer();
-			break;
-		}
-	}
-	std::cout << "Server started successfully." << std::endl;
+	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath);
 }
 

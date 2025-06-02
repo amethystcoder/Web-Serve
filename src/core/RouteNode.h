@@ -4,6 +4,7 @@
 #include "../ast/ast.h"
 #include "../ast/ast_manager.h"
 #include "../util/mimetypes.h"
+#include <filesystem>
 #include <iostream>
 
 class RouteNode : public ASTreeNode

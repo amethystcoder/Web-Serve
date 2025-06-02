@@ -5,12 +5,11 @@
 #include "ast.h"
 #include "ast_factory.h"
 #include <unordered_map>
+#include <filesystem>
 
 class ASTManager
 {
 public:
-	ASTManager();
-	~ASTManager();
 
 	static void addNodeChildrenFromContent(std::string& content, ASTreeNode* node);
 
@@ -22,8 +21,21 @@ public:
 
 	static ASTreeNode* findNodeWithName(const std::string& name, ASTreeNode* startnode);
 
-private:
+	ASTreeNode* buildTree(std::filesystem::path htmlPath);
 
+	static ASTManager& getInstance() {
+		static ASTManager instance;
+		return instance;
+	}
+
+	std::filesystem::path getMainPath() const noexcept;
+	void setMainPath(std::string& path) noexcept;
+
+	~ASTManager();
+
+private:
+	static std::filesystem::path mainPath;
+	ASTManager();
 };
 
 #endif // !AST_MANAGER_H
