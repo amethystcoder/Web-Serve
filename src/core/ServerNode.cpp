@@ -60,14 +60,12 @@ void ServerNode::startUpServer() {
 					server.sendData(clientSocket, "HTTP/1.1 500 Internal Server Error\nContent-Type: text/html\n\n<html><body><h1>500 Internal Server Error</h1></body></html>");
 					continue;
 				}
-				sockaddr_in clientAddress;
+				sockaddr_in clientAddress{};
 				int clientAddressLen = sizeof(clientAddress);
 				getpeername(clientSocket, (sockaddr*)&clientAddress, &clientAddressLen);
 				char ip_str[INET_ADDRSTRLEN];
 				inet_ntop(AF_INET, &(clientAddress.sin_addr), ip_str, INET_ADDRSTRLEN);
 				rateLimitNode->addNewIpaddress(ip_str);
-
-				std::cout << "" << ip_str << "amount of requests now" << rateLimitNode->getIpAttempts(ip_str) << std::endl;
 
 				if (rateLimitNode->isRateLimited(ip_str)) {
 					//response to the client if the ip address is in the rate limit
