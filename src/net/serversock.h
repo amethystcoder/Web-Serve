@@ -28,6 +28,8 @@ namespace AmthSocket
 
 			SOCKET acceptConnection(CleanSocket* tcpSocketIPV4);
 
+			std::string getClientIp(SOCKET clientSocket);
+
 			std::string receiveData(SOCKET clientSocket);
 
 			void sendData(SOCKET& clientSocket, const char data[]);

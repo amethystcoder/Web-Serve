@@ -17,7 +17,6 @@ void AmthSocket::ServerSocket::listenforConnections(CleanSocket* tcpSocketIPV4, 
 	hint.sin_addr.s_addr = INADDR_ANY;
 	hint.sin_port = htons(port);
 
-	//there is an issue with inet_pton here that i have to fix
 	//inet_pton(AF_INET, ip_addr, &hint.sin_addr);
 
 	int bind_result = bind(tcpSocketIPV4->Get(), reinterpret_cast<const sockaddr*>(&hint), sizeof(hint));
@@ -49,6 +48,21 @@ SOCKET AmthSocket::ServerSocket::acceptConnection(CleanSocket* tcpSocketIPV4) {
 	}
 
 	return clientSocket;
+}
+
+std::string AmthSocket::ServerSocket::getClientIp(SOCKET clientSocket) {
+	sockaddr_in client{};
+	int clientSize = sizeof(client);
+	if (getpeername(clientSocket, reinterpret_cast<sockaddr*>(&client), &clientSize) == SOCKET_ERROR) {
+		throw std::system_error(WSAGetLastError(), std::system_category());
+	}
+
+	char ip_str[INET_ADDRSTRLEN];
+	if (inet_ntop(AF_INET, &client.sin_addr, ip_str, sizeof(ip_str)) == NULL) {
+		throw std::system_error(WSAGetLastError(), std::system_category());
+	}
+
+	return std::string(ip_str);
 }
 
 std::string AmthSocket::ServerSocket::receiveData(SOCKET clientSocket) {

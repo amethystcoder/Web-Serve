@@ -11,6 +11,7 @@
 #include "ast/ast_factory.h"
 #include <filesystem>
 #include "ast/ast_manager.h"
+#include "process/process.h"
 
 
 // Helper function to register classes
@@ -38,5 +39,7 @@ int main(int argc, char** argv) {
 	std::filesystem::path htmlPath = currentPath / html_text;
 
 	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath);
+
+
 }
 

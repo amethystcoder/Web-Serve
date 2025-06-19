@@ -53,3 +53,26 @@ void ASTreeNode::addTagName(const std::string& tagname, ASTreeNode* node) {
 std::string ASTreeNode::getTagName() const noexcept {
 	return name;
 }
+
+ASTreeNode* ASTreeNode::getParent() const noexcept
+{
+	if (this->parent == nullptr) 
+		std::cerr << "Error: Parent is null for node with tag: " << this->getTagName() << std::endl;
+	return this->parent;
+}
+
+void ASTreeNode::attachable(ConnectionRequest& conReq, NodeDependencies& dependencies)
+{
+	std::cout << "attachable method called for node with tag: " << this->getTagName() << std::endl;
+}
+
+//TODO: Remember to move this method to a more appropriate place
+ASTreeNode* ASTreeNode::getDependency(NodeDependencies& deps, const std::string& name) const noexcept
+{
+	for (const auto& child : this->children) {
+		if (child->getTagName() == name) {
+			return child.get();
+		}
+	}
+	return nullptr; // Not found
+}

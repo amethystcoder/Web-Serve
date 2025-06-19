@@ -4,6 +4,7 @@
 #include "../ast/ast.h"
 #include "../ast/ast_manager.h"
 #include "../util/mimetypes.h"
+#include "../process/connectionRequest.h"
 #include <filesystem>
 #include <iostream>
 
@@ -35,6 +36,8 @@ public:
 
 	std::string getResContentType();
 	std::string setEndpointContent(const std::string& content);
+
+	void attachable(ConnectionRequest& conReq, NodeDependencies& dependencies);
 private:
 	std::string endpoint;
 	std::string rescontenttype;

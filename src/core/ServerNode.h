@@ -9,6 +9,7 @@
 #include "../protocols/http/httprequest.h"
 #include "RouteNode.h"
 #include "../net/cleansocket.h"
+#include "../process/connectionRequest.h"
 #include <winsock.h>
 
 class ServerNode : public ASTreeNode
@@ -23,7 +24,9 @@ public:
 	//it would return false if the port is not a number
 	bool setPort(const std::string& port) noexcept;
 
-	void startUpServer();
+	void sendResponse(const char* response) noexcept;
+
+	void attachable(ConnectionRequest& conReq, NodeDependencies dependencies);
 	//friend ASTManager;
 
 	friend ASTManager;
@@ -32,7 +35,7 @@ private:
 	//so that we can use the socket class in the server class
 	//without it having to know the details of the socket class and so it doesn't throw exceptions again
 	CleanSocket* cleanSocket;
-
+	AmthSocket::ServerSocket serverSock;
 	unsigned int port = 8080;
 	const char* address = "127.0.0.1";
 };

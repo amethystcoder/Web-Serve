@@ -6,11 +6,13 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include "process/connectionRequest.h"
 
 class ASTreeNode
 {
 
 	//A tree node for the abstract syntax tree
+	// It is more a server node tree, than an AST, but still works in this case 
 	//it would contain children and they would also be of type ASTreeNode
 	//other classes in the server html tree would be derived from this class
 public:
@@ -19,6 +21,7 @@ public:
 	~ASTreeNode() = default;
 
 	typedef std::vector<std::shared_ptr<ASTreeNode>> NodeChildren;
+	typedef NodeChildren NodeDependencies;
 
 	//add a child to the node
 	void AddChild(std::shared_ptr<ASTreeNode> child);
@@ -40,9 +43,21 @@ public:
 
 	std::map<std::string, std::string> nodeAttributes;
 
+	ASTreeNode* getParent() const noexcept;
+
+	ASTreeNode* getDependency(NodeDependencies& deps, const std::string& name) const noexcept;
+
+	//attachable is a function that is called during the processs
+	//a process is a loop that runs during the lifetime of the application
+	//the loop checks all the nodes for their 'attachables' and runs each of them
+	virtual void attachable(ConnectionRequest& conReq,NodeDependencies& dependencies);
+
 private:
 	//use vector to store children
 	NodeChildren children;
+
+	//use a pointer to the parent node
+	ASTreeNode* parent = nullptr;
 
 	std::string name;
 };

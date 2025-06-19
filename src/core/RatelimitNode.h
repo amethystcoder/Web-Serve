@@ -24,11 +24,13 @@ public:
 
 	void removeIpaddress(std::string& ip_address);
 
-	void StartSynchronousLimiting()
+	void StartSynchronousLimiting();
 
 	bool isRateLimited(const std::string& ip_address);
 
 	int getIpAttempts(const std::string& ip_address);
+
+	void startCentralResetThread();
 
 	//void startCentralResetThread();
 
