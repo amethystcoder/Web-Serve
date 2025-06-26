@@ -4,8 +4,10 @@
 #include "../util/fileParser.h"
 #include "ast.h"
 #include "ast_factory.h"
+#include "../process/process.h"
 #include <unordered_map>
 #include <filesystem>
+#include <algorithm>
 
 class ASTManager
 {
@@ -20,6 +22,8 @@ public:
 	static std::map<std::string, std::string> parseattributes(const std::string& attributes);
 
 	static ASTreeNode* findNodeWithName(const std::string& name, ASTreeNode* startnode);
+	
+	static ASTreeNode::NodeDependencies transformNodeDependencies(std::vector<RawDependency*> rawDep);
 
 	ASTreeNode* buildTree(std::filesystem::path htmlPath);
 
@@ -35,6 +39,13 @@ public:
 
 private:
 	static std::filesystem::path mainPath;
+	ASTManager(const ASTManager&) = delete;
+	ASTManager& operator=(const ASTManager&) = delete;
+
+	static ASTreeNode* rootNode; //root node of the AST
+
+	//global access for process
+	CelProcess process;
 	ASTManager();
 };
 

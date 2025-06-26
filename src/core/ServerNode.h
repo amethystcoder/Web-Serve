@@ -26,7 +26,7 @@ public:
 
 	void sendResponse(const char* response) noexcept;
 
-	void attachable(ConnectionRequest& conReq, NodeDependencies dependencies);
+	void attachable(NodeDependencies dependencies);
 	//friend ASTManager;
 
 	friend ASTManager;

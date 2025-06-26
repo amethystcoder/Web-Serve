@@ -7,6 +7,7 @@
 #include <string>
 #include <iostream>
 #include "process/connectionRequest.h"
+#include "process/process.h"
 
 class ASTreeNode
 {
@@ -50,11 +51,16 @@ public:
 	//attachable is a function that is called during the processs
 	//a process is a loop that runs during the lifetime of the application
 	//the loop checks all the nodes for their 'attachables' and runs each of them
-	virtual void attachable(ConnectionRequest& conReq,NodeDependencies& dependencies);
+	virtual ProcessEntry getattachable(NodeDependencies& dependencyList);
 
 private:
 	//use vector to store children
 	NodeChildren children;
+
+	//use a vector to store raw dependencies
+	std::vector<RawDependency> rawDependencies;
+	//use a vector to store dependencies
+	NodeDependencies dependencies;
 
 	//use a pointer to the parent node
 	ASTreeNode* parent = nullptr;

@@ -7,6 +7,7 @@ void ASTreeNode::registernode(const std::string& name, const std::string& attrib
 
 void ASTreeNode::AddChild(std::shared_ptr<ASTreeNode> child)
 {
+	child.get()->parent = this; //set the parent of the child to this node
 	children.emplace_back(child);
 }
 
@@ -61,17 +62,21 @@ ASTreeNode* ASTreeNode::getParent() const noexcept
 	return this->parent;
 }
 
-void ASTreeNode::attachable(ConnectionRequest& conReq, NodeDependencies& dependencies)
+ProcessEntry ASTreeNode::getattachable(NodeDependencies& dependencyList)
 {
-	std::cout << "attachable method called for node with tag: " << this->getTagName() << std::endl;
+	RepProcess process = [&dependencyList]() {
+		// Default implementation does nothing
+	};
+
+	return ProcessEntry(this, dependencyList, process);
 }
 
 //TODO: Remember to move this method to a more appropriate place
 ASTreeNode* ASTreeNode::getDependency(NodeDependencies& deps, const std::string& name) const noexcept
 {
-	for (const auto& child : this->children) {
-		if (child->getTagName() == name) {
-			return child.get();
+	for (const auto& dep : deps) {
+		if (dep->getTagName() == name) {
+			return dep.get();
 		}
 	}
 	return nullptr; // Not found

@@ -82,8 +82,9 @@ std::string RouteNode::setEndpointContent(const std::string& content) {
 	return filecontent;
 }
 
-void RouteNode::attachable(ConnectionRequest& conReq, NodeDependencies& dependencies)
+void RouteNode::attachable(NodeDependencies& dependencies)
 {
+	ConnectionRequest& conReq = ConnectionRequest::getInstance();
 	ServerNode* ServerApplication = static_cast<ServerNode*>(this->getDependency(dependencies, "server"));
 	//check if the route has a rate limit
 	if (this->nodeAttributes.find("rateLimit") != this->nodeAttributes.end()) {

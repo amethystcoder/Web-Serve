@@ -37,7 +37,7 @@ public:
 	std::string getResContentType();
 	std::string setEndpointContent(const std::string& content);
 
-	void attachable(ConnectionRequest& conReq, NodeDependencies& dependencies);
+	void attachable(NodeDependencies& dependencies);
 private:
 	std::string endpoint;
 	std::string rescontenttype;

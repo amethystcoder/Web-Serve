@@ -40,7 +40,7 @@ bool ServerNode::setPort(const std::string& port) noexcept {
 //todos:
 //generate a better regex pattern to handle self closing tags, comments, and double quotes...
 //the current one does not properly handle self closing tags and double quotes
-void ServerNode::attachable(ConnectionRequest& conReq, NodeDependencies dependencies) {
+void ServerNode::attachable(NodeDependencies dependencies) {
 	SOCKET clientSocket = this->serverSock.acceptConnection(this->cleanSocket);
 	//TODO: note that this only works if it is a get request
 	//We need to implement a way to handle other request types

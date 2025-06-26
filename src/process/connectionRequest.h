@@ -13,7 +13,7 @@ public:
     ConnectionRequest& operator=(const ConnectionRequest&) = delete;
 
     //access the single instance
-    static ConnectionRequest& getInstance()
+	static ConnectionRequest& getInstance() noexcept
     {
         static ConnectionRequest instance;
         return instance;
