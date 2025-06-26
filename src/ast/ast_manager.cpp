@@ -34,7 +34,7 @@ ASTreeNode* ASTManager::buildTree(std::filesystem::path htmlPath) {
 				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
 				return nullptr;
 			}
-			ASTreeNode::NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(serverNode->dependencies);
+			ASTreeNode::NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(serverNode->getRawDependencies());
 			serverNode->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
 			CelProcess::getInstance().attachProcess(
 				serverNode->getattachable(transformedDependencies)

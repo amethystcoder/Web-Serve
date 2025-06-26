@@ -18,7 +18,7 @@ void CelProcess::beginprocess()
 	{
 		for (auto& repeatable : processNodes) {
 			//TODO: check the node later for order/priority of execution
-			repeatable.process(repeatable.deps);
+			repeatable.process(); //we will set the process to take the dependencies as an argument later
 		}
 	}
 	return;

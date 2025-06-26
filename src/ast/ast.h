@@ -53,14 +53,19 @@ public:
 	//the loop checks all the nodes for their 'attachables' and runs each of them
 	virtual ProcessEntry getattachable(NodeDependencies& dependencyList);
 
+	virtual std::vector<RawDependency*> getRawDependencies() const noexcept;
+
 private:
 	//use vector to store children
 	NodeChildren children;
 
 	//use a vector to store raw dependencies
-	std::vector<RawDependency> rawDependencies;
+	std::vector<RawDependency*> rawDependencies;
+
 	//use a vector to store dependencies
 	NodeDependencies dependencies;
+
+	bool determinedDependencies = false; //if the dependencies are determined or not
 
 	//use a pointer to the parent node
 	ASTreeNode* parent = nullptr;

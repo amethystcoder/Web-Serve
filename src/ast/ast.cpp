@@ -81,3 +81,7 @@ ASTreeNode* ASTreeNode::getDependency(NodeDependencies& deps, const std::string&
 	}
 	return nullptr; // Not found
 }
+
+std::vector<RawDependency*> ASTreeNode::getRawDependencies() const noexcept {
+	return rawDependencies; //whether dependecies are determined or not, this will return the raw dependencies
+}
