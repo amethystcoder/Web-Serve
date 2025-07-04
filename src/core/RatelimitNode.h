@@ -24,13 +24,13 @@ public:
 
 	void removeIpaddress(std::string& ip_address);
 
-	void StartSynchronousLimiting();
+	//void StartSynchronousLimiting();
 
 	bool isRateLimited(const std::string& ip_address);
 
 	int getIpAttempts(const std::string& ip_address);
 
-	void startCentralResetThread();
+	//void startCentralResetThread();
 
 	//void startCentralResetThread();
 
@@ -40,7 +40,8 @@ private:
 
 	std::mutex attempts_mutex;
 
-	std::map<std::string, std::map<uint16_t,uint64_t>> ip_attempts_map;
+	//ipaddress => <attempts, last reset time>
+	std::map<std::string, std::pair<uint16_t,uint64_t>> ip_attempts_map;
 };
 
 #endif // !RATELIMITNODE_H

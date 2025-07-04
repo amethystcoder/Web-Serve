@@ -29,20 +29,22 @@ void RateLimitNode::registernode(const std::string& name, const std::string& att
 }
 
 bool RateLimitNode::beginLimit() {
-
-	if (this->nodeAttributes.find("type") == this->nodeAttributes.end()) {
+	/*
+		if (this->nodeAttributes.find("type") == this->nodeAttributes.end()) {
 		//default is to use non threded version
 		this->StartSynchronousLimiting();
-	}
-	else if (this->nodeAttributes["type"] == "central") {
-		//start the central reset thread
-		this->startCentralResetThread();
-	}
-	else if (this->nodeAttributes["type"] == "synchronous") {
-		//start the synchronous limiting
-		this->StartSynchronousLimiting();
-	}
-	else this->StartSynchronousLimiting();
+		}
+		else if (this->nodeAttributes["type"] == "central") {
+			//start the central reset thread
+			this->startCentralResetThread();
+		}
+		else if (this->nodeAttributes["type"] == "synchronous") {
+			//start the synchronous limiting
+			this->StartSynchronousLimiting();
+		}
+		else this->StartSynchronousLimiting();
+	*/
+	
 	return true;
 }
 
@@ -52,10 +54,10 @@ void RateLimitNode::addNewIpaddress(const std::string& ip_address)
 	
 	//check that the ip address is not already in the map
 	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end()) {
-		this->ip_attempts_map[ip_address] += 1;
+		this->ip_attempts_map[ip_address].first += 1;
 	}
 	else {
-		this->ip_attempts_map[ip_address] = 1;
+		this->ip_attempts_map[ip_address].first = 1;
 	}
 }
 
@@ -69,32 +71,34 @@ int RateLimitNode::getIpAttempts(const std::string& ip_address)
 {
 	//check if the ip address is in the map
 	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end()) {
-		return this->ip_attempts_map[ip_address];
+		return this->ip_attempts_map[ip_address].first;
 	}
 	return 0;
 }
 
+//TODO: Check this function properly
 bool RateLimitNode::isRateLimited(const std::string& ip_address){
 	//check that `maxRequests` is exists as an attribute ... else use 100
 	if(this->nodeAttributes.find("maxRequests") != this->nodeAttributes.end())
 	if (this->ip_attempts_map.find(ip_address) != this->ip_attempts_map.end()) {
 		//we need to keep track of the time and check if the time is within the rate limit
-		if (this->ip_attempts_map[ip_address] >= this->rate) {
+		if (this->ip_attempts_map[ip_address].second >= this->rate) {
 			return true;
 		}
 	}
 	return false;
 }
 
+/*
 void RateLimitNode::StartSynchronousLimiting() {
 	auto time_now = std::chrono::steady_clock::now();
 	for(auto& [first, second]: this->ip_attempts_map){
-		if (second->second + std::chrono::seconds(this->rate) < time_now) {
-			second->first = 0; //reset the count
-			second->second = time_now; //update the last reset time
+		if (second.second + std::chrono::seconds(this->rate) < time_now) {
+			second.first = 0; //reset the count
+			second.second = time_now; //update the last reset time
 		}
 		else {
-			second->first += 1; //increment the count
+			second.first += 1; //increment the count
 		}
 	}
 }
@@ -119,4 +123,6 @@ void RateLimitNode::startCentralResetThread() {
 		}
 		}).detach();
 }
+*/
+
 

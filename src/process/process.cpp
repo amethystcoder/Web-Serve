@@ -5,7 +5,7 @@
 ProcessEntry processNodes;
 
 
-bool CelProcess::attachProcess(ProcessEntry process) noexcept
+bool CelProcess::attachProcess(ProcessEntry* process) noexcept
 {
 		processNodes.emplace_back(process);
 		return true;
@@ -18,7 +18,7 @@ void CelProcess::beginprocess()
 	{
 		for (auto& repeatable : processNodes) {
 			//TODO: check the node later for order/priority of execution
-			repeatable.process(); //we will set the process to take the dependencies as an argument later
+			repeatable->process(); //we will set the process to take the dependencies as an argument later
 		}
 	}
 	return;

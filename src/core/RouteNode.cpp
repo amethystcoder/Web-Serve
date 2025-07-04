@@ -82,27 +82,31 @@ std::string RouteNode::setEndpointContent(const std::string& content) {
 	return filecontent;
 }
 
-void RouteNode::attachable(NodeDependencies& dependencies)
+ProcessEntry RouteNode::getattachable(NodeDependencies& dependencyList)
 {
-	ConnectionRequest& conReq = ConnectionRequest::getInstance();
-	ServerNode* ServerApplication = static_cast<ServerNode*>(this->getDependency(dependencies, "server"));
-	//check if the route has a rate limit
-	if (this->nodeAttributes.find("rateLimit") != this->nodeAttributes.end()) {
-		//we need to give a proper reference to a rate limit node in a route node by giving it a more appropriate attribute
-		RateLimitNode* rateLimitNode = static_cast<RateLimitNode*>(this->getDependency(dependencies, this->nodeAttributes["rateLimit"]));
-		if (rateLimitNode == nullptr) {
-			ServerApplication->sendResponse("HTTP/1.1 500 Internal Server Error\nContent-Type: text/html\n\n<html><body><h1>500 Internal Server Error</h1></body></html>");
-			//continue;
-		}
-		rateLimitNode->addNewIpaddress(conReq.getIpAddress());
+	RepProcess process = [this,&dependencyList]() {
+		// Default implementation does nothing
+		ConnectionRequest& conReq = ConnectionRequest::getInstance();
+		ServerNode* ServerApplication = static_cast<ServerNode*>(this->getDependency(dependencyList, "server"));
+		//check if the route has a rate limit
+		if (this->nodeAttributes.find("rateLimit") != this->nodeAttributes.end()) {
+			//we need to give a proper reference to a rate limit node in a route node by giving it a more appropriate attribute
+			RateLimitNode* rateLimitNode = static_cast<RateLimitNode*>(this->getDependency(dependencyList, this->nodeAttributes["rateLimit"]));
+			if (rateLimitNode == nullptr) {
+				ServerApplication->sendResponse("HTTP/1.1 500 Internal Server Error\nContent-Type: text/html\n\n<html><body><h1>500 Internal Server Error</h1></body></html>");
+				//continue;
+			}
+			rateLimitNode->addNewIpaddress(conReq.getIpAddress());
 
-		if (rateLimitNode->isRateLimited(conReq.getIpAddress())) {
-			//response to the client if the ip address is in the rate limit
-			ServerApplication->sendResponse("HTTP/1.1 429 Too Many Requests\nContent-Type: text/html\n\n<html><body><h1>429 Too Many Requests</h1></body></html>");
-			//continue;
+			if (rateLimitNode->isRateLimited(conReq.getIpAddress())) {
+				//response to the client if the ip address is in the rate limit
+				ServerApplication->sendResponse("HTTP/1.1 429 Too Many Requests\nContent-Type: text/html\n\n<html><body><h1>429 Too Many Requests</h1></body></html>");
+				//continue;
+			}
 		}
-	}
-	//Send the response
-	ServerApplication->sendResponse(this->getFullResponse().c_str());
-	//else this->serverSock.sendData(clientSocket, "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\n<html><body><h1>404 Not Found</h1></body></html>");//send a 404 response
+		//Send the response
+		ServerApplication->sendResponse(this->getFullResponse().c_str());
+		//else this->serverSock.sendData(clientSocket, "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\n<html><body><h1>404 Not Found</h1></body></html>");//send a 404 response
+	};
+	return ProcessEntry(this, dependencyList, process);
 }

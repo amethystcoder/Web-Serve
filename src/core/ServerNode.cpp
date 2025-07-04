@@ -40,21 +40,26 @@ bool ServerNode::setPort(const std::string& port) noexcept {
 //todos:
 //generate a better regex pattern to handle self closing tags, comments, and double quotes...
 //the current one does not properly handle self closing tags and double quotes
-void ServerNode::attachable(NodeDependencies dependencies) {
-	SOCKET clientSocket = this->serverSock.acceptConnection(this->cleanSocket);
-	//TODO: note that this only works if it is a get request
-	//We need to implement a way to handle other request types
-	std::string request_data = this->serverSock.receiveData(clientSocket);
-	//there should be a sort of cache to store the headers with the request data
-	HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
-	//set connection request 
-	conReq.setSocket(clientSocket);
-	conReq.setHeaders(headers);
-	conReq.setContent(HTTPTextParser::GetRequestBody(request_data));
-
-}
 
 void ServerNode::sendResponse(const char* response) noexcept {
 	SOCKET clientSocket = ConnectionRequest::getInstance().getSocket();
 	this->serverSock.sendData(clientSocket, response);
+}
+
+ProcessEntry ServerNode::getattachable(ASTreeNode::NodeDependencies& dependencyList)
+{
+	RepProcess process = [this, &dependencyList]() {
+		ConnectionRequest& conReq = ConnectionRequest::getInstance();
+		SOCKET clientSocket = this->serverSock.acceptConnection(this->cleanSocket);
+		//TODO: note that this only works if it is a get request
+		//We need to implement a way to handle other request types
+		std::string request_data = this->serverSock.receiveData(clientSocket);
+		//there should be a sort of cache to store the headers with the request data
+		HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
+		//set connection request 
+		conReq.setSocket(clientSocket);
+		conReq.setHeaders(headers);
+		conReq.setContent(HTTPTextParser::GetRequestBody(request_data));
+	};
+	return ProcessEntry(this, dependencyList, process);
 }

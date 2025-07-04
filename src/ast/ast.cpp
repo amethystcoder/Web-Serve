@@ -62,13 +62,13 @@ ASTreeNode* ASTreeNode::getParent() const noexcept
 	return this->parent;
 }
 
-ProcessEntry ASTreeNode::getattachable(NodeDependencies& dependencyList)
+ProcessEntry* ASTreeNode::getattachable(NodeDependencies& dependencyList)
 {
 	RepProcess process = [&dependencyList]() {
 		// Default implementation does nothing
 	};
-
-	return ProcessEntry(this, dependencyList, process);
+	ProcessEntry* newEntry = new ProcessEntry(this, dependencyList, process);
+	return newEntry;
 }
 
 //TODO: Remember to move this method to a more appropriate place
@@ -85,3 +85,4 @@ ASTreeNode* ASTreeNode::getDependency(NodeDependencies& deps, const std::string&
 std::vector<RawDependency*> ASTreeNode::getRawDependencies() const noexcept {
 	return rawDependencies; //whether dependecies are determined or not, this will return the raw dependencies
 }
+

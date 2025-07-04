@@ -41,7 +41,7 @@ public:
 
 	CelProcess() = default;
 
-	bool attachProcess(ProcessEntry process);
+	bool attachProcess(ProcessEntry* process);
 
 	void beginprocess();
 
@@ -52,8 +52,7 @@ public:
 
 private:
 	//AstreeNode* | a list of the nodes dependencies
-	//std::vector<std::pair<ASTreeNode*, dependencies>> processNodes;
-	std::vector<ProcessEntry> processNodes;
+	std::vector<ProcessEntry*> processNodes;
 	friend ASTManager;
 };
 #endif // !PROCESS_H

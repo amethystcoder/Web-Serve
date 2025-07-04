@@ -51,11 +51,11 @@ public:
 	//attachable is a function that is called during the processs
 	//a process is a loop that runs during the lifetime of the application
 	//the loop checks all the nodes for their 'attachables' and runs each of them
-	virtual ProcessEntry getattachable(NodeDependencies& dependencyList);
+	virtual ProcessEntry* getattachable(NodeDependencies& dependencyList);
 
 	virtual std::vector<RawDependency*> getRawDependencies() const noexcept;
-
 private:
+
 	//use vector to store children
 	NodeChildren children;
 
@@ -63,7 +63,7 @@ private:
 	std::vector<RawDependency*> rawDependencies;
 
 	//use a vector to store dependencies
-	NodeDependencies dependencies;
+	NodeDependencies dependencies; //TODO: make this a set to avoid duplicates, or a priority queue to order them by priority
 
 	bool determinedDependencies = false; //if the dependencies are determined or not
 
