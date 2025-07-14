@@ -6,8 +6,8 @@
 #include <memory>
 #include <string>
 #include <iostream>
-#include "process/connectionRequest.h"
-#include "process/process.h"
+#include <functional>
+#include "process/dependency.h"
 
 class ASTreeNode
 {
@@ -73,6 +73,15 @@ private:
 	std::string name;
 };
 
+
+struct ProcessEntry {
+	ASTreeNode* node;
+	ASTreeNode::NodeDependencies deps;
+	RepProcess process;
+
+	ProcessEntry(ASTreeNode* n, ASTreeNode::NodeDependencies d, RepProcess p)
+		: node(n), deps(std::move(d)), process(std::move(p)) {}
+};
 
 #endif // !AST_H
 

@@ -1,6 +1,4 @@
 #include "RouteNode.h"
-#include "ServerNode.h"
-#include "RatelimitNode.h"
 
 
 RouteNode::RouteNode()
@@ -82,7 +80,7 @@ std::string RouteNode::setEndpointContent(const std::string& content) {
 	return filecontent;
 }
 
-ProcessEntry RouteNode::getattachable(NodeDependencies& dependencyList)
+ProcessEntry* RouteNode::getattachable(NodeDependencies& dependencyList)
 {
 	RepProcess process = [this,&dependencyList]() {
 		// Default implementation does nothing
@@ -108,5 +106,5 @@ ProcessEntry RouteNode::getattachable(NodeDependencies& dependencyList)
 		ServerApplication->sendResponse(this->getFullResponse().c_str());
 		//else this->serverSock.sendData(clientSocket, "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\n<html><body><h1>404 Not Found</h1></body></html>");//send a 404 response
 	};
-	return ProcessEntry(this, dependencyList, process);
+	return new ProcessEntry(this, dependencyList, process);
 }

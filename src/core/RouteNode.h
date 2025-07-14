@@ -2,11 +2,12 @@
 #define ROUTENODE_H
 
 #include "../ast/ast.h"
-#include "../ast/ast_manager.h"
 #include "../util/mimetypes.h"
 #include "../process/connectionRequest.h"
 #include <filesystem>
 #include <iostream>
+#include "ServerNode.h"
+#include "RatelimitNode.h"
 
 class RouteNode : public ASTreeNode
 {
@@ -43,8 +44,6 @@ private:
 	std::string rescontenttype;
 	std::string method;
 	std::string response;
-
-	friend ASTManager;
 
 };
 

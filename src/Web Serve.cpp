@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 
 	std::filesystem::path htmlPath = currentPath / html_text;
 
-	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath);
+	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath).get();
 
 
 }

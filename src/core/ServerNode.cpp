@@ -1,5 +1,4 @@
 #include "ServerNode.h"
-#include "RatelimitNode.h"
 
 ServerNode::ServerNode()
 {
@@ -46,7 +45,7 @@ void ServerNode::sendResponse(const char* response) noexcept {
 	this->serverSock.sendData(clientSocket, response);
 }
 
-ProcessEntry ServerNode::getattachable(ASTreeNode::NodeDependencies& dependencyList)
+ProcessEntry* ServerNode::getattachable(ASTreeNode::NodeDependencies& dependencyList)
 {
 	RepProcess process = [this, &dependencyList]() {
 		ConnectionRequest& conReq = ConnectionRequest::getInstance();
@@ -61,5 +60,5 @@ ProcessEntry ServerNode::getattachable(ASTreeNode::NodeDependencies& dependencyL
 		conReq.setHeaders(headers);
 		conReq.setContent(HTTPTextParser::GetRequestBody(request_data));
 	};
-	return ProcessEntry(this, dependencyList, process);
+	return new ProcessEntry(this, dependencyList, process);
 }

@@ -1,6 +1,5 @@
 #include "ast_manager.h"
 #include <iostream>
-#include <core/ServerNode.h>
 
 ASTManager::ASTManager()
 {
@@ -14,7 +13,7 @@ std::filesystem::path ASTManager::mainPath;
 
 //build the tree from the first node list
 // the first tag must be a server tag
-ASTreeNode* ASTManager::buildTree(std::filesystem::path htmlPath) {
+std::shared_ptr<ASTreeNode> ASTManager::buildTree(std::filesystem::path htmlPath) {
 	mainPath = htmlPath.parent_path(); //set the main path to the html path
 	std::string resolvedPath = std::filesystem::weakly_canonical(htmlPath).string();
 	std::vector<HTMLTagData> firstNodeList = FileParser::determineParseType(resolvedPath);
@@ -28,7 +27,7 @@ ASTreeNode* ASTManager::buildTree(std::filesystem::path htmlPath) {
 			//any tag not under the server tag would be ignored
 
 			//create a node for the server tag
-			ServerNode* serverNode = new ServerNode();//, tag_data.content
+			std::shared_ptr<ASTreeNode> serverNode = ASTNodeFactory::getInstance().create("server");
 			rootNode = serverNode; //set the root node to the server node
 			if (serverNode == nullptr) {
 				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
@@ -51,7 +50,7 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 		if (ASTManager::rootNode == nullptr) {
 			return; //No root node available
 		}
-		node = ASTManager::rootNode; //Start from the root node if no start node is provided
+		node = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
 	}
 	TagDataList parsed_content = FileParser::parse_html_content(content);
 	for (auto& tag_data : parsed_content) {
@@ -83,12 +82,12 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 }
 
 //Find a route node with a specific endpoint
-ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode = ASTManager::rootNode) {
+ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode = ASTManager::rootNode.get()) {
 	if (!startnode || startnode == nullptr) {
 		if (ASTManager::rootNode == nullptr) {
 			return nullptr; //No root node available
 		}
-		startnode = ASTManager::rootNode; //Start from the root node if no start node is provided
+		startnode = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
 	}
 
 	//Check if current node is the matching route node
@@ -103,12 +102,12 @@ ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, A
 	return nullptr; //Not found in this branch
 }
 
-ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* startnode = ASTManager::rootNode) {
+ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* startnode = ASTManager::rootNode.get()) {
 	if (!startnode || startnode == nullptr) {
 		if (ASTManager::rootNode == nullptr) {
 			return nullptr; //No root node available
 		}
-		startnode = ASTManager::rootNode; //Start from the root node if no start node is provided
+		startnode = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
 	}
 
 	//work on this tomorrow 
@@ -126,12 +125,12 @@ ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* st
 	return nullptr; //Not found in this branch
 }
 
-ASTreeNode* ASTManager::findNodeWithTagName(const std::string& Tagname, ASTreeNode* startnode = ASTManager::rootNode) {
+ASTreeNode* ASTManager::findNodeWithTagName(const std::string& Tagname, ASTreeNode* startnode = ASTManager::rootNode.get()) {
 	if (!startnode || startnode == nullptr) {
 		if (ASTManager::rootNode == nullptr) {
 			return nullptr; //No root node available
 		}
-		startnode = ASTManager::rootNode; //Start from the root node if no start node is provided
+		startnode = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
 	}
 
 	if (startnode->getTagName() == Tagname) return startnode;

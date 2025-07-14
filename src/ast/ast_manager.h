@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <filesystem>
 #include <algorithm>
+#include <memory>
 
 class ASTManager
 {
@@ -25,7 +26,7 @@ public:
 	
 	static ASTreeNode::NodeDependencies transformNodeDependencies(std::vector<RawDependency*> rawDep);
 
-	ASTreeNode* buildTree(std::filesystem::path htmlPath);
+	std::shared_ptr<ASTreeNode> buildTree(std::filesystem::path htmlPath);
 
 	static ASTManager& getInstance() {
 		static ASTManager instance;
@@ -42,7 +43,7 @@ private:
 	ASTManager(const ASTManager&) = delete;
 	ASTManager& operator=(const ASTManager&) = delete;
 
-	static ASTreeNode* rootNode; //root node of the AST
+	static std::shared_ptr<ASTreeNode> rootNode; //root node of the AST
 
 	//global access for process
 	CelProcess process;
