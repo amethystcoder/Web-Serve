@@ -7,7 +7,30 @@
 #include <string>
 #include <iostream>
 #include <functional>
-#include "process/dependency.h"
+#include <utility> //for std::move
+
+struct RawDependency {
+	std::string depNodeName; //name of the dependency
+	std::string depName;
+};
+
+using RepProcess = std::function<void()>; //repeatable process type, a function that takes a list of dependencies and does something with them
+
+//smart pointer containing the repeatable process
+using RepProcessPtr = std::shared_ptr<RepProcess>;
+
+class ASTreeNode; //forward declaration of the ASTreeNode class
+typedef std::vector<std::shared_ptr<ASTreeNode>>  NodeDependencies;
+
+
+struct ProcessEntry {
+	ASTreeNode* node;
+	NodeDependencies deps;
+	RepProcess process;
+
+	ProcessEntry(ASTreeNode* n, NodeDependencies d, RepProcess p)
+		: node(n), deps(std::move(d)), process(std::move(p)) {}
+};
 
 class ASTreeNode
 {
@@ -17,12 +40,11 @@ class ASTreeNode
 	//it would contain children and they would also be of type ASTreeNode
 	//other classes in the server html tree would be derived from this class
 public:
-	ASTreeNode() = default;
+	ASTreeNode();
 
-	~ASTreeNode() = default;
+	~ASTreeNode();
 
 	typedef std::vector<std::shared_ptr<ASTreeNode>> NodeChildren;
-	typedef NodeChildren NodeDependencies;
 
 	//add a child to the node
 	void AddChild(std::shared_ptr<ASTreeNode> child);
@@ -73,15 +95,6 @@ private:
 	std::string name;
 };
 
-
-struct ProcessEntry {
-	ASTreeNode* node;
-	ASTreeNode::NodeDependencies deps;
-	RepProcess process;
-
-	ProcessEntry(ASTreeNode* n, ASTreeNode::NodeDependencies d, RepProcess p)
-		: node(n), deps(std::move(d)), process(std::move(p)) {}
-};
 
 #endif // !AST_H
 

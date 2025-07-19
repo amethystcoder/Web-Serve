@@ -10,6 +10,7 @@ ASTManager::~ASTManager()
 }
 
 std::filesystem::path ASTManager::mainPath;
+std::shared_ptr<ASTreeNode>ASTManager::rootNode; //root node of the AST
 
 //build the tree from the first node list
 // the first tag must be a server tag
@@ -33,7 +34,9 @@ std::shared_ptr<ASTreeNode> ASTManager::buildTree(std::filesystem::path htmlPath
 				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
 				return nullptr;
 			}
-			ASTreeNode::NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(serverNode->getRawDependencies());
+			//there might be a slight bug here to fix later
+			//TODO: make sure to fix bug here
+			NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(serverNode->getRawDependencies());
 			serverNode->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
 			CelProcess::getInstance().attachProcess(
 				serverNode->getattachable(transformedDependencies)
@@ -70,7 +73,7 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 				tag_data.content = FileParser::readHtmlFile(std::filesystem::weakly_canonical(p/sref).string());
 			} 
 			//ASTManager::addNodeChildrenFromContent(tag_data.content, astInstance.get());
-			ASTreeNode::NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(astInstance->getRawDependencies());
+			NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(astInstance->getRawDependencies());
 			astInstance->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
 			CelProcess::getInstance().attachProcess(
 				astInstance->getattachable(transformedDependencies)
@@ -82,12 +85,12 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 }
 
 //Find a route node with a specific endpoint
-ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode = ASTManager::rootNode.get()) {
+std::shared_ptr<ASTreeNode> ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, std::shared_ptr<ASTreeNode> startnode = ASTManager::rootNode) {
 	if (!startnode || startnode == nullptr) {
 		if (ASTManager::rootNode == nullptr) {
 			return nullptr; //No root node available
 		}
-		startnode = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
+		startnode = ASTManager::rootNode; //Start from the root node if no start node is provided
 	}
 
 	//Check if current node is the matching route node
@@ -95,19 +98,19 @@ ASTreeNode* ASTManager::findRouteNodeWithEndpoint(const std::string& endpoint, A
 
 	//Recursively search children
 	for (auto& child : startnode->GetChildren()) {
-		ASTreeNode* result = findRouteNodeWithEndpoint(endpoint, child.get());
+		std::shared_ptr<ASTreeNode> result = findRouteNodeWithEndpoint(endpoint, child);
 		if (result) return result; 
 	}
 
 	return nullptr; //Not found in this branch
 }
 
-ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* startnode = ASTManager::rootNode.get()) {
+std::shared_ptr<ASTreeNode> ASTManager::findNodeWithName(const std::string& name, std::shared_ptr<ASTreeNode> startnode = ASTManager::rootNode) {
 	if (!startnode || startnode == nullptr) {
 		if (ASTManager::rootNode == nullptr) {
 			return nullptr; //No root node available
 		}
-		startnode = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
+		startnode = ASTManager::rootNode; //Start from the root node if no start node is provided
 	}
 
 	//work on this tomorrow 
@@ -118,26 +121,26 @@ ASTreeNode* ASTManager::findNodeWithName(const std::string& name, ASTreeNode* st
 
 	//Recursively search children
 	for (auto& child : startnode->GetChildren()) {
-		ASTreeNode* result = findNodeWithName(name, child.get());
+		std::shared_ptr<ASTreeNode> result = findNodeWithName(name, child);
 		if (result) return result;
 	}
 
 	return nullptr; //Not found in this branch
 }
 
-ASTreeNode* ASTManager::findNodeWithTagName(const std::string& Tagname, ASTreeNode* startnode = ASTManager::rootNode.get()) {
+std::shared_ptr<ASTreeNode> ASTManager::findNodeWithTagName(const std::string& Tagname, std::shared_ptr<ASTreeNode> startnode = ASTManager::rootNode) {
 	if (!startnode || startnode == nullptr) {
 		if (ASTManager::rootNode == nullptr) {
 			return nullptr; //No root node available
 		}
-		startnode = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
+		startnode = ASTManager::rootNode; //Start from the root node if no start node is provided
 	}
 
 	if (startnode->getTagName() == Tagname) return startnode;
 
 	//Recursively search children
 	for (auto& child : startnode->GetChildren()) {
-		ASTreeNode* result = findNodeWithTagName(Tagname, child.get());
+		std::shared_ptr<ASTreeNode> result = findNodeWithTagName(Tagname, child);
 		if (result) return result;
 	}
 
@@ -161,19 +164,16 @@ void ASTManager::setMainPath(std::string& path) noexcept {
 	mainPath = p.string();
 }
 
-ASTreeNode::NodeDependencies ASTManager::transformNodeDependencies(std::vector<RawDependency*> rawDep)
+NodeDependencies ASTManager::transformNodeDependencies(std::vector<RawDependency*> rawDep)
 {
-	ASTreeNode::NodeDependencies depList;
+	NodeDependencies depList;
 	std::transform(rawDep.begin(), rawDep.end(), depList.begin(), [](RawDependency* dep) {
-		ASTreeNode* node;
+		std::shared_ptr<ASTreeNode> node;
 		if (dep->depName.empty())
 			node = ASTManager::findNodeWithTagName(dep->depNodeName);
 		else //need to change this, as there should be a function to check for both name and node name together
 			node = ASTManager::findNodeWithName(dep->depName);
-		if (node) {
-			return std::make_shared<ASTreeNode>(node);
-		}
-		return std::make_shared<ASTreeNode>(nullptr);
+		return node;
 	});
 	return depList;
 }

@@ -30,11 +30,11 @@ bool FileParser::check_is_html(const std::string& filename) {
 }
 
 bool FileParser::check_is_file(const std::string& filename) {
-	size_t position_of_last_separator = filename.find_last_of(".");
-	if (position_of_last_separator == std::string::npos) return false;
-	std::string extension = filename.substr(position_of_last_separator + 1);
-	if (MimeTypes::getInstance().mime_type_exists(extension)) return true;
-	return false;
+	std::filesystem::path path(filename);
+	auto ext = path.extension();
+
+	// Check if extension is non-empty and longer than just '.'
+	return !ext.empty() && ext.string() != ".";
 }
 
 std::map<std::string, std::string> FileParser::parseAttributes(const std::string& input) {

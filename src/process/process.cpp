@@ -2,7 +2,6 @@
 
 
 //AstreeNode* | a list of the nodes dependencies
-ProcessEntry processNodes;
 
 
 bool CelProcess::attachProcess(ProcessEntry* process) noexcept

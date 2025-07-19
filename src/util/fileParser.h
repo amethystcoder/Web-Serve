@@ -12,7 +12,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include "mimetypes.h"
+#include <filesystem>
 
 struct HTMLTagData {
 	std::string tag;

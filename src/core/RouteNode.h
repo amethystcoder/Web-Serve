@@ -38,7 +38,7 @@ public:
 	std::string getResContentType();
 	std::string setEndpointContent(const std::string& content);
 
-	ProcessEntry* getattachable(ASTreeNode::NodeDependencies& dependencies) override;
+	ProcessEntry* getattachable(NodeDependencies& dependencies) override;
 private:
 	std::string endpoint;
 	std::string rescontenttype;

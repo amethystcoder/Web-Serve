@@ -45,7 +45,7 @@ void ServerNode::sendResponse(const char* response) noexcept {
 	this->serverSock.sendData(clientSocket, response);
 }
 
-ProcessEntry* ServerNode::getattachable(ASTreeNode::NodeDependencies& dependencyList)
+ProcessEntry* ServerNode::getattachable(NodeDependencies& dependencyList)
 {
 	RepProcess process = [this, &dependencyList]() {
 		ConnectionRequest& conReq = ConnectionRequest::getInstance();

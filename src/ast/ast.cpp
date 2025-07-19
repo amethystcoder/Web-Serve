@@ -1,5 +1,15 @@
 #include "ast.h"
 
+ASTreeNode::ASTreeNode() {}
+
+ASTreeNode::~ASTreeNode() {
+	// Destructor to clean up children
+	for (auto& child : children) {
+		child.reset(); // Reset shared_ptr to release the child node
+	}
+	children.clear();
+
+}
 
 void ASTreeNode::registernode(const std::string& name, const std::string& attributes, std::string& content)
 {

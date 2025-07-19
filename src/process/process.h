@@ -7,7 +7,6 @@
 #include "process/connectionRequest.h"
 #include <functional>
 #include <memory>
-#include "dependency.h"
 #include "ast/ast.h"
 
 class CelProcess
@@ -21,7 +20,7 @@ public:
 
 	CelProcess() = default;
 
-	bool attachProcess(ProcessEntry* process);
+	bool attachProcess(ProcessEntry* process) noexcept;
 
 	void beginprocess();
 

@@ -16,15 +16,15 @@ public:
 
 	static void addNodeChildrenFromContent(std::string& content, ASTreeNode* node);
 
-	static ASTreeNode* findNodeWithTagName(const std::string& name, ASTreeNode* startnode);
+	static std::shared_ptr<ASTreeNode> findNodeWithTagName(const std::string& name, std::shared_ptr<ASTreeNode> startnode);
 
-	static ASTreeNode* findRouteNodeWithEndpoint(const std::string& endpoint, ASTreeNode* startnode);
+	static std::shared_ptr<ASTreeNode> findRouteNodeWithEndpoint(const std::string& endpoint, std::shared_ptr<ASTreeNode> startnode);
 
 	static std::map<std::string, std::string> parseattributes(const std::string& attributes);
 
-	static ASTreeNode* findNodeWithName(const std::string& name, ASTreeNode* startnode);
+	static std::shared_ptr<ASTreeNode> findNodeWithName(const std::string& name, std::shared_ptr<ASTreeNode> startnode);
 	
-	static ASTreeNode::NodeDependencies transformNodeDependencies(std::vector<RawDependency*> rawDep);
+	static NodeDependencies transformNodeDependencies(std::vector<RawDependency*> rawDep);
 
 	std::shared_ptr<ASTreeNode> buildTree(std::filesystem::path htmlPath);
 

@@ -26,7 +26,7 @@ public:
 
 	void sendResponse(const char* response) noexcept;
 
-	ProcessEntry* getattachable(ASTreeNode::NodeDependencies& dependencies) override;
+	ProcessEntry* getattachable(NodeDependencies& dependencies) override;
 	//friend ASTManager;
 
 	//friend ASTManager;
