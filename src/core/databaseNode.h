@@ -11,7 +11,7 @@ public:
 
 	void registernode(const std::string& name, const std::string& attributes, std::string& content);
 private:
-
+	std::vector<RawDependency*> rawDependencies = {};
 };
 
 #endif // !DATABASENODE_H

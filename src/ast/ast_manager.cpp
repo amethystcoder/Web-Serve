@@ -167,13 +167,16 @@ void ASTManager::setMainPath(std::string& path) noexcept {
 NodeDependencies ASTManager::transformNodeDependencies(std::vector<RawDependency*> rawDep)
 {
 	NodeDependencies depList;
-	std::transform(rawDep.begin(), rawDep.end(), depList.begin(), [](RawDependency* dep) {
+	depList.reserve(rawDep.size()); // Optional: improve performance
+
+	std::transform(rawDep.begin(), rawDep.end(), std::back_inserter(depList), [](RawDependency* dep) {
 		std::shared_ptr<ASTreeNode> node;
 		if (dep->depName.empty())
 			node = ASTManager::findNodeWithTagName(dep->depNodeName);
-		else //need to change this, as there should be a function to check for both name and node name together
-			node = ASTManager::findNodeWithName(dep->depName);
+		else
+			node = ASTManager::findNodeWithName(dep->depName); // <-- Ideally improve to match both
 		return node;
-	});
+		});
+
 	return depList;
 }

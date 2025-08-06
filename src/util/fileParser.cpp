@@ -227,7 +227,7 @@ TagDataList FileParser::determineParseType(std::string& input) {
 	//check if the input is a file or a string
 	//if the input is a file then return the parsed file content
 	//if the input is a string then return the parsed string content
-	//if the input is neither a file nor a string then return an empty 
+	//if the input is neither a file nor a string then return an empty string
 	return input.size() >= 5 && input.compare(input.size() - 5, 5, ".html") == 0
 		? parse_html_file(input)
 		: parse_html_content(input);

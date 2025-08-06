@@ -38,6 +38,8 @@ private:
 	AmthSocket::ServerSocket serverSock;
 	unsigned int port = 8080;
 	const char* address = "127.0.0.1";
+
+	std::vector<RawDependency*> rawDependencies = {};
 };
 
 

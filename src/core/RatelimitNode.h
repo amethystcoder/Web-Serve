@@ -42,6 +42,8 @@ private:
 
 	//ipaddress => <attempts, last reset time>
 	std::map<std::string, std::pair<uint16_t,uint64_t>> ip_attempts_map;
+
+	std::vector<RawDependency*> rawDependencies = {};
 };
 
 #endif // !RATELIMITNODE_H

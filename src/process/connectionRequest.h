@@ -61,6 +61,37 @@ public:
         return this->ipAddress;
     }
 
+	std::string getRoute() const noexcept {
+		std::lock_guard<std::mutex> lock(mutex);
+		return this->route;
+	}
+
+    void setRoute(const std::string& route) noexcept {
+        std::lock_guard<std::mutex> lock(mutex);
+        this->route = route;
+    }
+
+	std::string setRequestMethod(const std::string& method) noexcept {
+		std::lock_guard<std::mutex> lock(mutex);
+		this->requestMethod = method;
+		return this->requestMethod;
+	}
+
+	std::string getRequestMethod() const noexcept {
+		std::lock_guard<std::mutex> lock(mutex);
+		return this->requestMethod;
+	}
+
+	//clear the request data
+	void clear() noexcept {
+		std::lock_guard<std::mutex> lock(mutex);
+		ipAddress.clear();
+		socket = INVALID_SOCKET;
+		headers.clear();
+		content.clear();
+		route.clear();
+	}
+
 private:
     ConnectionRequest() = default;
     ~ConnectionRequest() = default;
@@ -70,6 +101,8 @@ private:
     std::string ipAddress;
     SOCKET socket;
     HTTPHeaderMap headers;
+    std::string route;
+	std::string requestMethod;
     AmthSocket::ServerSocket serverSock{};
     std::string content;
 };

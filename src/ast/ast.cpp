@@ -3,11 +3,21 @@
 ASTreeNode::ASTreeNode() {}
 
 ASTreeNode::~ASTreeNode() {
-	// Destructor to clean up children
+	//destructor to clean up children
 	for (auto& child : children) {
-		child.reset(); // Reset shared_ptr to release the child node
+		child.reset(); //reset shared_ptr to release the child node
 	}
 	children.clear();
+
+	//clear dependencies
+	for (auto& dep : dependencies) {
+		dep.reset(); //reset shared_ptr to release the dependency node
+	}
+
+	//clear raw dependencies
+	for (auto& rawdep : rawDependencies) {
+		delete rawdep; // Delete the raw dependency
+	}
 
 }
 
@@ -82,11 +92,14 @@ ProcessEntry* ASTreeNode::getattachable(NodeDependencies& dependencyList)
 }
 
 //TODO: Remember to move this method to a more appropriate place
-ASTreeNode* ASTreeNode::getDependency(NodeDependencies& deps, const std::string& name) const noexcept
+ASTreeNode* ASTreeNode::getDependency(RawDependency* rawdep) const noexcept
 {
-	for (const auto& dep : deps) {
-		if (dep->getTagName() == name) {
-			return dep.get();
+	for (const auto& dep : dependencies) {
+		if (dep->getTagName() == rawdep->depNodeName) {
+			if (rawdep->depName == "") return dep.get(); // Return the dependency node if it matches the node name
+			else if (rawdep->depName == dep->getTagName()) {
+				return dep.get(); // Return the dependency node if it matches
+			}
 		}
 	}
 	return nullptr; // Not found

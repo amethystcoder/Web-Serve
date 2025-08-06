@@ -68,12 +68,13 @@ public:
 
 	ASTreeNode* getParent() const noexcept;
 
-	ASTreeNode* getDependency(NodeDependencies& deps, const std::string& name) const noexcept;
 
 	//attachable is a function that is called during the processs
 	//a process is a loop that runs during the lifetime of the application
 	//the loop checks all the nodes for their 'attachables' and runs each of them
 	virtual ProcessEntry* getattachable(NodeDependencies& dependencyList);
+
+	ASTreeNode* getDependency(RawDependency* rawdep) const noexcept;
 
 	virtual std::vector<RawDependency*> getRawDependencies() const noexcept;
 private:

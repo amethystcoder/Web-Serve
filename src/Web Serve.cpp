@@ -7,6 +7,8 @@
 #include "core/databaseNode.h"
 #include "core/FileSystem.h"
 
+#include "process/process.h"
+
 #include "ast/ast_factory.h"
 #include <filesystem>
 #include "ast/ast_manager.h"
@@ -38,6 +40,8 @@ int main(int argc, char** argv) {
 
 	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath).get();
 
+
+	CelProcess::getInstance().beginprocess();
 
 }
 

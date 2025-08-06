@@ -50,14 +50,15 @@ ProcessEntry* ServerNode::getattachable(NodeDependencies& dependencyList)
 	RepProcess process = [this, &dependencyList]() {
 		ConnectionRequest& conReq = ConnectionRequest::getInstance();
 		SOCKET clientSocket = this->serverSock.acceptConnection(this->cleanSocket);
-		//TODO: note that this only works if it is a get request
-		//We need to implement a way to handle other request types
 		std::string request_data = this->serverSock.receiveData(clientSocket);
 		//there should be a sort of cache to store the headers with the request data
+		//there should be a proper documented comment on this function
 		HTTPHeaderMap headers = HTTPTextParser::ParseRequest(request_data);
 		//set connection request 
 		conReq.setSocket(clientSocket);
 		conReq.setHeaders(headers);
+		conReq.setRoute(headers["path"]);
+		conReq.setRequestMethod(headers["method"]);
 		conReq.setContent(HTTPTextParser::GetRequestBody(request_data));
 	};
 	return new ProcessEntry(this, dependencyList, process);

@@ -38,13 +38,17 @@ public:
 	std::string getResContentType();
 	std::string setEndpointContent(const std::string& content);
 
+	//ASTreeNode* getDependency(RawDependency* rawdep) const noexcept;
+
 	ProcessEntry* getattachable(NodeDependencies& dependencies) override;
 private:
 	std::string endpoint;
 	std::string rescontenttype;
 	std::string method;
 	std::string response;
-
+	std::vector<RawDependency*> rawDependencies = {
+		new RawDependency{ "server", ""}
+	};
 };
 
 

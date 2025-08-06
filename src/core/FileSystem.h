@@ -11,7 +11,7 @@ public:
 	~FileSystem();
 
 private:
-
+	std::vector<RawDependency*> rawDependencies = {};
 };
 
 #endif // !FILESYSTEM_H
