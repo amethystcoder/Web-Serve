@@ -1,13 +1,14 @@
-#include <iostream>
 #include "net/cleansocket.h"
-#include "core/ServerNode.h"
-#include "core/databaseNode.h"
-#include <vector>
-#include "util/fileParser.h"
+
 #include "core/RouteNode.h"
 #include "core/APINode.h"
 #include "core/RatelimitNode.h"
+#include "core/ServerNode.h"
+#include "core/databaseNode.h"
 #include "core/FileSystem.h"
+
+#include "process/process.h"
+
 #include "ast/ast_factory.h"
 #include <filesystem>
 #include "ast/ast_manager.h"
@@ -37,6 +38,10 @@ int main(int argc, char** argv) {
 
 	std::filesystem::path htmlPath = currentPath / html_text;
 
-	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath);
+	ASTreeNode* rootNode = ASTManager::getInstance().buildTree(htmlPath).get();
+
+
+	CelProcess::getInstance().beginprocess();
+
 }
 

@@ -1,0 +1,6 @@
+- work on documentation of the software
+- add proper comments to all required areas of the code
+- add more tests to the codebase
+- refactor the code to improve readability and maintainability
+- implement proper error handling and graceful degradation
+- add logging to the application

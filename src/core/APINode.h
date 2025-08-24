@@ -17,7 +17,7 @@ public:
 
 private:
 	friend ASTManager;
-
+	std::vector<RawDependency*> rawDependencies = {};
 };
 
 #endif // !APINODE

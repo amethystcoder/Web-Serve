@@ -36,41 +36,65 @@ std::string HTTPTextParser::GetRequestBody(std::string& headers) noexcept {
 	return body;
 }
 
+/**
+* Parses the HTTP request headers and returns a map of header fields.
+* The first line of the request is parsed to extract the request type, path, and version.
+* The function will split the request into headers and body, and parse the headers into a map.
+* map is guaranteed to have the keys "request_type", "path", and "version".
+* 
+* returns a map containing the request type, path, version, and other headers.
+* * @note The request is expected to be in the format:
+* * "GET /path/to/resource HTTP/1.1\r\nHeader1: Value1\r\nHeader2: Value2\r\n\r\n"
+* * @param request The raw HTTP request string.
+* * @return A map containing the parsed HTTP headers. 
+*/
 HTTPHeaderMap HTTPTextParser::ParseRequest(std::string& request) noexcept {
-	//headers is a raw http header
+    HTTPHeaderMap header_map;
 
-	std::string header = "", body = "";
+    std::string header, body;
 
-	size_t pos = request.find(DBCRLF);
-	if (pos != std::string::npos) {
-		header = request.substr(0, pos);
-		body = request.substr(pos + 4);  // Skip \r\n\r\n
-	}
+    // Separate header and body
+    size_t pos = request.find(DBCRLF);
+    if (pos != std::string::npos) {
+        header = request.substr(0, pos);
+        body = request.substr(pos + 4);  //skip "\r\n\r\n"
+    }
 
-	//get the first line of the header
-	std::string first_line = header.substr(0, header.find_first_of(CRLF));
-	//first line is in the format "GET /path/to/resource HTTP/1.1"
-	//split the first line into its components
-	HTTPHeaderMap header_map;
-	header_map["request_type"] = first_line.substr(0, first_line.find_first_of(' ') + 1);
-	first_line.erase(0, first_line.find_first_of(' ') + 1);
-	header_map["path"] = first_line.substr(0, first_line.find_first_of(' '));
-	first_line.erase(0, first_line.find_first_of(' ') + 1);
-	header_map["version"] = first_line;
-	//erase the first line from the header
-	header.erase(0, header.find_first_of(CRLF) + 2);
-	//parse the rest of the header
-	while (!header.empty())
-	{
-		std::string key = header.substr(0, header.find_first_of(':'));
-		header.erase(0, header.find_first_of(':') + 1);
-		header.erase(0, header.find_first_not_of(' '));
-		std::string value = header.substr(0, header.find_first_of(CRLF));
-		header.erase(0, header.find_first_of(CRLF) + 2);
-		header_map[key] = value;
-	}
-	return header_map;
+    // Get the first line (request line)
+    size_t line_end = header.find(CRLF);
+    std::string request_line = header.substr(0, line_end);
+    header.erase(0, line_end + 2); // Remove request line + CRLF
+
+    // Split request line into method, path, version
+    std::istringstream req_stream(request_line);
+    std::string method, path, version;
+    req_stream >> method >> path >> version;
+
+    header_map["method"] = method;
+    header_map["path"] = path;
+    header_map["version"] = version;
+
+    // Parse remaining headers
+    while (!header.empty()) {
+        size_t sep_pos = header.find(':');
+        if (sep_pos == std::string::npos) break;
+
+        std::string key = header.substr(0, sep_pos);
+        header.erase(0, sep_pos + 1);
+
+        // Trim leading spaces from value
+        header.erase(0, header.find_first_not_of(' '));
+
+        size_t line_end = header.find(CRLF);
+        std::string value = header.substr(0, line_end);
+        header.erase(0, line_end + 2);
+
+        header_map[key] = value;
+    }
+
+    return header_map;
 }
+
 
 HTTPTextParser::HTTPTextParser() {
 }

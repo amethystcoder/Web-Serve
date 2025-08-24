@@ -8,6 +8,7 @@
 #include <string>
 #include <unordered_map>
 #include <system_error>
+#include <sstream>
 
 typedef std::unordered_map<std::string, std::string> HTTPHeaderMap;
 

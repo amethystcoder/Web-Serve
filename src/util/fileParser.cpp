@@ -30,11 +30,11 @@ bool FileParser::check_is_html(const std::string& filename) {
 }
 
 bool FileParser::check_is_file(const std::string& filename) {
-	size_t position_of_last_separator = filename.find_last_of(".");
-	if (position_of_last_separator == std::string::npos) return false;
-	std::string extension = filename.substr(position_of_last_separator + 1);
-	if (MimeTypes::getInstance().mime_type_exists(extension)) return true;
-	return false;
+	std::filesystem::path path(filename);
+	auto ext = path.extension();
+
+	// Check if extension is non-empty and longer than just '.'
+	return !ext.empty() && ext.string() != ".";
 }
 
 std::map<std::string, std::string> FileParser::parseAttributes(const std::string& input) {
@@ -217,8 +217,6 @@ std::stringstream FileParser::readHtmlFileAsBuffer(const std::string& html_file)
 TagDataList FileParser::parse_html_file(const std::string& html_file)
 {
 	std::string html_text = readHtmlFile(html_file);
-	std::cout << "Parsing HTML file: " << html_file << std::endl;
-	std::cout << "HTML content: " << html_text << std::endl;
 	if (html_text == "") return TagDataList();
 	return parse_html_content(html_text);
 }
@@ -227,7 +225,7 @@ TagDataList FileParser::determineParseType(std::string& input) {
 	//check if the input is a file or a string
 	//if the input is a file then return the parsed file content
 	//if the input is a string then return the parsed string content
-	//if the input is neither a file nor a string then return an empty 
+	//if the input is neither a file nor a string then return an empty string
 	return input.size() >= 5 && input.compare(input.size() - 5, 5, ".html") == 0
 		? parse_html_file(input)
 		: parse_html_content(input);
