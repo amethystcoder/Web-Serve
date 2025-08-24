@@ -22,3 +22,9 @@ void CelProcess::beginprocess()
 	}
 	return;
 }
+
+void CelProcess::printProcesses() const noexcept {
+	for (const auto& process : processNodes) {
+		std::cout << "Process: " << process->node->getTagName() << std::endl;
+	}
+}

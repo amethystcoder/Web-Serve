@@ -29,9 +29,10 @@ std::shared_ptr<ASTreeNode> ASTManager::buildTree(std::filesystem::path htmlPath
 
 			//create a node for the server tag
 			std::shared_ptr<ASTreeNode> serverNode = ASTNodeFactory::getInstance().create("server");
+			//Todo: check here if there is a possibility that this could be causing the double child creation?
 			rootNode = serverNode; //set the root node to the server node
 			if (serverNode == nullptr) {
-				std::cerr << "Invalid html text. The root tag should be <server> tag" << std::endl;
+				std::cerr << "Server was not successfully created" << std::endl;
 				return nullptr;
 			}
 			//there might be a slight bug here to fix later
@@ -56,13 +57,11 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 		node = ASTManager::rootNode.get(); //Start from the root node if no start node is provided
 	}
 	TagDataList parsed_content = FileParser::parse_html_content(content);
+
 	for (auto& tag_data : parsed_content) {
-		//create a function that determines the tag classes
 
 		std::shared_ptr<ASTreeNode> astInstance = ASTNodeFactory::getInstance().create(tag_data.tag);
 		if (astInstance != nullptr) {
-			ASTreeNode::addTagName(tag_data.tag, astInstance.get());
-			ASTreeNode::setNodeAttributes(ASTManager::parseattributes(tag_data.attributes), astInstance.get());
 			//use the file parser to change the content based on an attribute called `sref`
 			//the sref is given more priority than the content directly placed in the tag
 			astInstance->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
@@ -74,7 +73,6 @@ void ASTManager::addNodeChildrenFromContent(std::string& content, ASTreeNode* no
 			} 
 			//ASTManager::addNodeChildrenFromContent(tag_data.content, astInstance.get());
 			NodeDependencies transformedDependencies = ASTManager::transformNodeDependencies(astInstance->getRawDependencies());
-			astInstance->registernode(tag_data.tag, tag_data.attributes, tag_data.content);
 			CelProcess::getInstance().attachProcess(
 				astInstance->getattachable(transformedDependencies)
 			);
@@ -167,16 +165,16 @@ void ASTManager::setMainPath(std::string& path) noexcept {
 NodeDependencies ASTManager::transformNodeDependencies(std::vector<RawDependency*> rawDep)
 {
 	NodeDependencies depList;
-	depList.reserve(rawDep.size()); // Optional: improve performance
+	depList.reserve(rawDep.size());
 
 	std::transform(rawDep.begin(), rawDep.end(), std::back_inserter(depList), [](RawDependency* dep) {
 		std::shared_ptr<ASTreeNode> node;
 		if (dep->depName.empty())
 			node = ASTManager::findNodeWithTagName(dep->depNodeName);
 		else
-			node = ASTManager::findNodeWithName(dep->depName); // <-- Ideally improve to match both
+			node = ASTManager::findNodeWithName(dep->depName); // ideally improve to match both
 		return node;
-		});
+	});
 
 	return depList;
 }

@@ -85,7 +85,6 @@ void AmthSocket::ServerSocket::sendData(SOCKET& clientSocket, const char data[])
 	}
 	Sleep(1000);
 	shutdown(clientSocket, SD_SEND);  //shutdown the sending side of the socket
-
 }
 
 int AmthSocket::ServerSocket::inet_pton(int af, const char* src, void* dst)

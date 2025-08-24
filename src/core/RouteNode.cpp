@@ -87,13 +87,9 @@ ProcessEntry* RouteNode::getattachable(NodeDependencies& dependencyList)
 		ConnectionRequest& conReq = ConnectionRequest::getInstance();
 
 		if (conReq.getRoute() == this->getEndpoint() && conReq.getRequestMethod() == this->getMethod()) {
-			
-			std::cout << "Processing inside request for route: " << this->getEndpoint() << std::endl;
 
 			struct RawDependency rawdep { "server", "" };
 			ServerNode* ServerApplication = static_cast<ServerNode*>(this->getDependency(&rawdep));
-
-			std::cout << "ServerApplication: " << std::endl;
 			
 			//check if the route has a rate limit
 			if (this->nodeAttributes.find("rateLimit") != this->nodeAttributes.end()) {

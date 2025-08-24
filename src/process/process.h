@@ -24,6 +24,8 @@ public:
 
 	void beginprocess();
 
+	void printProcesses() const noexcept;
+
 	static CelProcess& getInstance() noexcept {
 		static CelProcess instance;
 		return instance;
