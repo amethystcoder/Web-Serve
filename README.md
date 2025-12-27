@@ -1,22 +1,22 @@
-﻿# Celeris 🚀
+﻿# Celeris 
 
 **Celeris** is a lightweight, high-performance web server written in modern C++. It allows developers to spin up custom HTTP servers using a simple, HTML-like configuration system. Celeris is designed for speed, flexibility, and ease of use — whether you're building APIs, serving static files, or experimenting with new ideas.
 
 ---
 
-## ✨ Features
+##  Features
 
-- ⚡ **Fast and Lightweight** – Built in C++ for maximum performance.
-- 🧱 **Custom Configuration** – Define your server behavior using intuitive HTML-like syntax.
-- 🔁 **Routing** – Easily create and manage routes.
-- 🔐 **Authentication Support** – Secure endpoints with built-in auth mechanisms.
-- 📁 **Static File Serving** – Serve HTML, CSS, JS, and media files.
-- 🧵 **Multithreading** – Handles concurrent requests efficiently.
-- 🛠️ **Extensible** – Built to support plugins and middleware in the future.
+-  **Fast and Lightweight** – Built in C++ for maximum performance.
+-  **Custom Configuration** – Define your server behavior using intuitive HTML-like syntax.
+-  **Routing** – Easily create and manage routes.
+-  **Authentication Support** – Secure endpoints with built-in auth mechanisms.
+-  **Static File Serving** – Serve HTML, CSS, JS, and media files.
+-  **Multithreading** – Handles concurrent requests efficiently.
+-  **Extensible** – Built to support plugins and middleware in the future.
 
 ---
 
-## 📦 Installation
+##  Installation
 
 > Coming soon: Install via `.exe` installer, package manager, or source.
 
@@ -31,7 +31,7 @@ make   # or cmake . && make
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 Celeris uses a lightweight markup-style config file:
 
@@ -52,7 +52,7 @@ More details and examples coming soon.
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```bash
 celerisd/            # Core source code
@@ -64,7 +64,7 @@ tests/               # Unit and integration tests
 
 ---
 
-## 🧪 Running Tests
+##  Running Tests
 
 ```bash
 make test
@@ -74,7 +74,7 @@ make test
 
 ---
 
-## 🚧 Roadmap
+## Roadmap
 
 - [x] Basic routing and static server
 - [x] HTML-like configuration parsing
@@ -86,7 +86,7 @@ make test
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please open an issue or PR.
 
@@ -98,12 +98,12 @@ Contributions are welcome! Please open an issue or PR.
 
 ---
 
-## 📄 License
+##  License
 
 MIT License. See `LICENSE` file for details.
 
 ---
 
-## 🙌 Acknowledgments
+##  Acknowledgments
 
 Developed with ❤️ by [Joshua Collins](https://github.com/amethystcoder).
